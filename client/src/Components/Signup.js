@@ -11,11 +11,12 @@ import {
     FormErrorMessage 
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Form, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 function Signup() {
     const [showPassword, setShowPassword] = useState(false)
+    const [error, setError] = useState(null)
     
     function handlePasswordToggle() {
         setShowPassword(!showPassword)
@@ -47,31 +48,58 @@ function Signup() {
         validateOnChange: false,
         validateOnBlur: false,
         onSubmit: (values) => {
-            console.log(values)
+            fetch('/signup', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(values),
+            })
+            .then(response => {
+                if (response.ok) {
+                    response.json()
+                    .then(userData => console.log(userData))
+                } else {
+                    response.json()
+                    .then(error => setError(error['error']))
+                }
+            })
         }
     });
 
     return (
         
         <Box w="400px" margin="auto">
-            <Heading>Sign Up for an Account</Heading>
-            <form onSubmit={formik.handleSubmit}>
-                <Stack>
+
+            <Stack>
+
+                <Heading>Sign Up for an Account</Heading>
+
+                {error 
+                    ? <Box bg="red">Error: {error}</Box>
+                    : null
+                }
+
+                <form onSubmit={formik.handleSubmit}>
+
                     <FormControl isInvalid={formik.errors['first_name']}>
                         <FormLabel>First Name</FormLabel>
                         <Input type="text" name="first_name" value={formik.values.first_name} onChange={formik.handleChange}/>
                         <FormErrorMessage>{formik.errors['first_name']}</FormErrorMessage>
                     </FormControl>
+
                     <FormControl isInvalid={formik.errors['last_name']}>
                         <FormLabel>Last Name</FormLabel>
                         <Input type="text" name="last_name" value={formik.values.last_name} onChange={formik.handleChange}/>
                         <FormErrorMessage>{formik.errors['last_name']}</FormErrorMessage>
                     </FormControl>
+
                     <FormControl isInvalid={formik.errors['email']}>
                         <FormLabel>Email Address</FormLabel>
                         <Input type="text" name="email" value={formik.values.email} onChange={formik.handleChange}/>
                         <FormErrorMessage>{formik.errors['email']}</FormErrorMessage>
                     </FormControl>
+
                     <FormControl isInvalid={formik.errors['password']}>
                         <FormLabel>Password</FormLabel>
                         <InputGroup>
@@ -82,6 +110,7 @@ function Signup() {
                         </InputGroup>
                         <FormErrorMessage>{formik.errors['password']}</FormErrorMessage>
                     </FormControl>
+
                     <FormControl isInvalid={formik.errors['confirm_password']}>
                         <FormLabel>Confirm Password</FormLabel>
                         <InputGroup>
@@ -92,9 +121,15 @@ function Signup() {
                         </InputGroup>
                         <FormErrorMessage>{formik.errors['confirm_password']}</FormErrorMessage>
                     </FormControl>
+
                     <Button type="submit">Sign Up</Button>
-                </Stack>
-            </form>
+
+                    
+
+                </form>
+
+            </Stack>
+
         </Box>
     )
 }
