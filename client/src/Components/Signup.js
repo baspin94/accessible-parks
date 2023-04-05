@@ -6,11 +6,12 @@ import {
     InputGroup,
     InputRightElement, 
     Button,
+    FormControl,
     FormLabel,
     FormErrorMessage 
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useFormik } from 'formik';
+import { Form, useFormik } from 'formik';
 import * as yup from 'yup';
 
 function Signup() {
@@ -55,29 +56,44 @@ function Signup() {
         <Box w="400px" margin="auto">
             <Heading>Sign Up for an Account</Heading>
             <form onSubmit={formik.handleSubmit}>
-            <Stack>
-                <FormLabel>First Name</FormLabel>
-                    <Input type="text" name="first_name" value={formik.values.first_name} onChange={formik.handleChange}/>
-                <FormLabel>Last Name</FormLabel>
-                    <Input type="text" name="last_name" value={formik.values.last_name} onChange={formik.handleChange}/>
-                <FormLabel>Email Address</FormLabel>
-                    <Input type="text" name="email" value={formik.values.email} onChange={formik.handleChange}/>
-                <FormLabel>Password</FormLabel>
-                    <InputGroup>
-                        <Input type={showPassword ? "text" : "password"} name="password" value={formik.values.password} onChange={formik.handleChange}/>
-                        <InputRightElement>
-                            <Button onClick={handlePasswordToggle}>{showPassword ? 'Hide' : 'Show'}</Button>
-                        </InputRightElement>
-                    </InputGroup>
-                <FormLabel>Confirm Password</FormLabel>
-                <InputGroup>
-                        <Input type={showPassword ? "text" : "password"} name="confirm_password" value={formik.values.confirm_password} onChange={formik.handleChange}/>
-                        <InputRightElement>
-                            <Button onClick={handlePasswordToggle}>{showPassword ? 'Hide' : 'Show'}</Button>
-                        </InputRightElement>
-                    </InputGroup>
-                <Button type="submit">Sign Up</Button>
-            </Stack>
+                <Stack>
+                    <FormControl isInvalid={formik.errors['first_name']}>
+                        <FormLabel>First Name</FormLabel>
+                        <Input type="text" name="first_name" value={formik.values.first_name} onChange={formik.handleChange}/>
+                        <FormErrorMessage>{formik.errors['first_name']}</FormErrorMessage>
+                    </FormControl>
+                    <FormControl isInvalid={formik.errors['last_name']}>
+                        <FormLabel>Last Name</FormLabel>
+                        <Input type="text" name="last_name" value={formik.values.last_name} onChange={formik.handleChange}/>
+                        <FormErrorMessage>{formik.errors['last_name']}</FormErrorMessage>
+                    </FormControl>
+                    <FormControl isInvalid={formik.errors['email']}>
+                        <FormLabel>Email Address</FormLabel>
+                        <Input type="text" name="email" value={formik.values.email} onChange={formik.handleChange}/>
+                        <FormErrorMessage>{formik.errors['email']}</FormErrorMessage>
+                    </FormControl>
+                    <FormControl isInvalid={formik.errors['password']}>
+                        <FormLabel>Password</FormLabel>
+                        <InputGroup>
+                            <Input type={showPassword ? "text" : "password"} name="password" value={formik.values.password} onChange={formik.handleChange}/>
+                            <InputRightElement>
+                                <Button onClick={handlePasswordToggle}>{showPassword ? 'Hide' : 'Show'}</Button>
+                            </InputRightElement>
+                        </InputGroup>
+                        <FormErrorMessage>{formik.errors['password']}</FormErrorMessage>
+                    </FormControl>
+                    <FormControl isInvalid={formik.errors['confirm_password']}>
+                        <FormLabel>Confirm Password</FormLabel>
+                        <InputGroup>
+                            <Input type={showPassword ? "text" : "password"} name="confirm_password" value={formik.values.confirm_password} onChange={formik.handleChange}/>
+                            <InputRightElement>
+                                <Button onClick={handlePasswordToggle}>{showPassword ? 'Hide' : 'Show'}</Button>
+                            </InputRightElement>
+                        </InputGroup>
+                        <FormErrorMessage>{formik.errors['confirm_password']}</FormErrorMessage>
+                    </FormControl>
+                    <Button type="submit">Sign Up</Button>
+                </Stack>
             </form>
         </Box>
     )
