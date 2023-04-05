@@ -25,6 +25,7 @@ class Signup(Resource):
             new_user.to_dict(),
             201
             )
+            
             return response
 
         except IntegrityError:
@@ -34,6 +35,34 @@ class Signup(Resource):
                 422
             )
             return response
+        
+class Login(Resource):
+    def post(self):
+        email = request.get_json()['email']
+        password = request.get_json()['password']
+
+        user = User.query.filter(User.email == email).first()
+
+        if not user:
+            response = make_response(
+                {"error": "Invalid username."}, 
+                401
+            )
+            return response
+
+        if user.authenticate(password):
+            # session['user_id'] = user.id
+            response = make_response(
+                user.to_dict(),
+                200
+            )
+            return response
+        else:
+            response = make_response(
+                {"error": "Invalid password."}, 
+                401
+            )
+            return response
 
         
 
@@ -41,6 +70,7 @@ class Signup(Resource):
         
 
 api.add_resource(Signup, '/signup')
+api.add_resource(Login, '/login')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
