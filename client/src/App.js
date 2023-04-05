@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Switch, Route } from 'react-router-dom';
@@ -8,6 +8,8 @@ import Signup from './Components/Signup';
 import Main from './Components/Main';
 
 function App() {
+  // const [user, setUser] = useState({})
+
   return (
     <ChakraProvider>
       <ColorModeSwitcher />

@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom'
 import * as yup from 'yup';
 
 function Signup() {
@@ -21,6 +22,8 @@ function Signup() {
     function handlePasswordToggle() {
         setShowPassword(!showPassword)
     }
+
+    const history = useHistory()
 
     const formSchema = yup.object().shape({
         first_name: yup.string().required("Must enter first name."),
@@ -59,6 +62,7 @@ function Signup() {
                 if (response.ok) {
                     response.json()
                     .then(userData => console.log(userData))
+                    .then(history.push('/'))
                 } else {
                     response.json()
                     .then(error => setError(error['error']))

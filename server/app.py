@@ -21,6 +21,8 @@ class Signup(Resource):
             db.session.add(new_user)
             db.session.commit()
 
+            session['user_id'] = new_user.id
+
             response = make_response(
             new_user.to_dict(),
             201
@@ -51,7 +53,7 @@ class Login(Resource):
             return response
 
         if user.authenticate(password):
-            # session['user_id'] = user.id
+            session['user_id'] = user.id
             response = make_response(
                 user.to_dict(),
                 200
@@ -63,11 +65,6 @@ class Login(Resource):
                 401
             )
             return response
-
-        
-
-
-        
 
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
