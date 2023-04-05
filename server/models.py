@@ -7,6 +7,8 @@ from config import db, bcrypt
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
+    serialize_rules = ('-_password_hash',)
+
     id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.String, nullable = False)
     last_name = db.Column(db.String, nullable = False)
