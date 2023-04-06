@@ -35,3 +35,14 @@ class User(db.Model, SerializerMixin):
     
     def __repr__(self):
         return f'<User: {self.first_name} {self.last_name}'
+    
+class Amenity(db.Model, SerializerMixin):
+    __tablename__ = "amenities"
+
+    id = db.Column(db.Integer, primary_key = True)
+    nps_api_id = db.Column(db.String)
+    name = db.Column(db.String)
+    created_at = db.Column(db.DateTime, server_default = db.func.now())
+
+    def __repr__(self):
+        return f'<Amenity: {self.name}>'
