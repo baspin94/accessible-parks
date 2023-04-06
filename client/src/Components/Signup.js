@@ -1,6 +1,7 @@
 import { 
     Heading,
     Box,
+    Link,
     Stack,
     Input,
     InputGroup,
@@ -12,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useFormik } from 'formik';
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link as ReachLink } from 'react-router-dom'
 import * as yup from 'yup';
 
 function Signup({ setUser }) {
@@ -128,10 +129,12 @@ function Signup({ setUser }) {
 
                     <Button type="submit">Sign Up</Button>
 
-                    
-
                 </form>
 
+                <Link as={ReachLink} to='/login'>
+                    Already have an account? <strong>Log In.</strong>
+                </Link>
+                
             </Stack>
 
         </Box>
