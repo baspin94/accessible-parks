@@ -69,7 +69,7 @@ function Login({ setUser }) {
     
     return (
         
-        <Box w="400px" margin="auto">
+        <Box w="500px" margin="auto" p="20px">
 
             <Stack>
 
