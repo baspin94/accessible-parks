@@ -19,8 +19,8 @@ function Header({ user, setUser }) {
             <HStack>
                 <ColorModeSwitcher />
                 { user.id !== undefined
-                    ? <Button onClick={handleLogout}>Log Out</Button>
-                    : <Link to='/login'><Button>Log In</Button></Link>
+                    ? <Button bg="white" color="black" onClick={handleLogout}>Log Out</Button>
+                    : <Link to='/login'><Button bg="white" color="black">Log In</Button></Link>
                 }
             </HStack>
         </Flex>
