@@ -65,9 +65,38 @@ class Login(Resource):
                 401
             )
             return response
+        
+class CheckSession(Resource):
+    def get(self):
+
+        user_id = session.get('user_id')
+        if user_id:
+            user = User.query.filter(User.id == user_id).first()
+            response = make_response(
+                user.to_dict(),
+                200
+            )
+            return response
+        else:
+            response = make_response(
+                {"error": "User not found. Please log in or sign up for an account to access additional features."},
+                401
+            )
+            return response
+        
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] = None
+        response = make_response(
+            {},
+            204
+        )
+        return response
 
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
+api.add_resource(CheckSession, '/authorized')
+api.add_resource(Logout, '/logout')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
