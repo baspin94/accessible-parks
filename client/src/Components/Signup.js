@@ -15,7 +15,7 @@ import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom'
 import * as yup from 'yup';
 
-function Signup() {
+function Signup({ setUser }) {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState(null)
     
@@ -61,7 +61,7 @@ function Signup() {
             .then(response => {
                 if (response.ok) {
                     response.json()
-                    .then(userData => console.log(userData))
+                    .then(userData => setUser(userData))
                     .then(history.push('/'))
                 } else {
                     response.json()

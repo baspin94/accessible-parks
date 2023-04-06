@@ -24,13 +24,13 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Header setUser={setUser}/>
+      <Header user={user} setUser={setUser}/>
       <Switch>
         <Route path='/login'>
-          <Login />
+          <Login setUser={setUser}/>
         </Route>
        <Route path='/signup'>
-        <Signup />
+        <Signup setUser={setUser}/>
        </Route>
        <Route exact path='/'>
         <Main user={user}/>
