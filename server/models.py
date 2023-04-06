@@ -39,6 +39,8 @@ class User(db.Model, SerializerMixin):
 class Amenity(db.Model, SerializerMixin):
     __tablename__ = "amenities"
 
+    serialize_rules = ('-created_at',)
+
     id = db.Column(db.Integer, primary_key = True)
     nps_api_id = db.Column(db.String)
     name = db.Column(db.String)
