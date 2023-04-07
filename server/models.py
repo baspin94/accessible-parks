@@ -46,6 +46,8 @@ class Amenity(db.Model, SerializerMixin):
     name = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default = db.func.now())
 
+    park_amenities = db.relationship('ParkAmenity', backref='amenity')
+
     def __repr__(self):
         return f'<Amenity: {self.name}>'
     
@@ -74,5 +76,18 @@ class Park(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
+    park_amenities = db.relationship('ParkAmenity', backref='park')
+
     def __repr__(self):
         return f'<Park: {self.name} ({self.code})>'
+    
+class ParkAmenity(db.Model, SerializerMixin):
+    __tablename__ = "park_amenities"
+
+    id = db.Column(db.Integer, primary_key = True)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
+    amenity_id = db.Column(db.Integer, db.ForeignKey('amenities.id'))
+    created_at = db.Column(db.DateTime, server_default = db.func.now())
+
+    def __repr__(self):
+        return f'<Park ID: {self.park_id} Amenity ID: {self.amenity_id}>'
