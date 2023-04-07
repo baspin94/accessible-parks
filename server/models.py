@@ -39,7 +39,7 @@ class User(db.Model, SerializerMixin):
 class Amenity(db.Model, SerializerMixin):
     __tablename__ = "amenities"
 
-    serialize_rules = ('-created_at',)
+    serialize_rules = ('-created_at', '-park_amenities')
 
     id = db.Column(db.Integer, primary_key = True)
     nps_api_id = db.Column(db.String)
@@ -54,7 +54,7 @@ class Amenity(db.Model, SerializerMixin):
 class Park(db.Model, SerializerMixin):
     __tablename__ = "parks"
 
-    serialize_rules = ('-created_at', '-updated_at')
+    serialize_rules = ('-created_at', '-updated_at', '-park_amenities')
 
     id = db.Column(db.Integer, primary_key = True)
     nps_api_id = db.Column(db.String)

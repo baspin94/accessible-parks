@@ -3,7 +3,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound, Unauthorized
 from config import app, db, api
-from models import User
+from models import User, Amenity
 
 class Signup(Resource):
     def post(self):
@@ -92,11 +92,53 @@ class Logout(Resource):
             204
         )
         return response
+    
+class Amenities(Resource):
+    def get(self):
+
+        amenities = [amenity.to_dict() for amenity in Amenity.query.all()]
+
+        response = make_response(
+            amenities,
+            200
+        )
+        return response
+    
+class AmenityById(Resource):
+    def get(self, id):
+        amenity = Amenity.query.filter(Amenity.id == id).first()
+
+        if not amenity:
+            response = make_response(
+                {"error": "Amenity not found."},
+                404
+            )
+            return response
+        
+        else:
+            response = make_response(
+                amenity
+                    .to_dict(
+                        only=(
+                            'name',
+                            'id',
+                            'park_amenities.park.id',
+                            'park_amenities.park.name',
+                            'park_amenities.park.image_url',
+                            'park_amenities.park.image_alt',
+                            'park_amenities.park.states'
+                        )
+                    ),
+                200
+            )
+            return response
 
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(CheckSession, '/authorized')
 api.add_resource(Logout, '/logout')
+api.add_resource(Amenities, '/amenities')
+api.add_resource(AmenityById, '/amenities/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
