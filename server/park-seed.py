@@ -9,6 +9,9 @@ with app.app_context():
 
     api_key = os.environ.get('NPS_API_KEY')
 
+    print("Deleting existing entries...")
+    Park.query.delete()
+
     parks_endpoint = f"https://developer.nps.gov/api/v1/parks?limit=500&api_key={api_key}"
 
     print("Requesting data on parks...")
@@ -22,16 +25,6 @@ with app.app_context():
     for park in parks_data['data']:
 
         accessibility_url = f"https://www.nps.gov/{park['parkCode']}/planyourvisit/accessibility.htm"
-
-        # print(f"{park['id']} | {park['fullName']} | {park['parkCode']} | {park['states']} | {park['description']}")
-        # print(f"Designation: {park['designation']}")
-        # print(f"Weather Info: {park['weatherInfo']}")
-        # print(f"Latitude: {park['latitude']} | Longitude: {park['longitude']}")
-        # print(f"Phone: {park['contacts']['phoneNumbers'][0]['phoneNumber']}")
-        # print(f"Email: {park['contacts']['emailAddresses'][0]['emailAddress']}")
-        # print(f"General Information: {park['url']}")
-        # print(f"Image: {park['images'][0]['url']} | Alt Text: {park['images'][0]['altText']} | Credit: {park['images'][0]['credit']}")
-        # print(f"Accessibility Information: {accessibility_url}")
 
         try:
             phone_number = park['contacts']['phoneNumbers'][0]['phoneNumber']
