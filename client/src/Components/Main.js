@@ -2,13 +2,16 @@ import {
     Checkbox,
     Heading,
     Grid,
-    Button, 
+    Button,
+    Stack,
+    Box
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 
 function Main({user}) {
     const [amenities, setAmenities] = useState([])
+    const [searchError, setSearchError] = useState(null)
 
     useEffect( () => {
         fetch('/amenities')
@@ -24,8 +27,15 @@ function Main({user}) {
             const value_array = values['checked']
             const value_string = value_array.join()
             fetch(`/parkamenities/${value_string}`)
-            .then(response => response.json())
-            .then(parkData => console.log(parkData))
+            .then(response => {
+                if (response.ok) {
+                    response.json()
+                    .then(parkData => console.log(parkData))
+                } else {
+                    response.json()
+                    .then(error => setSearchError(error['error']))
+                }
+            })
             
             // const start_int = int_values.shift()
 
@@ -84,21 +94,22 @@ function Main({user}) {
                     : 'Welcome!'
                 }
             </Heading>
+            <Stack margin="auto" w="600px">
+                <Heading margin="auto">Search By Amenities</Heading>
+                {searchError 
+                    ? <Box p="5px" bg="red" margin="auto" textAlign="center">{searchError}</Box>
+                    : null
+                }
             <form onSubmit={formik.handleSubmit}>
                 <Grid margin="auto" w="50%" templateColumns='repeat(3, 1fr)' gap={2} justifyContent="center">
                     {checkboxes}
                 </Grid>
-                <Button type="submit">Search</Button>
+                <Box w="50%" margin="auto">
+                    <Button type="submit" width="full">Search</Button>
+                </Box>
             </form>
-            
-            
-            
-        
-        
-        
-        
+            </Stack>
         </>
-        
     )
 }
 

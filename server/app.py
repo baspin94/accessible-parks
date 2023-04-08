@@ -146,11 +146,19 @@ class ParksByAmenityIds(Resource):
 
         parks = [park.to_dict(only=('id', 'name', 'states', 'image_url', 'image_alt')) for park in Park.query.filter(Park.id.in_(unique_matches)).all()]
 
-        response = make_response(
-            parks, 
-            200
-        )
-        return response
+        if len(parks) == 0:
+            response = make_response(
+                {"error": "No parks with all specified amenities were found. Please try removing some of your criteria and search again."},
+                404
+            )
+            return response
+
+        else: 
+            response = make_response(
+                parks, 
+                200
+            )
+            return response
 
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
