@@ -148,7 +148,7 @@ class ParksByAmenityIds(Resource):
 
         if len(parks) == 0:
             response = make_response(
-                {"error": "No parks with all specified amenities were found. Please try removing some of your criteria and search again."},
+                {"error": "No matching parks."},
                 404
             )
             return response

@@ -11,7 +11,7 @@ import { useFormik } from 'formik';
 
 function Main({user}) {
     const [amenities, setAmenities] = useState([])
-    const [searchError, setSearchError] = useState(null)
+    const [searchError, setSearchError] = useState(false)
 
     useEffect( () => {
         fetch('/amenities')
@@ -33,7 +33,7 @@ function Main({user}) {
                     .then(parkData => console.log(parkData))
                 } else {
                     response.json()
-                    .then(error => setSearchError(error['error']))
+                    .then(error => setSearchError(true))
                 }
             })
             
@@ -97,7 +97,10 @@ function Main({user}) {
             <Stack margin="auto" w="600px">
                 <Heading margin="auto">Search By Amenities</Heading>
                 {searchError 
-                    ? <Box p="5px" bg="red" margin="auto" textAlign="center">{searchError}</Box>
+                    ?   <Box p="5px" bg="red" margin="auto" textAlign="center">
+                            <p>No parks with all specified amenities were found.</p>
+                            <p>Please try removing some criteria and search again.</p>
+                        </Box>
                     : null
                 }
             <form onSubmit={formik.handleSubmit}>
