@@ -3,7 +3,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound, Unauthorized
 from config import app, db, api
-from models import User, Amenity
+from models import User, Amenity, Park, ParkAmenity
 
 class Signup(Resource):
     def post(self):
@@ -120,8 +120,8 @@ class AmenityById(Resource):
                 amenity
                     .to_dict(
                         only=(
-                            'name',
-                            'id',
+                            # 'name',
+                            # 'id',
                             'park_amenities.park.id',
                             'park_amenities.park.name',
                             'park_amenities.park.image_url',
@@ -132,6 +132,25 @@ class AmenityById(Resource):
                 200
             )
             return response
+        
+class ParksByAmenityIds(Resource):
+    def get(self, id_string):
+        id_array = id_string.split(',')
+        int_ids = [int(id) for id in id_array]
+
+        all_matching_amenities = [amenity.to_dict() for amenity in ParkAmenity.query.filter(ParkAmenity.amenity_id.in_(int_ids)).all()]
+        all_park_ids = [element['park']['id'] for element in all_matching_amenities]
+
+        multiple_matches = [id for id in all_park_ids if all_park_ids.count(id) == len(int_ids)]
+        unique_matches = set(multiple_matches)
+
+        parks = [park.to_dict(only=('id', 'name', 'states', 'image_url', 'image_alt')) for park in Park.query.filter(Park.id.in_(unique_matches)).all()]
+
+        response = make_response(
+            parks, 
+            200
+        )
+        return response
 
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
@@ -139,6 +158,7 @@ api.add_resource(CheckSession, '/authorized')
 api.add_resource(Logout, '/logout')
 api.add_resource(Amenities, '/amenities')
 api.add_resource(AmenityById, '/amenities/<int:id>')
+api.add_resource(ParksByAmenityIds, '/parkamenities/<string:id_string>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

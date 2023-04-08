@@ -21,11 +21,43 @@ function Main({user}) {
             checked: []
         },
         onSubmit: (values) => {
-            const int_values = values['checked'].map((value) => parseInt(value))
-            console.log(int_values)
+            const value_array = values['checked']
+            const value_string = value_array.join()
+            fetch(`/parkamenities/${value_string}`)
+            .then(response => response.json())
+            .then(parkData => console.log(parkData))
+            
+            // const start_int = int_values.shift()
+
+            // fetch(`amenities/${start_int}`)
+            //     .then(response => response.json())
+            //     .then(amenityData => {
+            //         let matches = {}
+            //         amenityData['park_amenities'].forEach(element => matches[element.park.id] = element)
+            //         console.log(matches)
+            //         return matches
+            //     })
+            //     .then(matches => {
+            //         console.log(matches);
+            //         let ids = Object.keys(matches)
+            //         console.log(ids)
+            //         int_values.forEach(int => {
+            //             debugger;
+            //             fetch(`/amenities/${int}`)
+            //                 .then(response => response.json())
+            //                 .then(amenityData => {
+            //                     let check_array = [];
+            //                     amenityData['park_amenities'].forEach(element => check_array.push(element.park.id))
+            //                     console.log('Array to Check:', check_array)
+            //                     const filtered_ids = check_array.filter(value => ids.includes(String(value)))
+            //                     ids = filtered_ids
+            //                     console.log('Filtered Ids at the end of an iteration:', ids)
+            //                     return ids
+            //                 })
+            //         })
+            //     })
         }
     })
-
 
     const checkboxes = amenities.map( (amenity) => {
         return (
