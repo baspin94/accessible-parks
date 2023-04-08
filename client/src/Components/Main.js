@@ -8,10 +8,13 @@ import {
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom'
 
-function Main({user}) {
+function Main({ user, setParks }) {
     const [amenities, setAmenities] = useState([])
     const [searchError, setSearchError] = useState(false)
+
+    const history = useHistory()
 
     useEffect( () => {
         fetch('/amenities')
@@ -30,7 +33,8 @@ function Main({user}) {
             .then(response => {
                 if (response.ok) {
                     response.json()
-                    .then(parkData => console.log(parkData))
+                    .then(parkData => setParks(parkData))
+                    .then(() => history.push('/results'))
                 } else {
                     response.json()
                     .then(error => setSearchError(true))
