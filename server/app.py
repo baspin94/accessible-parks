@@ -144,7 +144,7 @@ class ParksByAmenityIds(Resource):
         multiple_matches = [id for id in all_park_ids if all_park_ids.count(id) == len(int_ids)]
         unique_matches = set(multiple_matches)
 
-        parks = [park.to_dict(only=('id', 'name', 'states', 'image_url', 'image_alt')) for park in Park.query.filter(Park.id.in_(unique_matches)).all()]
+        parks = [park.to_dict(only=('id', 'name', 'designation', 'states', 'image_url', 'image_alt')) for park in Park.query.filter(Park.id.in_(unique_matches)).all()]
 
         if len(parks) == 0:
             response = make_response(

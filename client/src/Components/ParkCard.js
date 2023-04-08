@@ -15,6 +15,7 @@ function ParkCard( {park}) {
             </CardBody>
             <CardHeader align="center">
                 <Heading as="h3">{park.name}</Heading>
+                <Text>{park.designation}</Text>
                 <Text>{park.states}</Text>
             </CardHeader>
         </Card>
