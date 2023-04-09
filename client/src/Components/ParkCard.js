@@ -1,4 +1,5 @@
 import {
+    Box,
     Card,
     CardHeader,
     Heading,
@@ -11,11 +12,13 @@ function ParkCard( {park}) {
     return(
         <Card border="1px" align="center">
             <CardBody>
-                <Image src={park.image_url} alt={park.image_alt}/>
+                <Box boxSize="md" w="100%" h="100%">
+                    <Image object-fit="cover" w="100%" h="100%" src={park.image_url} alt={park.image_alt}/>
+                </Box>
             </CardBody>
             <CardHeader align="center">
-                <Heading as="h3">{park.name}</Heading>
-                <Text>{park.designation}</Text>
+                <Heading as="h3" size="md">{park.name}</Heading>
+                <Text as="i">{park.designation}</Text>
                 <Text>{park.states}</Text>
             </CardHeader>
         </Card>
