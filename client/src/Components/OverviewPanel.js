@@ -1,21 +1,23 @@
 import {
-    Box, 
     Heading, 
     Text, 
-    Image
+    Image,
+    VStack
 } from '@chakra-ui/react';
 
 function OverviewPanel( { park }) {
+
+    const designation = (park.designation === "") ? "Destination" : park.designation
     return (
         <>
-        <Box w="60%" border='1px'>
+        <VStack p="10px">
             <Heading>{park.name}</Heading>
-            <Text>{park.designation} | {park.states}</Text>
-            <Box boxSize="md" border='1px'>
-                <Image src={park.image_url} alt={park.image_alt}/>
-            </Box>
+            <Text>{designation} | {park.states}</Text>
+            {/* <Box boxSize="md" border='1px'> */}
+                <Image w="40%" h="40%" src={park.image_url} alt={park.image_alt}/>
+            {/* </Box> */}
             <Text>{park.description}</Text>
-        </Box>
+        </VStack>
         </>
     )
     

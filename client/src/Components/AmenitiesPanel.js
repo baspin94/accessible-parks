@@ -1,7 +1,7 @@
 import {
     Box, 
-    Heading, 
-    Text,
+    Heading,
+    Grid,
     UnorderedList,
     ListItem
 } from '@chakra-ui/react';
@@ -13,10 +13,12 @@ function AmenitiesPanel({ park }) {
     })
 
     return (
-        <Box>
-            <Heading as="h3">Accessibility-Related Amenities</Heading>
+        <Box p="10px">
+            <Heading as="h3" size="lg">Amenities</Heading>
             <UnorderedList>
+                <Grid templateColumns='repeat(2, 1fr)'>
                 {amenities}
+                </Grid>
             </UnorderedList>
         </Box>
     )

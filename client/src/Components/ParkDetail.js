@@ -5,6 +5,12 @@ import OverviewPanel from './OverviewPanel';
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import {
+    Grid,
+    GridItem,
+    Button
+} from '@chakra-ui/react';
+
 
 function ParkDetail() {
 
@@ -25,13 +31,22 @@ function ParkDetail() {
     else {
         return (
             <>
-                <h1>Park Detail Page for {park.name}</h1>
                 <Link to='/results'>
-                    <button>Back to Results</button>
+                    <Button>Back to Results</Button>
                 </Link>
-                <OverviewPanel park={park}/>
-                <DetailsPanel park={park}/>
-                <AmenitiesPanel park={park}/>
+                <Grid
+                    templateRows='repeat(2, 1fr)'
+                    templateColumns='repeat(4, 1fr)'
+                    gap={4}
+                >
+                    <GridItem rowSpan={2} colSpan={1}>
+                        <DetailsPanel park={park}/>
+                    </GridItem>
+                    <GridItem colSpan={3}>
+                        <OverviewPanel park={park}/>
+                    </GridItem>
+                    <GridItem colSpan={2}><AmenitiesPanel park={park}/></GridItem>
+                </Grid>
             </>
         )
     }

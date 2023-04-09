@@ -5,6 +5,7 @@ import {
     UnorderedList,
     ListItem, 
     ListIcon,
+    Stack
 } from '@chakra-ui/react';
 import {
     PhoneIcon,
@@ -20,9 +21,9 @@ function DetailsPanel({ park }) {
     const access_page = `https://www.nps.gov/${park.code}/planyourvisit/accessibility.htm`
 
     return (
-        <Box>
-            <Heading as="h3">General Information</Heading>
-            <Heading as="h4">National Park Service Pages</Heading>
+        <Stack p="10px">
+            <Heading as="h3" size="lg">General Information</Heading>
+            <Heading as="h4" size="md">National Park Service Pages</Heading>
                 <UnorderedList styleType="none">
                     <ListItem>
                         <ListIcon as={InfoOutlineIcon}/>
@@ -34,7 +35,7 @@ function DetailsPanel({ park }) {
                     </ListItem>
 
                 </UnorderedList>
-            <Heading as="h4">Contact Information</Heading>
+            <Heading as="h4" size="md">Contact Information</Heading>
                 <UnorderedList styleType="none">
                     <ListItem>
                         <ListIcon as={PhoneIcon}/>
@@ -45,9 +46,9 @@ function DetailsPanel({ park }) {
                         Email: {park.email}
                     </ListItem>
                 </UnorderedList>
-            <Heading as="h4">Weather</Heading>
+            <Heading as="h4" size="md">Weather</Heading>
                 <Text>{park.weather}</Text>
-        </Box>
+        </Stack>
     )
 }
 
