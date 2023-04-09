@@ -6,6 +6,7 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Main from './Components/Main';
 import Results from './Components/Results';
+import ParkDetail from './Components/ParkDetail';
 
 function App() {
   const [user, setUser] = useState({})
@@ -40,6 +41,9 @@ function App() {
        </Route>
        <Route path = '/results'>
           <Results parks={parkMatches}/>
+       </Route>
+       <Route path='/park/:id'>
+          <ParkDetail/>
        </Route>
       </Switch>
     </ChakraProvider>
