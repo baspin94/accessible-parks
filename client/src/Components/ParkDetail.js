@@ -1,3 +1,7 @@
+import AmenitiesPanel from './AmenitiesPanel';
+import DetailsPanel from './DetailsPanel';
+import OverviewPanel from './OverviewPanel';
+
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
@@ -25,6 +29,9 @@ function ParkDetail() {
                 <Link to='/results'>
                     <button>Back to Results</button>
                 </Link>
+                <OverviewPanel park={park}/>
+                <DetailsPanel park={park}/>
+                <AmenitiesPanel park={park}/>
             </>
         )
     }
