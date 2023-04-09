@@ -160,6 +160,25 @@ class ParksByAmenityIds(Resource):
             )
             return response
 
+class ParkById(Resource):
+    def get(self, id):
+        park = Park.query.filter(Park.id == id).first()
+
+        if not park:
+            response = make_response(
+                {"error": "Park not found."}, 
+                404
+            )
+            return response
+        
+        else:
+            response = make_response(
+                park.to_dict(rules=('park_amenities.amenity',)),
+                200
+            )
+
+            return response
+
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(CheckSession, '/authorized')
@@ -167,6 +186,7 @@ api.add_resource(Logout, '/logout')
 api.add_resource(Amenities, '/amenities')
 api.add_resource(AmenityById, '/amenities/<int:id>')
 api.add_resource(ParksByAmenityIds, '/parkamenities/<string:id_string>')
+api.add_resource(ParkById, '/parks/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

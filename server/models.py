@@ -84,6 +84,8 @@ class Park(db.Model, SerializerMixin):
 class ParkAmenity(db.Model, SerializerMixin):
     __tablename__ = "park_amenities"
 
+    serialize_rules = ('-created_at', '-park')
+
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
     amenity_id = db.Column(db.Integer, db.ForeignKey('amenities.id'))
