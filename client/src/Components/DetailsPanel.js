@@ -12,8 +12,12 @@ import {
     InfoOutlineIcon,
     CheckIcon
 } from '@chakra-ui/icons'
+import { Link } from 'react-router-dom'
 
 function DetailsPanel({ park }) {
+
+    const homepage = `https://www.nps.gov/${park.code}/index.htm`
+    const access_page = `https://www.nps.gov/${park.code}/planyourvisit/accessibility.htm`
 
     return (
         <Box>
@@ -22,11 +26,11 @@ function DetailsPanel({ park }) {
                 <UnorderedList styleType="none">
                     <ListItem>
                         <ListIcon as={InfoOutlineIcon}/>
-                        General:
+                        General: <a href={homepage}>NPS Park Homepage</a>
                     </ListItem>
                     <ListItem>
                         <ListIcon as={CheckIcon}/>
-                        Accessibility:
+                        Accessibility: <a href={access_page}>NPS Park Accessibility Page</a>
                     </ListItem>
 
                 </UnorderedList>
