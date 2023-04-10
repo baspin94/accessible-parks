@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, createContext } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Switch, Route } from 'react-router-dom';
 import Header from './Components/Header';
@@ -7,6 +7,8 @@ import Signup from './Components/Signup';
 import Main from './Components/Main';
 import Results from './Components/Results';
 import ParkDetail from './Components/ParkDetail';
+
+const UserContext = createContext({})
 
 function App() {
   const [user, setUser] = useState({})
@@ -43,7 +45,9 @@ function App() {
           <Results parks={parkMatches}/>
        </Route>
        <Route path='/park/:id'>
-          <ParkDetail/>
+          <UserContext.Provider value={user}>
+            <ParkDetail/>
+          </UserContext.Provider>
        </Route>
       </Switch>
     </ChakraProvider>
@@ -51,3 +55,4 @@ function App() {
 }
 
 export default App;
+export { UserContext };
