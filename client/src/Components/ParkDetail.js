@@ -36,15 +36,42 @@ function ParkDetail() {
         })
     }, [parkId, user])
 
+    function setSubheader() {
+        if (user.id !== undefined) {
+            if (isSaved) {
+                return (
+                    <>
+                    <Link to='/results'>
+                        <Button>Back to Results</Button>
+                    </Link>
+                    <Button>Unsave</Button>
+                    </>
+            )} else {
+                return (
+                    <>
+                    <Link to='/results'>
+                        <Button>Back to Results</Button>
+                    </Link>
+                    <Button>Save</Button>
+                    </>
+            )}
+        } else {
+            return(
+                <Link to='/results'>
+                    <Button>Back to Results</Button>
+                </Link>
+            )
+        }
+    }
+    const subheader = setSubheader()
+
     if (!park) {
         return <h1>Loading...</h1>
     }
     else {
         return (
             <>
-                <Link to='/results'>
-                    <Button>Back to Results</Button>
-                </Link>
+                {subheader}
                 <Grid
                     templateRows='repeat(2, 1fr)'
                     templateColumns='repeat(4, 1fr)'
