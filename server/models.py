@@ -100,7 +100,17 @@ class ParkAmenity(db.Model, SerializerMixin):
 class UserPark(db.Model, SerializerMixin):
     __tablename__ = "user_parks"
 
-    serialize_only = ('id', 'park_id', 'user_id', 'created_at')
+    serialize_only = (
+        'id', 
+        'park_id', 
+        'user_id', 
+        'created_at',
+        'park.name',
+        'park.states',
+        'park.image_url',
+        'park.image_alt',
+        'park.designation'
+        )
 
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
