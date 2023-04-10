@@ -9,7 +9,9 @@ import { UserContext } from '../App'
 import {
     Grid,
     GridItem,
-    Button
+    Button,
+    Flex,
+    Spacer
 } from '@chakra-ui/react';
 
 function ParkDetail() {
@@ -20,7 +22,7 @@ function ParkDetail() {
     const parkId = params['id'];
 
     const [park, setPark] = useState(null)
-    const [isSaved, setIsSaved] = useState(false)
+    const [savedId, setSavedId] = useState(null)
 
     useEffect( () => {
         fetch(`/parks/${parkId}`)
@@ -31,29 +33,57 @@ function ParkDetail() {
                 const savedIds = user.parks.map(park => park.park_id)
                 const intParkId = parseInt(parkId)
                 if (savedIds.includes(intParkId)) {
-                    setIsSaved(true)
+                    const match = user.parks.find(park => park.park_id === intParkId)
+                    console.log(match)
+                    setSavedId(match.id)
                 }}
         })
     }, [parkId, user])
 
+    function handleSaveUnsave(event) {
+        if (event.target.id === 'save'){
+            const submission = {
+                user_id: user.id,
+                park_id: parseInt(parkId)
+            }
+            fetch(`/user_parks`, {
+                method: "POST", 
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(submission),
+            })
+            .then((response) => response.json())
+            .then((newUserPark)=> setSavedId(newUserPark.id))
+        } else {
+            fetch(`/user_parks/${savedId}`, {
+                method: "DELETE",
+            })
+            .then(response => response.json())
+            .then(() => setSavedId(null))
+        }
+    }
+
     function setSubheader() {
         if (user.id !== undefined) {
-            if (isSaved) {
+            if (savedId !== null) {
                 return (
-                    <>
-                    <Link to='/results'>
-                        <Button>Back to Results</Button>
-                    </Link>
-                    <Button>Unsave</Button>
-                    </>
+                    <Flex>
+                        <Link to='/results'>
+                            <Button>Back to Results</Button>
+                        </Link>
+                        <Spacer />
+                        <Button id="unsave" onClick={handleSaveUnsave}>Unsave</Button>
+                    </Flex>
             )} else {
                 return (
-                    <>
+                    <Flex>
                     <Link to='/results'>
                         <Button>Back to Results</Button>
                     </Link>
-                    <Button>Save</Button>
-                    </>
+                    <Spacer />
+                    <Button id="save" onClick={handleSaveUnsave}>Save</Button>
+                    </Flex>
             )}
         } else {
             return(
@@ -63,6 +93,7 @@ function ParkDetail() {
             )
         }
     }
+
     const subheader = setSubheader()
 
     if (!park) {
