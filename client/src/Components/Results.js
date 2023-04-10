@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 function Results({ parks }) {
 
     const cards = parks.map(park => {
-        return <ParkCard key={park.id} park={park} />
+        return <ParkCard key={park.id} id={park.id} park={park} />
     })
 
     return (

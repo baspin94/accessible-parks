@@ -7,6 +7,7 @@ import Signup from './Components/Signup';
 import Main from './Components/Main';
 import Results from './Components/Results';
 import ParkDetail from './Components/ParkDetail';
+import SavedParks from './Components/SavedParks';
 
 const UserContext = createContext({})
 
@@ -44,11 +45,14 @@ function App() {
        <Route path = '/results'>
           <Results parks={parkMatches}/>
        </Route>
+       <UserContext.Provider value={user}>
        <Route path='/park/:id'>
-          <UserContext.Provider value={user}>
             <ParkDetail/>
-          </UserContext.Provider>
        </Route>
+       <Route path='/myparks'>
+          <SavedParks />
+       </Route>
+       </UserContext.Provider>
       </Switch>
     </ChakraProvider>
   );

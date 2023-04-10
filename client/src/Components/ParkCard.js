@@ -9,9 +9,9 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-function ParkCard( {park}) {
+function ParkCard( { park, id }) {
     return(
-        <Link to={`/park/${park.id}`}>
+        <Link to={`/park/${id}`}>
             <Card border="1px" align="center">
                 <CardBody>
                     <Box boxSize="md" w="100%" h="100%">
