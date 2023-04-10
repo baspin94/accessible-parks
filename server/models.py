@@ -7,7 +7,7 @@ from config import db, bcrypt
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
-    serialize_rules = ('-_password_hash', '-created_at', '-updated_at')
+    serialize_rules = ('-_password_hash', '-created_at', '-updated_at', '-parks')
 
     id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.String, nullable = False)
@@ -16,6 +16,8 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String, nullable = False)
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+
+    parks = db.relationship('UserPark', backref='user')
 
     @hybrid_property
     def password_hash(self):
@@ -54,7 +56,7 @@ class Amenity(db.Model, SerializerMixin):
 class Park(db.Model, SerializerMixin):
     __tablename__ = "parks"
 
-    serialize_rules = ('-created_at', '-updated_at', '-park_amenities')
+    serialize_rules = ('-created_at', '-updated_at', '-park_amenities', '-users')
 
     id = db.Column(db.Integer, primary_key = True)
     nps_api_id = db.Column(db.String)
@@ -77,6 +79,7 @@ class Park(db.Model, SerializerMixin):
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
     park_amenities = db.relationship('ParkAmenity', backref='park')
+    users = db.relationship('UserPark', backref='park')
 
     def __repr__(self):
         return f'<Park: {self.name} ({self.code})>'
@@ -93,3 +96,14 @@ class ParkAmenity(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Park ID: {self.park_id} Amenity ID: {self.amenity_id}>'
+    
+class UserPark(db.Model, SerializerMixin):
+    __tablename__ = "user_parks"
+
+    id = db.Column(db.Integer, primary_key = True)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_at = db.Column(db.DateTime, server_default = db.func.now())
+
+    def __repr__(self):
+        return f'<Park ID: {self.park_id} User ID: {self.user_id}>'
