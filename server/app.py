@@ -3,7 +3,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound, Unauthorized
 from config import app, db, api
-from models import User, Amenity, Park, ParkAmenity
+from models import User, Amenity, Park, ParkAmenity, UserPark
 
 class Signup(Resource):
     def post(self):
@@ -24,7 +24,7 @@ class Signup(Resource):
             session['user_id'] = new_user.id
 
             response = make_response(
-            new_user.to_dict(),
+            new_user.to_dict(rules=('parks',)),
             201
             )
             
@@ -55,7 +55,7 @@ class Login(Resource):
         if user.authenticate(password):
             session['user_id'] = user.id
             response = make_response(
-                user.to_dict(),
+                user.to_dict(rules=('parks',)),
                 200
             )
             return response
@@ -73,7 +73,7 @@ class CheckSession(Resource):
         if user_id:
             user = User.query.filter(User.id == user_id).first()
             response = make_response(
-                user.to_dict(),
+                user.to_dict(rules=('parks',)),
                 200
             )
             return response
@@ -179,6 +179,44 @@ class ParkById(Resource):
 
             return response
 
+class UserParks(Resource):
+    def post(self):
+        user_id = request.get_json()['user_id']
+        park_id = request.get_json()['park_id']
+
+        new_user_park = UserPark(
+            user_id = user_id,
+            park_id = park_id
+        )
+
+        db.session.add(new_user_park)
+        db.session.commit()
+
+        response = make_response(
+            new_user_park.to_dict(),
+            201
+        )
+
+        return response
+        
+
+class UserParkById(Resource):
+    def delete(self, id):
+        user_park = UserPark.query.filter(UserPark.id == id).first()
+
+        if not user_park:
+            pass
+
+        db.session.delete(user_park)
+        db.session.commit()
+
+        response = make_response(
+            {"message": "Park successfully removed from your saved parks."}, 
+            200
+        )
+
+        return response
+
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(CheckSession, '/authorized')
@@ -187,6 +225,8 @@ api.add_resource(Amenities, '/amenities')
 api.add_resource(AmenityById, '/amenities/<int:id>')
 api.add_resource(ParksByAmenityIds, '/parkamenities/<string:id_string>')
 api.add_resource(ParkById, '/parks/<int:id>')
+api.add_resource(UserParks, '/user_parks')
+api.add_resource(UserParkById, '/user_parks/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
