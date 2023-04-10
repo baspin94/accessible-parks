@@ -3,7 +3,7 @@ import DetailsPanel from './DetailsPanel';
 import OverviewPanel from './OverviewPanel';
 
 import { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../App'
 
 import {
@@ -15,6 +15,8 @@ import {
 } from '@chakra-ui/react';
 
 function ParkDetail() {
+
+    const history = useHistory()
 
     const user = useContext(UserContext)
 
@@ -69,9 +71,7 @@ function ParkDetail() {
             if (savedId !== null) {
                 return (
                     <Flex>
-                        <Link to='/results'>
-                            <Button>Back to Results</Button>
-                        </Link>
+                        <Button onClick={history.goBack}>Back to Previous Page</Button>
                         <Spacer />
                         <Button id="unsave" onClick={handleSaveUnsave}>Unsave</Button>
                     </Flex>
@@ -79,7 +79,7 @@ function ParkDetail() {
                 return (
                     <Flex>
                     <Link to='/results'>
-                        <Button>Back to Results</Button>
+                        <Button onClick={history.goBack}>Back to Previous Page</Button>
                     </Link>
                     <Spacer />
                     <Button id="save" onClick={handleSaveUnsave}>Save</Button>
@@ -88,7 +88,7 @@ function ParkDetail() {
         } else {
             return(
                 <Link to='/results'>
-                    <Button>Back to Results</Button>
+                    <Button onClick={history.goBack}>Back to Previous Page</Button>
                 </Link>
             )
         }

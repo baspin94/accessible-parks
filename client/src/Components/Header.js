@@ -1,6 +1,6 @@
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
-import { Heading, Flex, Spacer, HStack, Button } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Heading, Flex, Spacer, HStack, Button, Text } from '@chakra-ui/react';
+import { Link, NavLink } from 'react-router-dom';
 
 function Header({ user, setUser }) {
 
@@ -14,8 +14,18 @@ function Header({ user, setUser }) {
     
     return (
         <Flex bg="green" p="20px">
-            <Heading as="h1" color="white">Accessible Parks</Heading>
-            <Spacer />
+            <HStack>
+                <Heading as="h1" color="white">Accessible Parks</Heading>
+                <Spacer />
+                <NavLink exact to='/'>
+                    <Text as ="b" p='10px' color="white">New Search</Text>
+                </NavLink>
+                { user.id !== undefined
+                    ? <NavLink to='/myparks'><Text as="b" p='10px' color="white">Saved Parks</Text></NavLink>
+                    : null
+                }
+            </HStack>
+            <Spacer/>
             <HStack>
                 <ColorModeSwitcher />
                 { user.id !== undefined
