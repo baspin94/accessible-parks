@@ -7,7 +7,7 @@ from config import db, bcrypt
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
-    serialize_rules = ('-_password_hash', '-created_at', '-updated_at', '-parks')
+    serialize_rules = ('-_password_hash', '-created_at', '-updated_at', '-parks', '-reviews')
 
     id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.String, nullable = False)
@@ -18,6 +18,7 @@ class User(db.Model, SerializerMixin):
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
     parks = db.relationship('UserPark', backref='user')
+    reviews = db.relationship('Review', backref='user')
 
     @hybrid_property
     def password_hash(self):
@@ -56,7 +57,7 @@ class Amenity(db.Model, SerializerMixin):
 class Park(db.Model, SerializerMixin):
     __tablename__ = "parks"
 
-    serialize_rules = ('-created_at', '-updated_at', '-park_amenities', '-users')
+    serialize_rules = ('-created_at', '-updated_at', '-park_amenities', '-users', '-reviews')
 
     id = db.Column(db.Integer, primary_key = True)
     nps_api_id = db.Column(db.String)
@@ -80,6 +81,7 @@ class Park(db.Model, SerializerMixin):
 
     park_amenities = db.relationship('ParkAmenity', backref='park')
     users = db.relationship('UserPark', backref='park')
+    reviews = db.relationship('Review', backref='park')
 
     def __repr__(self):
         return f'<Park: {self.name} ({self.code})>'
@@ -119,3 +121,18 @@ class UserPark(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Park ID: {self.park_id} User ID: {self.user_id}>'
+    
+class Review(db.Model, SerializerMixin):
+    __tablename__ = "reviews"
+
+    id = db.Column(db.Integer, primary_key = True)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    review = db.Column(db.String)
+    rating = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime, server_default = db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+
+    def __repr__(self):
+        return f'<User ID: {self.user_id} Park ID: {self.park_id} Rating: {self.rating}>'
+
