@@ -59,6 +59,18 @@ function ReviewCard({ review, reviewArray, setReviews }) {
         setEditMode(!editMode)
     }
 
+    function handleDelete() {
+        fetch(`/reviews/${review.id}`, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(responseData => console.log(responseData))
+            .then(() => {
+                const updatedReviews = reviewArray.filter(element => element.id !== review.id)
+                setReviews(updatedReviews)
+            })
+    }
+
     function review_edit() {
         if (editMode) {
             return(
@@ -87,7 +99,7 @@ function ReviewCard({ review, reviewArray, setReviews }) {
                 <CardBody>{review.review}</CardBody>
                 <CardFooter>
                     <Button onClick={toggleEdit}>Edit</Button>
-                    <Button>Delete</Button>
+                    <Button onClick={handleDelete}>Delete</Button>
                 </CardFooter>
                 </>
             )
