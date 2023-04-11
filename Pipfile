@@ -16,6 +16,7 @@ gunicorn = "*"
 jsonify = "*"
 ipdb = "*"
 python-dotenv = "*"
+faker = "*"
 
 [dev-packages]
 
