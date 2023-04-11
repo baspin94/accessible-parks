@@ -3,7 +3,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound, Unauthorized
 from config import app, db, api
-from models import User, Amenity, Park, ParkAmenity, UserPark
+from models import User, Amenity, Park, ParkAmenity, UserPark, Review
 
 class Signup(Resource):
     def post(self):
@@ -217,6 +217,55 @@ class UserParkById(Resource):
 
         return response
 
+class Reviews(Resource):
+    def post(self):
+        data = request.get_json()
+
+        new_review = Review(
+            park_id = data['park_id'],
+            user_id = data['user_id'],
+            review = data['review'],
+            rating = data['rating']
+        )
+
+        db.session.add(new_review)
+        db.session.commit()
+
+        response = make_response(
+            new_review.to_dict(),
+            201
+        )
+        return response
+
+class ReviewById(Resource):
+    def patch(self, id):
+        data = request.get_json()
+        review = Review.query.filter(Review.id == id).first()
+
+        for attr in data:
+            setattr(review, attr, data[attr])
+
+        db.session.add(review)
+        db.session.commit()
+
+        response = make_response(
+            review.to_dict(),
+            202
+		)
+        return response
+
+    def delete(self, id):
+        review = Review.query.filter(Review.id == id).first()
+
+        db.session.delete(review)
+        db.session.commit()
+
+        response = make_response(
+            {"message": "Review successfully deleted."},
+            200
+        )
+        return response
+
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(CheckSession, '/authorized')
@@ -227,6 +276,8 @@ api.add_resource(ParksByAmenityIds, '/parkamenities/<string:id_string>')
 api.add_resource(ParkById, '/parks/<int:id>')
 api.add_resource(UserParks, '/user_parks')
 api.add_resource(UserParkById, '/user_parks/<int:id>')
+api.add_resource(Reviews, '/reviews')
+api.add_resource(ReviewById, '/reviews/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
