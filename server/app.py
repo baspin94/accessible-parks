@@ -173,7 +173,7 @@ class ParkById(Resource):
         
         else:
             response = make_response(
-                park.to_dict(rules=('park_amenities.amenity',)),
+                park.to_dict(rules=('park_amenities.amenity', 'reviews')),
                 200
             )
 

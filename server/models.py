@@ -125,6 +125,8 @@ class UserPark(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = "reviews"
 
+    serialize_rules = ('-park', '-user')
+
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
