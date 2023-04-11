@@ -1,6 +1,7 @@
 import AmenitiesPanel from './AmenitiesPanel';
 import DetailsPanel from './DetailsPanel';
 import OverviewPanel from './OverviewPanel';
+import ReviewPanel from './ReviewPanel';
 
 import { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
@@ -108,13 +109,14 @@ function ParkDetail() {
                     templateColumns='repeat(4, 1fr)'
                     gap={4}
                 >
-                    <GridItem rowSpan={2} colSpan={1}>
+                    <GridItem border='1px'rowSpan={1} colSpan={1}>
                         <DetailsPanel park={park}/>
                     </GridItem>
-                    <GridItem colSpan={3}>
+                    <GridItem border='1px' colSpan={3}>
                         <OverviewPanel park={park}/>
                     </GridItem>
-                    <GridItem colSpan={2}><AmenitiesPanel park={park}/></GridItem>
+                    <GridItem border='1px' colSpan={2}><AmenitiesPanel park={park}/></GridItem>
+                    <GridItem border='1px' colSpan={2}><ReviewPanel park={park}/></GridItem>
                 </Grid>
             </>
         )
