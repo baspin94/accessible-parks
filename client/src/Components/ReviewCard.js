@@ -4,13 +4,10 @@ import {
     Card,
     CardHeader,
     Heading,
-    Text,
     CardBody,
     CardFooter,
     Button,
-    Icon,
     FormLabel,
-    Input,
     Textarea,
     Select
 } from '@chakra-ui/react';
