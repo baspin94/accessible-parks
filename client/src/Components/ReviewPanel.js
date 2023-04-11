@@ -1,7 +1,6 @@
 import {
     Box, 
     Heading,
-    Grid,
     UnorderedList,
 } from '@chakra-ui/react';
 import ReviewCard from './ReviewCard';
@@ -9,7 +8,7 @@ import ReviewCard from './ReviewCard';
 function ReviewPanel({ park }) {
 
     const reviews = park.reviews.map(element => {
-        return <ReviewCard key={element.id}/>
+        return <ReviewCard key={element.id} review={element}/>
     })
 
     return (
