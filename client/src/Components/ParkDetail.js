@@ -26,11 +26,15 @@ function ParkDetail() {
 
     const [park, setPark] = useState(null)
     const [savedId, setSavedId] = useState(null)
+    const [reviews, setReviews] = useState([])
 
     useEffect( () => {
         fetch(`/parks/${parkId}`)
         .then(response => response.json())
-        .then(parkData => setPark(parkData))
+        .then(parkData => {
+            setPark(parkData)
+            setReviews(parkData.reviews)
+            })
         .then(() => {
             if (user.id !== undefined) {
                 const savedIds = user.parks.map(park => park.park_id)
@@ -116,7 +120,7 @@ function ParkDetail() {
                         <OverviewPanel park={park}/>
                     </GridItem>
                     <GridItem border='1px' colSpan={2}><AmenitiesPanel park={park}/></GridItem>
-                    <GridItem border='1px' colSpan={2}><ReviewPanel park={park}/></GridItem>
+                    <GridItem border='1px' colSpan={2}><ReviewPanel reviews={reviews} setReviews={setReviews}/></GridItem>
                 </Grid>
             </>
         )

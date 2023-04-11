@@ -18,11 +18,9 @@ import {
 import { useFormik } from 'formik';
 
 
-function ReviewCard({ review }) {
+function ReviewCard({ review, reviewArray, setReviews }) {
     const [editMode, setEditMode] = useState(false)
-    const [currentReview, setCurrentReview] = useState(review.review)
-    const [currentRating, setCurrentRating] = useState(review.rating)
-
+    
     const user = useContext(UserContext)
 
     const formik = useFormik({
@@ -44,8 +42,14 @@ function ReviewCard({ review }) {
             })
             .then(response => response.json())
             .then(reviewData => {
-                setCurrentReview(reviewData.review)
-                setCurrentRating(reviewData.rating)
+                const updatedReviews = reviewArray.map(review => {
+                    if (review.id === reviewData.id) {
+                        return reviewData
+                    } else {
+                        return review
+                    }
+                }) 
+                setReviews(updatedReviews)
             })
             .then(setEditMode(false))
         }

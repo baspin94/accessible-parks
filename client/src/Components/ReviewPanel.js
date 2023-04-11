@@ -5,17 +5,17 @@ import {
 } from '@chakra-ui/react';
 import ReviewCard from './ReviewCard';
 
-function ReviewPanel({ park }) {
+function ReviewPanel({ reviews, setReviews }) {
 
-    const reviews = park.reviews.map(element => {
-        return <ReviewCard key={element.id} review={element}/>
+    const review_cards = reviews.map(element => {
+        return <ReviewCard key={element.id} review={element} reviewArray={reviews} setReviews={setReviews}/>
     })
 
     return (
         <Box p="10px">
             <Heading as="h3" size="lg">Reviews</Heading>
             <UnorderedList>
-                {reviews}
+                {review_cards}
             </UnorderedList>
         </Box>
     )
