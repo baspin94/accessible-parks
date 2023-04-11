@@ -96,6 +96,8 @@ function ReviewCard({ review, reviewArray, setReviews }) {
 
     const user_review = review_edit()
 
+    const reviewer_name = review.user.first_name
+
     if (user.id === review.user_id) {
         return (
             <Card border='1px'>
@@ -105,7 +107,7 @@ function ReviewCard({ review, reviewArray, setReviews }) {
     } else {
         return (
             <Card border='1px'>
-                <CardHeader><Heading as="h4" size="sm">User</Heading></CardHeader>
+                <CardHeader><Heading as="h4" size="sm">{reviewer_name}</Heading></CardHeader>
                 <CardBody>{review.review}</CardBody>
             </Card>
         )
