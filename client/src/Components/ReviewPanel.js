@@ -93,9 +93,9 @@ function ReviewPanel({ reviews, setReviews }) {
             <Box border='1px' p='10px'>
                 {review_form}
             </Box>
-            <UnorderedList>
+            <Stack>
                 {review_cards}
-            </UnorderedList>
+            </Stack>
         </Stack>
     )
 }

@@ -9,7 +9,9 @@ import {
     Button,
     FormLabel,
     Textarea,
-    Select
+    Select,
+    Text,
+    Stack
 } from '@chakra-ui/react';
 
 import { useFormik } from 'formik';
@@ -89,16 +91,21 @@ function ReviewCard({ review, reviewArray, setReviews }) {
 
         } else {
             return (
-                <>
+                <Stack>
                 <CardHeader>
                     <Heading as="h4" size="sm">You</Heading>
                 </CardHeader>
-                <CardBody>{review.review}</CardBody>
+                <CardBody>
+                    <Stack>
+                        <Text><strong>Rating:</strong> {review.rating}/5</Text>
+                        <Text>{review.review}</Text>
+                    </Stack>
+                </CardBody>
                 <CardFooter>
                     <Button onClick={toggleEdit}>Edit</Button>
                     <Button onClick={handleDelete}>Delete</Button>
                 </CardFooter>
-                </>
+                </Stack>
             )
         }
     }
@@ -117,7 +124,12 @@ function ReviewCard({ review, reviewArray, setReviews }) {
         return (
             <Card border='1px'>
                 <CardHeader><Heading as="h4" size="sm">{reviewer_name}</Heading></CardHeader>
-                <CardBody>{review.review}</CardBody>
+                <CardBody>
+                    <Stack>
+                        <Text><strong>Rating:</strong> {review.rating}/5</Text>
+                        <Text>{review.review}</Text>
+                    </Stack>
+                </CardBody>
             </Card>
         )
     }
