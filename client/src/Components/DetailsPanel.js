@@ -1,5 +1,4 @@
 import {
-    Box, 
     Heading, 
     Text,
     UnorderedList,
@@ -12,8 +11,7 @@ import {
     EmailIcon,
     InfoOutlineIcon,
     CheckIcon
-} from '@chakra-ui/icons'
-import { Link } from 'react-router-dom'
+} from '@chakra-ui/icons';
 
 function DetailsPanel({ park }) {
 

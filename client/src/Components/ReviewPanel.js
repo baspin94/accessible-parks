@@ -1,8 +1,6 @@
 import {
     Box, 
     Heading,
-    UnorderedList,
-    FormControl,
     FormLabel,
     Textarea,
     Select,
@@ -12,7 +10,7 @@ import {
 import ReviewCard from './ReviewCard';
 import { UserContext } from '../App';
 import { useFormik } from 'formik';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
 
