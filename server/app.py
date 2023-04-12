@@ -232,7 +232,7 @@ class Reviews(Resource):
         db.session.commit()
 
         response = make_response(
-            new_review.to_dict(),
+            new_review.to_dict(rules=('user',)),
             201
         )
         return response
