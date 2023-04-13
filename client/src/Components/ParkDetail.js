@@ -15,7 +15,7 @@ import {
     Spacer
 } from '@chakra-ui/react';
 
-function ParkDetail() {
+function ParkDetail({ savedParks, setSavedParks }) {
 
     const history = useHistory()
 
@@ -61,13 +61,21 @@ function ParkDetail() {
                 body: JSON.stringify(submission),
             })
             .then((response) => response.json())
-            .then((newUserPark)=> setSavedId(newUserPark.id))
+            .then((newUserPark)=> {
+                setSavedId(newUserPark.id)
+                const updatedSavedParks = [...savedParks, newUserPark]
+                setSavedParks(updatedSavedParks)
+            })
         } else {
             fetch(`/user_parks/${savedId}`, {
                 method: "DELETE",
             })
             .then(response => response.json())
-            .then(() => setSavedId(null))
+            .then(() => {
+                setSavedId(null)
+                const updatedSavedParks = savedParks.filter(element => element.id !== savedId)
+                setSavedParks(updatedSavedParks)
+            })
         }
     }
 

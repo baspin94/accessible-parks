@@ -7,18 +7,10 @@ import {
     Heading
 } from '@chakra-ui/react';
 
-function SavedParks(){
+function SavedParks({ savedParks }){
 
     const user = useContext(UserContext)
-    const [savedParks, setSavedParks] = useState([])
-
-    useEffect(() => {
-        if (user.id !== undefined) {
-            setSavedParks([...user.parks])
-        }
-
-    }, [user])
-
+    
     const cards = savedParks.map(element => {
         return <ParkCard key={element.park_id} id={element.park_id} park={element.park} />
     })

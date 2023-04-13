@@ -13,15 +13,18 @@ const UserContext = createContext({})
 
 function App() {
   const [user, setUser] = useState({})
-
   const [parkMatches, setParkMatches] = useState([])
+  const [savedParks, setSavedParks] = useState([])
 
   useEffect( () => {
     fetch('/authorized')
     .then(response => {
       if (response.ok) {
         response.json()
-        .then(userData => setUser(userData))
+        .then(userData => {
+          setUser(userData)
+          setSavedParks(userData.parks)
+        })
       } else {
         response.json()
         .then(error => console.log(error))
@@ -47,10 +50,10 @@ function App() {
        </Route>
        <UserContext.Provider value={user}>
        <Route path='/park/:id'>
-            <ParkDetail/>
+            <ParkDetail savedParks={savedParks} setSavedParks={setSavedParks}/>
        </Route>
        <Route path='/myparks'>
-          <SavedParks />
+          <SavedParks savedParks={savedParks}/>
        </Route>
        </UserContext.Provider>
       </Switch>
