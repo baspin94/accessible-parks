@@ -25,11 +25,11 @@ function DetailsPanel({ park }) {
                 <UnorderedList styleType="none">
                     <ListItem>
                         <ListIcon as={InfoOutlineIcon}/>
-                        General: <a href={homepage}>NPS Park Homepage</a>
+                        General: <a href={homepage} target="_blank" rel="noopener noreferrer">NPS Park Homepage</a>
                     </ListItem>
                     <ListItem>
                         <ListIcon as={CheckIcon}/>
-                        Accessibility: <a href={access_page}>NPS Park Accessibility Page</a>
+                        Accessibility: <a href={access_page} target="_blank" rel="noopener noreferrer">NPS Park Accessibility Page</a>
                     </ListItem>
 
                 </UnorderedList>
@@ -41,7 +41,7 @@ function DetailsPanel({ park }) {
                     </ListItem>
                     <ListItem>
                         <ListIcon as={EmailIcon}/>
-                        Email: {park.email}
+                        Email: <a href={`mailto:${park.email}`} target="_blank" rel="noopener noreferrer">{park.email}</a>
                     </ListItem>
                 </UnorderedList>
             <Heading as="h4" size="md">Weather</Heading>
