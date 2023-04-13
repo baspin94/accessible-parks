@@ -5,14 +5,14 @@ import {
     Heading,
     Text,
     CardBody, 
-    Image
+    Image,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 function ParkCard( { park, id }) {
     return(
         <Link to={`/park/${id}`}>
-            <Card border="1px" align="center">
+            <Card w="100%"  h="100%" border="1px" align="center">
                 <CardBody>
                     <Box boxSize="md" w="100%" h="100%">
                         <Image object-fit="cover" w="100%" h="100%" src={park.image_url} alt={park.image_alt}/>

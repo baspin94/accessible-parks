@@ -1,7 +1,7 @@
 import ParkCard from "./ParkCard";
 import {
     Button,
-    Grid,
+    SimpleGrid,
     Heading,
     Box,
     Text,
@@ -85,9 +85,9 @@ function Results({ parks }) {
                     <Button type="submit">Filter</Button>
                     <Button onClick={handleFilterClear}>Clear Filter</Button>
                 </form>
-                <Grid p="20px" margin="auto" w="100%" templateColumns='repeat(3, 1fr)' gap={2}>
+                <SimpleGrid margin="auto" w="100%" spacing={2} minChildWidth="250px">
                     {cards}
-                </Grid>
+                </SimpleGrid>
                 <Link exact to='/'>
                     <Button>Search Again</Button>
                 </Link>
