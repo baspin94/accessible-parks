@@ -8,13 +8,15 @@ import {
     FormLabel,
     Select
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 
 function Results({ parks }) {
     const [displayParks, setDisplayParks] = useState(parks)
     const [states, setStates] = useState([])
+
+    const history = useHistory()
 
     useEffect(() => {
         function getStates() {
@@ -34,8 +36,13 @@ function Results({ parks }) {
         
         }
         const states = getStates()
-        setStates(states)
-    }, [parks])
+
+        if (parks.length === 0) {
+            history.push('/')
+        } else {
+            setStates(states)
+        }
+    }, [parks, history])
 
     const formik = useFormik({
         initialValues: {
