@@ -68,6 +68,11 @@ function Results({ parks }) {
         return <option key={index} value={state}>{state}</option>
     })
 
+    function handleFilterClear() {
+        setDisplayParks(parks)
+        formik.handleReset()
+    }
+
     return (
         <Box p="5px" margin="auto" w="80%" textAlign="center">
                 <Heading margin="auto">Search Results</Heading>
@@ -78,6 +83,7 @@ function Results({ parks }) {
                         {stateOptions}
                     </Select>
                     <Button type="submit">Filter</Button>
+                    <Button onClick={handleFilterClear}>Clear Filter</Button>
                 </form>
                 <Grid p="20px" margin="auto" w="100%" templateColumns='repeat(3, 1fr)' gap={2}>
                     {cards}
