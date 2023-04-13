@@ -1,16 +1,20 @@
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
 import { Heading, Flex, Spacer, HStack, Button, Text } from '@chakra-ui/react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 
 function Header({ user, setUser }) {
+
+    const history = useHistory()
 
     function handleLogout(){
         fetch('/logout', {
             method: "DELETE",
         })
-            .then(setUser({}))
+            .then(() => {
+                setUser({})
+                history.push('/login')
+            })
     }
-
     
     return (
         <Flex bg="green" p="20px">
