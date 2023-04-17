@@ -76,7 +76,7 @@ function Results({ parks }) {
     }
 
     return (
-        <Box p="5px" margin="auto" w="80%" textAlign="center">
+        <Box p="5px" margin="auto" w="90%" textAlign="center">
                 <Heading margin="auto">Search Results</Heading>
                 <Text><strong>{displayParks.length}</strong> parks matching your search criteria</Text>
                 <form onSubmit={formik.handleSubmit}>
@@ -87,7 +87,7 @@ function Results({ parks }) {
                     <Button type="submit">Filter</Button>
                     <Button onClick={handleFilterClear}>Clear Filter</Button>
                 </form>
-                <SimpleGrid margin="auto" w="100%" spacing={2} minChildWidth="250px">
+                <SimpleGrid margin="auto" w="100%" spacing={2} minChildWidth="300px">
                     {cards}
                 </SimpleGrid>
                 <Link exact to='/'>

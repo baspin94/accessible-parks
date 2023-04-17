@@ -36,11 +36,9 @@ function ParkCard( { park, id }) {
 
     return(
         <Link to={`/park/${id}`}>
-            <Card w="100%"  h="100%" border="1px" align="center">
-                <CardBody>
-                    <Box boxSize="md" w="100%" h="100%">
-                        <Image object-fit="cover" w="100%" h="100%" src={park.image_url} alt={park.image_alt}/>
-                    </Box>
+            <Card w="100%" h="100%" maxHeight="425px" border="1px" align="center">
+                <CardBody maxHeight="66.666%">
+                    <Image w="100%" h="100%" src={park.image_url} alt={park.image_alt}/>
                 </CardBody>
                 <CardHeader align="center">
                     <VStack>
