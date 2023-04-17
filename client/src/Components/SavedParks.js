@@ -2,7 +2,7 @@ import ParkCard from "./ParkCard";
 import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../App';
 import {
-    Grid,
+    SimpleGrid,
     Box,
     Heading
 } from '@chakra-ui/react';
@@ -22,9 +22,9 @@ function SavedParks({ savedParks }){
     return (
         <Box p="5px" margin="auto" w="80%" textAlign="center">
             <Heading margin="auto">Your Saved Parks</Heading>
-            <Grid p="20px" margin="auto" w="100%" templateColumns='repeat(3, 1fr)' gap={2}>
+            <SimpleGrid margin="auto" w="100%" spacing={2} minChildWidth="250px">
                 {cards}
-            </Grid>
+            </SimpleGrid>
         </Box>
     )
 }
