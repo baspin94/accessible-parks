@@ -53,6 +53,8 @@ function Results({ parks }) {
             const filteredParks = parks.filter(park => {
                 if (park.states.includes(filterState)){
                     return park
+                } else {
+                    return null
                 }
             })
             setDisplayParks(filteredParks)
