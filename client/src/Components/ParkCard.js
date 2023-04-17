@@ -6,10 +6,34 @@ import {
     Text,
     CardBody, 
     Image,
+    UnorderedList,
+    ListItem, 
+    VStack
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 function ParkCard( { park, id }) {
+
+    function formatStates() {
+        if (park.states.length === 2) {
+            return <Text>{park.states}</Text>
+        } else {
+            const states = park.states.split(',')
+            const stateList = states.map(state => {
+                if (states.indexOf(state) === 0) {
+                    return <ListItem display='inline' p='1'>{state}</ListItem>
+                } else {
+                    return <ListItem display='inline' p='1'>· {state}</ListItem>
+                }
+            })
+            return stateList
+        }
+    }
+
+    const formattedStates = formatStates()
+
+    const designation = (park.designation === "") ? "Destination" : park.designation
+
     return(
         <Link to={`/park/${id}`}>
             <Card w="100%"  h="100%" border="1px" align="center">
@@ -19,9 +43,17 @@ function ParkCard( { park, id }) {
                     </Box>
                 </CardBody>
                 <CardHeader align="center">
-                    <Heading as="h3" size="md">{park.name}</Heading>
-                    <Text as="i">{park.designation}</Text>
-                    <Text>{park.states}</Text>
+                    <VStack>
+                        <Heading as="h3" size="md">{park.name}</Heading>
+                        <Text as="i">{designation}</Text>
+                        {park.states.length === 2 
+                        ? formattedStates
+                        :
+                            <UnorderedList styleType="None" textAlign='center'>
+                            {formattedStates}
+                            </UnorderedList>
+                        }
+                    </VStack>
                 </CardHeader>
             </Card>
         </Link>
