@@ -20,9 +20,9 @@ function SavedParks({ savedParks }){
     }
 
     return (
-        <Box p="5px" margin="auto" w="80%" textAlign="center">
-            <Heading margin="auto">Your Saved Parks</Heading>
-            <SimpleGrid margin="auto" w="100%" spacing={2} minChildWidth="250px">
+        <Box p="5px" margin="auto" w="90%" textAlign="center">
+            <Heading p='5px' margin="auto">Your Saved Parks</Heading>
+            <SimpleGrid p='5px' margin="auto" w="100%" spacing={2} minChildWidth="300px">
                 {cards}
             </SimpleGrid>
         </Box>
