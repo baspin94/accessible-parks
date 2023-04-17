@@ -48,7 +48,10 @@ function OverviewPanel( { park }) {
                 {stateText}
                 </UnorderedList>
             }
-            <Image w="40%" h="40%" src={park.image_url} alt={park.image_alt}/>
+            <Box>
+                <Image margin="auto" w="40%" h="40%" src={park.image_url} alt={park.image_alt}/>
+                <Text align="center" fontSize="2xs">{park.image_credit}</Text>
+            </Box>
             <Text>{park.description}</Text>
         </VStack>
         </Box> 
