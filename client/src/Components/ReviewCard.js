@@ -22,6 +22,9 @@ function ReviewCard({ review, reviewArray, setReviews }) {
     
     const user = useContext(UserContext)
 
+    const star = "⭐"
+    const starRating = star.repeat(review.rating)
+    
     const formik = useFormik({
         initialValues: {
             review: review.review,
@@ -96,7 +99,7 @@ function ReviewCard({ review, reviewArray, setReviews }) {
                 </CardHeader>
                 <CardBody>
                     <Stack>
-                        <Text><strong>Rating:</strong> {review.rating}/5</Text>
+                        <Text><strong>Rating (Out of 5 Stars):</strong> {starRating}</Text>
                         <Text>{review.review}</Text>
                     </Stack>
                 </CardBody>
@@ -125,7 +128,7 @@ function ReviewCard({ review, reviewArray, setReviews }) {
                 <CardHeader><Heading as="h4" size="sm">{reviewer_name}</Heading></CardHeader>
                 <CardBody>
                     <Stack>
-                        <Text><strong>Rating:</strong> {review.rating}/5</Text>
+                        <Text><strong>Rating (Out of 5 Stars):</strong> {starRating}</Text>
                         <Text>{review.review}</Text>
                     </Stack>
                 </CardBody>
