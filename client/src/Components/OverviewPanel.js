@@ -21,10 +21,10 @@ function OverviewPanel( { park }) {
             const stateAbbrs = park.states.split(',')
             const stateFullNames = stateAbbrs.map(abbr => {
                 if (stateAbbrs.indexOf(abbr) !== 0) {
-                    return <ListItem fontSize='lg' display='inline' p='1'>· {states.fullName(abbr)}</ListItem>
+                    return <ListItem key={abbr} fontSize='lg' display='inline' p='1'>· {states.fullName(abbr)}</ListItem>
 
                 } else {
-                    return <ListItem fontSize='lg' display='inline' p='1'>{states.fullName(abbr)}</ListItem>
+                    return <ListItem key={abbr} fontSize='lg' display='inline' p='1'>{states.fullName(abbr)}</ListItem>
                 }
                 
             })
