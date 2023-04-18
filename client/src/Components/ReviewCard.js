@@ -63,7 +63,6 @@ function ReviewCard({ review, reviewArray, setReviews }) {
             method: "DELETE"
         })
             .then(response => response.json())
-            .then(responseData => console.log(responseData))
             .then(() => {
                 const updatedReviews = reviewArray.filter(element => element.id !== review.id)
                 setReviews(updatedReviews)

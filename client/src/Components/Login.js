@@ -46,7 +46,6 @@ function Login({ setUser }) {
         validateOnChange: false,
         validateOnBlur: false,
         onSubmit: (values) => {
-            console.log(values)
             fetch('/login', {
                 method: "POST",
                 headers: {

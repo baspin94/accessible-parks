@@ -41,7 +41,6 @@ function ParkDetail({ savedParks, setSavedParks }) {
                 const intParkId = parseInt(parkId)
                 if (savedIds.includes(intParkId)) {
                     const match = user.parks.find(park => park.park_id === intParkId)
-                    console.log(match)
                     setSavedId(match.id)
                 }}
         })
