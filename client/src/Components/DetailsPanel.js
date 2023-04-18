@@ -12,12 +12,17 @@ import {
     InfoOutlineIcon,
     CheckIcon
 } from '@chakra-ui/icons';
+import {parsePhoneNumber} from 'libphonenumber-js';
 
 function DetailsPanel({ park }) {
 
     const homepage = `https://www.nps.gov/${park.code}/index.htm`
     const access_page = `https://www.nps.gov/${park.code}/planyourvisit/accessibility.htm`
 
+    const phoneNumber = parsePhoneNumber(park.phone, 'US')
+    const formattedPhoneNumber = phoneNumber.formatNational()
+    const phoneURI = phoneNumber.getURI()
+      
     return (
         <Stack p="10px">
             <Heading as="h3" size="lg">General Information</Heading>
@@ -37,7 +42,7 @@ function DetailsPanel({ park }) {
                 <UnorderedList styleType="none">
                     <ListItem>
                         <ListIcon as={PhoneIcon}/>
-                        Phone: {park.phone}
+                        Phone: <a href={phoneURI} target="_blank" rel="noopener noreferrer">{formattedPhoneNumber}</a>
                     </ListItem>
                     <ListItem>
                         <ListIcon as={EmailIcon}/>
