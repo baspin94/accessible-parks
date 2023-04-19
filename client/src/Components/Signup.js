@@ -9,8 +9,13 @@ import {
     Button,
     FormControl,
     FormLabel,
-    FormErrorMessage 
+    FormErrorMessage,
+    IconButton 
 } from '@chakra-ui/react';
+import {
+    ViewIcon,
+    ViewOffIcon
+} from '@chakra-ui/icons';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useHistory, Link as ReachLink } from 'react-router-dom'
@@ -74,11 +79,11 @@ function Signup({ setUser }) {
 
     return (
         
-        <Box w="400px" margin="auto">
+        <Box w="500px" p='20px' margin="auto" textAlign='center'>
 
             <Stack>
 
-                <Heading>Sign Up for an Account</Heading>
+                <Heading p='5px'>Sign Up for an Account</Heading>
 
                 {error 
                     ? <Box bg="red">Error: {error}</Box>
@@ -88,50 +93,50 @@ function Signup({ setUser }) {
                 <form onSubmit={formik.handleSubmit}>
 
                     <FormControl isInvalid={formik.errors['first_name']}>
-                        <FormLabel>First Name</FormLabel>
-                        <Input type="text" name="first_name" value={formik.values.first_name} onChange={formik.handleChange}/>
+                        <FormLabel mt='10px'>First Name</FormLabel>
+                        <Input  border='1px' type="text" name="first_name" value={formik.values.first_name} onChange={formik.handleChange}/>
                         <FormErrorMessage>{formik.errors['first_name']}</FormErrorMessage>
                     </FormControl>
 
                     <FormControl isInvalid={formik.errors['last_name']}>
-                        <FormLabel>Last Name</FormLabel>
-                        <Input type="text" name="last_name" value={formik.values.last_name} onChange={formik.handleChange}/>
+                        <FormLabel mt='10px'>Last Name</FormLabel>
+                        <Input border='1px' type="text" name="last_name" value={formik.values.last_name} onChange={formik.handleChange}/>
                         <FormErrorMessage>{formik.errors['last_name']}</FormErrorMessage>
                     </FormControl>
 
                     <FormControl isInvalid={formik.errors['email']}>
-                        <FormLabel>Email Address</FormLabel>
-                        <Input type="text" name="email" value={formik.values.email} onChange={formik.handleChange}/>
+                        <FormLabel mt='10px'>Email Address</FormLabel>
+                        <Input border='1px' type="text" name="email" value={formik.values.email} onChange={formik.handleChange}/>
                         <FormErrorMessage>{formik.errors['email']}</FormErrorMessage>
                     </FormControl>
 
                     <FormControl isInvalid={formik.errors['password']}>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel mt='10px'>Password</FormLabel>
                         <InputGroup>
-                            <Input type={showPassword ? "text" : "password"} name="password" value={formik.values.password} onChange={formik.handleChange}/>
+                            <Input border='1px' type={showPassword ? "text" : "password"} name="password" value={formik.values.password} onChange={formik.handleChange}/>
                             <InputRightElement>
-                                <Button onClick={handlePasswordToggle}>{showPassword ? 'Hide' : 'Show'}</Button>
+                                <IconButton aria-label={showPassword ? "Hide Password" : "Show Password"} colorScheme="orange" background="green" color="white" onClick={handlePasswordToggle} icon={showPassword ? <ViewOffIcon /> : <ViewIcon />} />
                             </InputRightElement>
                         </InputGroup>
                         <FormErrorMessage>{formik.errors['password']}</FormErrorMessage>
                     </FormControl>
 
                     <FormControl isInvalid={formik.errors['confirm_password']}>
-                        <FormLabel>Confirm Password</FormLabel>
+                        <FormLabel mt='10px'>Confirm Password</FormLabel>
                         <InputGroup>
-                            <Input type={showPassword ? "text" : "password"} name="confirm_password" value={formik.values.confirm_password} onChange={formik.handleChange}/>
+                            <Input border='1px' type={showPassword ? "text" : "password"} name="confirm_password" value={formik.values.confirm_password} onChange={formik.handleChange}/>
                             <InputRightElement>
-                                <Button onClick={handlePasswordToggle}>{showPassword ? 'Hide' : 'Show'}</Button>
+                            <IconButton aria-label={showPassword ? "Hide Password" : "Show Password"} colorScheme="orange" background="green" color="white" onClick={handlePasswordToggle} icon={showPassword ? <ViewOffIcon /> : <ViewIcon />} />
                             </InputRightElement>
                         </InputGroup>
                         <FormErrorMessage>{formik.errors['confirm_password']}</FormErrorMessage>
                     </FormControl>
 
-                    <Button type="submit">Sign Up</Button>
+                    <Button colorScheme="orange" mt='10px' border='1px' background="green" color="white" type="submit">Sign Up</Button>
 
                 </form>
 
-                <Link as={ReachLink} to='/login'>
+                <Link as={ReachLink} to='/login' p='5px'>
                     Already have an account? <strong>Log In.</strong>
                 </Link>
                 
