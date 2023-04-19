@@ -10,7 +10,11 @@ import {
     FormControl,
     FormLabel,
     FormErrorMessage, 
-    IconButton 
+    IconButton,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription 
 } from '@chakra-ui/react';
 import {
     ViewIcon,
@@ -80,7 +84,11 @@ function Login({ setUser }) {
                 <Heading p='5px'>Log In to Your Account</Heading>
 
                 {error 
-                    ? <Box bg="red">Error: {error}</Box>
+                    ? <Alert status='error' flexDirection='column'>
+                        <AlertIcon/>
+                        <AlertTitle>Login Unsuccessful.</AlertTitle>
+                        <AlertDescription>{error}<br/>Please log in or try again.</AlertDescription>
+                    </Alert>
                     : null
                 }
 
