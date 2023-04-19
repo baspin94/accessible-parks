@@ -93,27 +93,27 @@ function Signup({ setUser }) {
                 <form onSubmit={formik.handleSubmit}>
 
                     <FormControl isRequired='true' isInvalid={formik.errors['first_name']}>
-                        <FormLabel fontSize='lg' mt='10px'>First Name</FormLabel>
-                        <Input _hover={{border: '2px', borderColor: 'green'}} border='1px' type="text" name="first_name" value={formik.values.first_name} onChange={formik.handleChange}/>
+                        <FormLabel mt='10px'>First Name</FormLabel>
+                        <Input _hover={{border: '2px', borderColor: 'blue.500'}} border='1px' type="text" name="first_name" value={formik.values.first_name} onChange={formik.handleChange}/>
                         <FormErrorMessage>{formik.errors['first_name']}</FormErrorMessage>
                     </FormControl>
 
                     <FormControl isRequired='true' isInvalid={formik.errors['last_name']}>
                         <FormLabel mt='10px'>Last Name</FormLabel>
-                        <Input _hover={{border: '2px', borderColor: 'green'}} border='1px' type="text" name="last_name" value={formik.values.last_name} onChange={formik.handleChange}/>
+                        <Input _hover={{border: '2px', borderColor: 'blue.500'}} border='1px' type="text" name="last_name" value={formik.values.last_name} onChange={formik.handleChange}/>
                         <FormErrorMessage>{formik.errors['last_name']}</FormErrorMessage>
                     </FormControl>
 
                     <FormControl isRequired='true' isInvalid={formik.errors['email']}>
                         <FormLabel mt='10px'>Email Address</FormLabel>
-                        <Input _hover={{border: '2px', borderColor: 'green'}} border='1px' type="text" name="email" value={formik.values.email} onChange={formik.handleChange}/>
+                        <Input _hover={{border: '2px', borderColor: 'blue.500'}} border='1px' type="text" name="email" value={formik.values.email} onChange={formik.handleChange}/>
                         <FormErrorMessage>{formik.errors['email']}</FormErrorMessage>
                     </FormControl>
 
                     <FormControl isRequired='true' isInvalid={formik.errors['password']}>
                         <FormLabel mt='10px'>Password</FormLabel>
                         <InputGroup>
-                            <Input _hover={{border: '2px', borderColor: 'green'}} border='1px' type={showPassword ? "text" : "password"} name="password" value={formik.values.password} onChange={formik.handleChange}/>
+                            <Input _hover={{border: '2px', borderColor: 'blue.500'}} border='1px' type={showPassword ? "text" : "password"} name="password" value={formik.values.password} onChange={formik.handleChange}/>
                             <InputRightElement>
                                 <IconButton aria-label={showPassword ? "Hide Password" : "Show Password"} colorScheme="orange" background="green" color="white" onClick={handlePasswordToggle} icon={showPassword ? <ViewOffIcon /> : <ViewIcon />} />
                             </InputRightElement>
@@ -124,7 +124,7 @@ function Signup({ setUser }) {
                     <FormControl isRequired='true' isInvalid={formik.errors['confirm_password']}>
                         <FormLabel mt='10px'>Confirm Password</FormLabel>
                         <InputGroup>
-                            <Input _hover={{border: '2px', borderColor: 'green'}} border='1px' type={showPassword ? "text" : "password"} name="confirm_password" value={formik.values.confirm_password} onChange={formik.handleChange}/>
+                            <Input _hover={{border: '2px', borderColor: 'blue.500'}} border='1px' type={showPassword ? "text" : "password"} name="confirm_password" value={formik.values.confirm_password} onChange={formik.handleChange}/>
                             <InputRightElement>
                             <IconButton aria-label={showPassword ? "Hide Password" : "Show Password"} colorScheme="orange" background="green" color="white" onClick={handlePasswordToggle} icon={showPassword ? <ViewOffIcon /> : <ViewIcon />} />
                             </InputRightElement>
