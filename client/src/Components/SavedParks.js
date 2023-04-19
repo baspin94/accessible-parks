@@ -1,5 +1,5 @@
 import ParkCard from "./ParkCard";
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../App';
 import {
     SimpleGrid,
