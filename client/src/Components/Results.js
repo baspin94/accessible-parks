@@ -7,7 +7,10 @@ import {
     Text,
     FormLabel,
     FormControl,
-    Select
+    Select,
+    InputGroup,
+    InputLeftAddon,
+    InputRightAddon
 } from '@chakra-ui/react';
 import { Link, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -64,11 +67,9 @@ function Results({ parks }) {
     const stateFormik = useFormik({
         initialValues: {
             state: ""
-            // designation: ""
         },
         onSubmit: (values) => {
             const filterState = values['state']
-            // const filterDesignation = values['designation']
             const filteredByState = displayParks.filter(park => {
                 if (park.states.includes(filterState)){
                     return park
@@ -76,15 +77,6 @@ function Results({ parks }) {
                     return null
                 }
             })
-            // const filteredByDesignation = filteredByState.filter(park => {
-            //     if (filterDesignation === "Other" && park.designation === "") {
-            //         return park
-            //     } else {
-            //         if (park.designation === filterDesignation) {
-            //             return park
-            //         }
-            //     }
-            // })
             setDisplayParks(filteredByState)
         }
     })
@@ -107,7 +99,6 @@ function Results({ parks }) {
                 return parkToReturn
             })
             setDisplayParks(filteredByDesignation)
-
         }
     })
 
@@ -137,22 +128,27 @@ function Results({ parks }) {
                 <Text><strong>{displayParks.length}</strong> parks matching your search criteria</Text>
                 <form onSubmit={stateFormik.handleSubmit}>
                     <FormControl isDisabled={stateFormik.isSubmitting}>
-                    <FormLabel>Filter By State:</FormLabel>
-                    <Select name="state" placeholder="Select a state:" value={stateFormik.values.state} onChange={stateFormik.handleChange}>
+                    <InputGroup>
+                    <InputLeftAddon w='204px'><FormLabel>Filter By State:</FormLabel></InputLeftAddon>
+                    <Select minW='207px' name="state" placeholder="Select a state:" value={stateFormik.values.state} onChange={stateFormik.handleChange}>
                         {stateOptions}
                     </Select>
+                    <InputRightAddon><Button isDisabled={stateFormik.isSubmitting} type="submit">Filter</Button></InputRightAddon>
+                    </InputGroup>
                     </FormControl>
-                    <Button isDisabled={stateFormik.isSubmitting} type="submit">Filter</Button>
+                    
                 </form>
                 <form onSubmit={designFormik.handleSubmit}>
-                    <FormControl isDisabled={designFormik.isSubmitting}>
-                    <FormLabel>Filter By Designation:</FormLabel>
-                    <Select name="designation" placeholder="Select a designation:" value={designFormik.values.designation} onChange={designFormik.handleChange}>
+                    <FormControl isDisabled={designFormik.isSubmitting}>    
+                    <InputGroup>
+                    <InputLeftAddon w='204px'><FormLabel>Filter By Designation:</FormLabel></InputLeftAddon>
+                    <Select minW='207px' name="designation" placeholder="Select a designation:" value={designFormik.values.designation} onChange={designFormik.handleChange}>
                         {designationOptions}
                     </Select>
+                    <InputRightAddon><Button isDisabled={designFormik.isSubmitting} type="submit">Filter</Button></InputRightAddon>
+                    </InputGroup>
                     </FormControl>
-                    <Button isDisabled={designFormik.isSubmitting} type="submit">Filter</Button>
-                    <Button onClick={handleFilterClear}>Clear Filter</Button>
+                    <Button onClick={handleFilterClear}>Reset Filters</Button>
                 </form>
                 <SimpleGrid margin="auto" w="100%" spacing={2} minChildWidth="300px">
                     {cards}
