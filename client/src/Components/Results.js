@@ -6,6 +6,7 @@ import {
     Box,
     Text,
     FormLabel,
+    FormControl,
     Select
 } from '@chakra-ui/react';
 import { Link, useHistory } from 'react-router-dom';
@@ -22,7 +23,7 @@ function Results({ parks }) {
     useEffect(() => {
         function getStates() {
             let statesArray = []
-            parks.forEach(park => {
+            displayParks.forEach(park => {
                 if (park.states.length === 2) {
                     statesArray.push(park.states)
                 } else {
@@ -38,7 +39,7 @@ function Results({ parks }) {
         }
 
         function getDesignations() {
-            const designationsArray = parks.map(park => {
+            const designationsArray = displayParks.map(park => {
                 if (park.designation !== "") {
                     return park.designation
                 } else {
@@ -58,33 +59,55 @@ function Results({ parks }) {
             setStates(states)
             setDesignations(designations)
         }
-    }, [parks, history])
+    }, [displayParks, parks, history])
 
-    const formik = useFormik({
+    const stateFormik = useFormik({
         initialValues: {
-            state: "",
-            designation: ""
+            state: ""
+            // designation: ""
         },
         onSubmit: (values) => {
             const filterState = values['state']
-            const filterDesignation = values['designation']
-            const filteredByState = parks.filter(park => {
+            // const filterDesignation = values['designation']
+            const filteredByState = displayParks.filter(park => {
                 if (park.states.includes(filterState)){
                     return park
                 } else {
                     return null
                 }
             })
-            const filteredByDesignation = filteredByState.filter(park => {
+            // const filteredByDesignation = filteredByState.filter(park => {
+            //     if (filterDesignation === "Other" && park.designation === "") {
+            //         return park
+            //     } else {
+            //         if (park.designation === filterDesignation) {
+            //             return park
+            //         }
+            //     }
+            // })
+            setDisplayParks(filteredByState)
+        }
+    })
+
+    const designFormik = useFormik({
+        initialValues: {
+            designation: ""
+        },
+        onSubmit: (values) => {
+            const filterDesignation = values['designation']
+            const filteredByDesignation = displayParks.filter(park => {
+                let parkToReturn
                 if (filterDesignation === "Other" && park.designation === "") {
-                    return park
+                    parkToReturn = park
+                } else if (park.designation === filterDesignation) {
+                    parkToReturn = park
                 } else {
-                    if (park.designation === filterDesignation) {
-                        return park
-                    }
+                    parkToReturn = null
                 }
+                return parkToReturn
             })
             setDisplayParks(filteredByDesignation)
+
         }
     })
 
@@ -104,23 +127,31 @@ function Results({ parks }) {
 
     function handleFilterClear() {
         setDisplayParks(parks)
-        formik.handleReset()
+        stateFormik.handleReset()
+        designFormik.handleReset()
     }
 
     return (
         <Box p="5px" margin="auto" w="90%" textAlign="center">
                 <Heading margin="auto">Search Results</Heading>
                 <Text><strong>{displayParks.length}</strong> parks matching your search criteria</Text>
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={stateFormik.handleSubmit}>
+                    <FormControl isDisabled={stateFormik.isSubmitting}>
                     <FormLabel>Filter By State:</FormLabel>
-                    <Select name="state" placeholder="Select a state:" value={formik.values.state} onChange={formik.handleChange}>
+                    <Select name="state" placeholder="Select a state:" value={stateFormik.values.state} onChange={stateFormik.handleChange}>
                         {stateOptions}
                     </Select>
+                    </FormControl>
+                    <Button isDisabled={stateFormik.isSubmitting} type="submit">Filter</Button>
+                </form>
+                <form onSubmit={designFormik.handleSubmit}>
+                    <FormControl isDisabled={designFormik.isSubmitting}>
                     <FormLabel>Filter By Designation:</FormLabel>
-                    <Select name="designation" placeholder="Select a designation:" value={formik.values.designation} onChange={formik.handleChange}>
+                    <Select name="designation" placeholder="Select a designation:" value={designFormik.values.designation} onChange={designFormik.handleChange}>
                         {designationOptions}
                     </Select>
-                    <Button type="submit">Filter</Button>
+                    </FormControl>
+                    <Button isDisabled={designFormik.isSubmitting} type="submit">Filter</Button>
                     <Button onClick={handleFilterClear}>Clear Filter</Button>
                 </form>
                 <SimpleGrid margin="auto" w="100%" spacing={2} minChildWidth="300px">
