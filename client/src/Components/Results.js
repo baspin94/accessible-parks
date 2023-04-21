@@ -126,35 +126,37 @@ function Results({ parks }) {
         <Box p="5px" margin="auto" w="90%" textAlign="center">
                 <Heading margin="auto">Search Results</Heading>
                 <Text><strong>{displayParks.length}</strong> parks matching your search criteria</Text>
-                <form onSubmit={stateFormik.handleSubmit}>
-                    <FormControl isDisabled={stateFormik.isSubmitting}>
-                    <InputGroup>
-                    <InputLeftAddon w='204px'><FormLabel>Filter By State:</FormLabel></InputLeftAddon>
-                    <Select minW='207px' name="state" placeholder="Select a state:" value={stateFormik.values.state} onChange={stateFormik.handleChange}>
-                        {stateOptions}
-                    </Select>
-                    <InputRightAddon><Button isDisabled={stateFormik.isSubmitting} type="submit">Filter</Button></InputRightAddon>
-                    </InputGroup>
-                    </FormControl>
-                    
-                </form>
-                <form onSubmit={designFormik.handleSubmit}>
-                    <FormControl isDisabled={designFormik.isSubmitting}>    
-                    <InputGroup>
-                    <InputLeftAddon w='204px'><FormLabel>Filter By Designation:</FormLabel></InputLeftAddon>
-                    <Select minW='207px' name="designation" placeholder="Select a designation:" value={designFormik.values.designation} onChange={designFormik.handleChange}>
-                        {designationOptions}
-                    </Select>
-                    <InputRightAddon><Button isDisabled={designFormik.isSubmitting} type="submit">Filter</Button></InputRightAddon>
-                    </InputGroup>
-                    </FormControl>
-                    <Button onClick={handleFilterClear}>Reset Filters</Button>
-                </form>
+                <Box margin='auto' minW='30%' maxW='60%' p='10px' alignItems='center'>
+                    <form onSubmit={stateFormik.handleSubmit}>
+                        <FormControl isDisabled={stateFormik.isSubmitting}>
+                        <InputGroup>
+                        <InputLeftAddon w='204px'><FormLabel>Filter By State:</FormLabel></InputLeftAddon>
+                        <Select minW='207px' name="state" placeholder="Select a state:" value={stateFormik.values.state} onChange={stateFormik.handleChange}>
+                            {stateOptions}
+                        </Select>
+                        <InputRightAddon><Button colorScheme="orange" border='1px' background="green" color="white" isDisabled={stateFormik.isSubmitting} type="submit">Filter</Button></InputRightAddon>
+                        </InputGroup>
+                        </FormControl>
+                        
+                    </form>
+                    <form onSubmit={designFormik.handleSubmit}>
+                        <FormControl isDisabled={designFormik.isSubmitting}>    
+                        <InputGroup mt='10px'>
+                        <InputLeftAddon w='204px'><FormLabel>Filter By Designation:</FormLabel></InputLeftAddon>
+                        <Select minW='207px' name="designation" placeholder="Select a designation:" value={designFormik.values.designation} onChange={designFormik.handleChange}>
+                            {designationOptions}
+                        </Select>
+                        <InputRightAddon><Button colorScheme="orange" border='1px' background="green" color="white" isDisabled={designFormik.isSubmitting} type="submit">Filter</Button></InputRightAddon>
+                        </InputGroup>
+                        </FormControl>
+                        <Button colorScheme="orange" mt='10px' border='1px' background="green" color="white" onClick={handleFilterClear}>Reset Filters</Button>
+                    </form>
+                </Box>
                 <SimpleGrid margin="auto" w="100%" spacing={2} minChildWidth="300px">
                     {cards}
                 </SimpleGrid>
                 <Link exact to='/'>
-                    <Button>Search Again</Button>
+                    <Button mt='10px' colorScheme="orange" border='1px' background="green" color="white">Search Again</Button>
                 </Link>
         </Box>
     )
