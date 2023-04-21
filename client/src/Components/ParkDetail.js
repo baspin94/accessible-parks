@@ -83,24 +83,24 @@ function ParkDetail({ savedParks, setSavedParks }) {
             if (savedId !== null) {
                 return (
                     <Flex>
-                        <Button onClick={history.goBack}>Back to Previous Page</Button>
+                        <Button mt='10px' mb='10px' ml='10px' colorScheme="orange" border='1px' background="green" color="white" onClick={history.goBack}>Back to Previous Page</Button>
                         <Spacer />
-                        <Button id="unsave" onClick={handleSaveUnsave}>Unsave</Button>
+                        <Button mt='10px' mb='10px' mr='10px' colorScheme="orange" border='1px' background="green" color="white" id="unsave" onClick={handleSaveUnsave}>Unsave</Button>
                     </Flex>
             )} else {
                 return (
                     <Flex>
                     <Link to='/results'>
-                        <Button onClick={history.goBack}>Back to Previous Page</Button>
+                        <Button mt='10px' mb='10px' ml='10px' colorScheme="orange" border='1px' background="green" color="white" onClick={history.goBack}>Back to Previous Page</Button>
                     </Link>
                     <Spacer />
-                    <Button id="save" onClick={handleSaveUnsave}>Save</Button>
+                    <Button mt='10px' mb='10px' mr='10px' colorScheme="orange" border='1px' background="green" color="white" id="save" onClick={handleSaveUnsave}>Save</Button>
                     </Flex>
             )}
         } else {
             return(
                 <Link to='/results'>
-                    <Button onClick={history.goBack}>Back to Previous Page</Button>
+                    <Button mt='10px' mb='10px' ml='10px' colorScheme="orange" border='1px' background="green" color="white" onClick={history.goBack}>Back to Previous Page</Button>
                 </Link>
             )
         }
@@ -119,6 +119,7 @@ function ParkDetail({ savedParks, setSavedParks }) {
                     templateRows='repeat(2, 1fr)'
                     templateColumns='repeat(4, 1fr)'
                     gap={4}
+                    p='10px'
                 >
                     <GridItem border='1px'rowSpan={1} colSpan={1}>
                         <DetailsPanel park={park}/>

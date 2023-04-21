@@ -1,11 +1,17 @@
 import {
     Box, 
     Heading,
+    FormControl,
     FormLabel,
+    FormErrorMessage,
     Textarea,
     Select,
     Button,
-    Stack
+    Stack,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription 
 } from '@chakra-ui/react';
 import ReviewCard from './ReviewCard';
 import { UserContext } from '../App';
@@ -64,21 +70,34 @@ function ReviewPanel({ reviews, setReviews }) {
         if (user.id !== undefined) {
             return(
                 <form onSubmit={formik.handleSubmit}>
-                    <FormLabel>Your Review</FormLabel>
-                    <Textarea name="review" value={formik.values.review} onChange={formik.handleChange}/>
-                    <FormLabel>Rating</FormLabel>
-                    <Select name="rating" placeholder="--" value={formik.values.rating} onChange={formik.handleChange}>
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                    </Select>
-                    <Button type="submit">Submit</Button>
+                    <FormControl isInvalid={formik.errors['review']}>
+                    <FormLabel>Your Review
+                        <Textarea mt='10px' name="review" value={formik.values.review} onChange={formik.handleChange}/>
+                    <FormErrorMessage>{formik.errors['review']}</FormErrorMessage>
+                    </FormLabel>
+                    </FormControl>
+                    <FormControl isInvalid={formik.errors['rating']}>
+                    <FormLabel>Rating
+                        <Select mt='10px' name="rating" placeholder="--" value={formik.values.rating} onChange={formik.handleChange}>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                        </Select>
+                    <FormErrorMessage>{formik.errors['rating']}</FormErrorMessage>
+                    </FormLabel>
+                    </FormControl>
+                    <Button colorScheme="orange" border='1px' background="green" color="white" type="submit">Submit</Button>
                 </form>
             )
         } else {
-            return <p>You must be logged in to leave a review.</p>
+            return (
+                <Alert status='warning'>
+                    <AlertIcon />
+                    You must be logged in to leave a review.
+                </Alert>
+            )
         }
     }
 
@@ -88,9 +107,7 @@ function ReviewPanel({ reviews, setReviews }) {
     return (
         <Stack p='15px'>
             <Heading as="h3" size="lg">Reviews</Heading>
-            <Box border='1px' p='10px'>
                 {review_form}
-            </Box>
             <Stack>
                 {review_cards}
             </Stack>
