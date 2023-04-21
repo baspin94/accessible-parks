@@ -4,7 +4,11 @@ import {
     Grid,
     Button,
     Stack,
-    Box
+    Box,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
@@ -103,10 +107,11 @@ function Main({ user, setParks }) {
             <Stack margin="auto" w="80%">
                 <Heading margin="auto">Search By Amenities</Heading>
                 {searchError 
-                    ?   <Box p="5px" bg="red" margin="auto" textAlign="center">
-                            <p>No parks with all specified amenities were found.</p>
-                            <p>Please try removing some criteria and search again.</p>
-                        </Box>
+                    ?   <Alert status='error' flexDirection='column'>
+                            <AlertIcon/>
+                            <AlertTitle>Search Unsuccessful.</AlertTitle>
+                            <AlertDescription textAlign='center'>No parks with all specified amenities were found.<br/>Please try removing some criteria and search again.</AlertDescription>
+                        </Alert>
                     : null
                 }
             <form onSubmit={formik.handleSubmit}>
