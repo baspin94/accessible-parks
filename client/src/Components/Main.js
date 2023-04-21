@@ -76,9 +76,11 @@ function Main({ user, setParks }) {
     const checkboxes = amenities.map( (amenity) => {
         return (
             <Checkbox
-                p='5px'
-                size='md' 
+                p='2px'
+                size='lg' 
                 border='1px'
+                colorScheme='green'
+                _hover={{borderColor: 'green.500'}}
                 key={amenity.id}
                 name="checked"
                 onChange={formik.handleChange}
@@ -98,7 +100,7 @@ function Main({ user, setParks }) {
                     : 'Welcome!'
                 }
             </Heading>
-            <Stack margin="auto" w="600px">
+            <Stack margin="auto" w="80%">
                 <Heading margin="auto">Search By Amenities</Heading>
                 {searchError 
                     ?   <Box p="5px" bg="red" margin="auto" textAlign="center">
@@ -108,11 +110,11 @@ function Main({ user, setParks }) {
                     : null
                 }
             <form onSubmit={formik.handleSubmit}>
-                <Grid margin="auto" w="50%" templateColumns='repeat(3, 1fr)' gap={2} justifyContent="center">
+                <Grid margin="auto" templateColumns='repeat(3, 1fr)' gap={2} justifyContent="center">
                     {checkboxes}
                 </Grid>
-                <Box w="50%" margin="auto">
-                    <Button type="submit" width="full">Search</Button>
+                <Box w="20%" margin="auto">
+                    <Button colorScheme="orange" mt='10px' border='1px' background="green" color="white" type="submit" width="full">Search</Button>
                 </Box>
             </form>
             </Stack>
