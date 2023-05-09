@@ -50,8 +50,8 @@ with app.app_context():
             name = park['fullName'],
             code = park['parkCode'],
             states = park['states'],
-            latitude = latitude,
-            longitude = longitude,
+            latitude = float(latitude),
+            longitude = float(longitude),
             designation = park['designation'],
             description = park['description'],
             phone = phone_number,
@@ -59,9 +59,7 @@ with app.app_context():
             image_url = park['images'][0]['url'],
             image_alt = park['images'][0]['altText'],
             image_credit = park['images'][0]['credit'],
-            weather = park['weatherInfo'],
-            nps_url = park['url'],
-            access_url = accessibility_url
+            weather = park['weatherInfo']
         )
 
         db.session.add(new_park)
