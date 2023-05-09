@@ -1,5 +1,4 @@
 import {
-    Box, 
     Heading,
     FormControl,
     FormLabel,
@@ -10,8 +9,6 @@ import {
     Stack,
     Alert,
     AlertIcon,
-    AlertTitle,
-    AlertDescription 
 } from '@chakra-ui/react';
 import ReviewCard from './ReviewCard';
 import { UserContext } from '../App';
