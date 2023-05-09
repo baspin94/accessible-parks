@@ -6,6 +6,11 @@ from config import app, db, api
 from models import User, Amenity, Park, ParkAmenity, UserPark, Review
 
 @app.route('/')
+@app.route('/login')
+@app.route('/signup')
+@app.route('/results')
+@app.route('/park/<int:id>')
+@app.route('/myparks')
 @app.route('/<int:id>')
 def index(id=0):
     return render_template("index.html")
