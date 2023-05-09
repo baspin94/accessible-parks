@@ -17,6 +17,7 @@ jsonify = "*"
 ipdb = "*"
 python-dotenv = "*"
 faker = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
