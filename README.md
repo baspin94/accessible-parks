@@ -16,10 +16,26 @@ Registered users can:
 *Coming soon* 
 
 ## Usage
-*Coming soon*
+### Search
+Users can search for parks by checking the box next to each amenity they would like included and clicking 'Search'. The search results will include parks having all the selected amenities.
+
+If a user's search does not return any parks with all selected amentities, they will receive an error message instructing them to remove some of their criteria and try again. The search form will be reset for the user to modify and resubmit.
+
+### Filtering Results
+Users have the option to filter their search results by state and park designation (such as park, monument, recreation area, etc.). The options available in each filter's dropdown menu will update based on which parks are currently displayed. Once a filter has been added, that input field will become inactive until clicking the 'Reset Filters' button.
+
+### Viewing Park Details
+Clicking on one of the park cards in the search results page brings the user to a page that provides additional details about the park, including: 
+- Description of the park.
+- General information, such as links to the official National Parks pages for park information and accessibility, contact information, and weather.
+- Accessibility-related amenities available at the park.
+- User reviews of park accessibility.
+
+Users must be logged in to access the review submission form.
 
 ## Roadmap
-Future additions will include: 
+Future additions will include:
+- Faster loading times for search results.
 - Improved responsivity and 'look and feel' for mobile users.
 - Ability for users to upload photos with reviews.
 - Ability for users to view the location of each park on a map.
