@@ -31,7 +31,7 @@ function Main({ user, setParks }) {
         initialValues: {
             checked: []
         },
-        onSubmit: (values) => {
+        onSubmit: (values, {resetForm}) => {
             const value_array = values['checked']
             const value_string = value_array.join()
             fetch(`/parkamenities/${value_string}`)
@@ -42,7 +42,10 @@ function Main({ user, setParks }) {
                     .then(() => history.push('/results'))
                 } else {
                     response.json()
-                    .then(error => setSearchError(true))
+                    .then(error => 
+                        setSearchError(true),
+                        resetForm({values: values})
+                        )
                 }
             })
             
