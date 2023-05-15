@@ -43,6 +43,18 @@ Clicking on one of the park cards in the search results page brings the user to 
 
 Users must be logged in to access the review submission form.
 
+### Saving and Unsaving Parks
+Users who are signed in to the app have the option to add parks to their 'Saved Parks' page by clicking the 'Save' button that appears in the upper-righthand corner of the park's page.
+
+If a user has already saved a particular park, an 'Unsave' button will appear in the same place. Clicking this button removes the park from the user's 'Saved Parks' page.
+
+### Adding, Editing, and Removing Reviews
+Users who are signed in to the app have the option to submit a review and rating (out of 5 stars) of a park's accessibility within the 'Reviews' panel on the park's page.
+
+Users can modify any review or rating they have previously submitted by clicking the 'Edit' button on the review.
+
+Users can also remove any review they have previously submitted by clicking the 'Delete' button on the review.
+
 ## Roadmap
 Future additions will include:
 - Faster loading times for search results.
