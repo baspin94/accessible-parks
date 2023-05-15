@@ -19,10 +19,18 @@ Registered users can:
 ### Search
 Users can search for parks by checking the box next to each amenity they would like included and clicking 'Search'. The search results will include parks having all the selected amenities.
 
+![User performing a basic search by checking criteria and clicking 'Search' to load results on a new page](https://github.com/baspin94/accessible-parks/blob/main/assets/01_Basic%20Search.gif)
+
 If a user's search does not return any parks with all selected amentities, they will receive an error message instructing them to remove some of their criteria and try again. The search form will be reset for the user to modify and resubmit.
+
+![User submitting a search and receiving a 'Search Unsuccessful' error message](https://github.com/baspin94/accessible-parks/blob/main/assets/02_Unsuccessful%20Search.gif)
 
 ### Filtering Results
 Users have the option to filter their search results by state and park designation (such as park, monument, recreation area, etc.). The options available in each filter's dropdown menu will update based on which parks are currently displayed. Once a filter has been added, that input field will become inactive until clicking the 'Reset Filters' button.
+
+![User filtering search results by state, followed by designation](https://github.com/baspin94/accessible-parks/blob/main/assets/03_Filter%20By%20State.gif)
+
+![User filtering search results by designation, followed by state](https://github.com/baspin94/accessible-parks/blob/main/assets/04_Filter%20By%20Designation.gif)
 
 ### Viewing Park Details
 Clicking on one of the park cards in the search results page brings the user to a page that provides additional details about the park, including: 
@@ -30,6 +38,8 @@ Clicking on one of the park cards in the search results page brings the user to 
 - General information, such as links to the official National Parks pages for park information and accessibility, contact information, and weather.
 - Accessibility-related amenities available at the park.
 - User reviews of park accessibility.
+
+![User selecting search result to load 'Park Detail' page](https://github.com/baspin94/accessible-parks/blob/main/assets/17_Park%20Detail%20View%20(Not%20Signed%20In).gif)
 
 Users must be logged in to access the review submission form.
 
