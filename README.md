@@ -46,14 +46,24 @@ Users must be logged in to access the review submission form.
 ### Saving and Unsaving Parks
 Users who are signed in to the app have the option to add parks to their 'Saved Parks' page by clicking the 'Save' button that appears in the upper-righthand corner of the park's page.
 
+![User clicking 'Save' button on a park and adding it to their 'Saved Parks' page](https://github.com/baspin94/accessible-parks/blob/main/assets/18_Save%20Park.gif)
+
 If a user has already saved a particular park, an 'Unsave' button will appear in the same place. Clicking this button removes the park from the user's 'Saved Parks' page.
+
+![User clicking 'Unsave' button on a park and removing it from their 'Saved Parks' page](https://github.com/baspin94/accessible-parks/blob/main/assets/19_Unsave%20Park.gif)
 
 ### Adding, Editing, and Removing Reviews
 Users who are signed in to the app have the option to submit a review and rating (out of 5 stars) of a park's accessibility within the 'Reviews' panel on the park's page.
 
+![User adding a review and rating in a park's 'Reviews' panel and clicking 'Submit' button to post it to the page](https://github.com/baspin94/accessible-parks/blob/main/assets/20_Add%20Review.gif)
+
 Users can modify any review or rating they have previously submitted by clicking the 'Edit' button on the review.
 
+![User clicking 'Edit' button on their review and modifying it, clicking 'Submit' again to post the changes](https://github.com/baspin94/accessible-parks/blob/main/assets/21_Edit%20Review.gif)
+
 Users can also remove any review they have previously submitted by clicking the 'Delete' button on the review.
+
+![User clicking 'Delete' button on their review, which immediately removes it from the page](https://github.com/baspin94/accessible-parks/blob/main/assets/22_Delete%20Review.gif)
 
 ## Roadmap
 Future additions will include:
