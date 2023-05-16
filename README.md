@@ -69,25 +69,43 @@ Users can also remove any review they have previously submitted by clicking the 
 
 Users can sign up for a new account by entering their first name, last name, and email address, as well as a password (which they'll need to confirm in a separate field) for their account, and then clicking the 'Sign Up' button.
 
+![User entering information into 'Sign Up' form and clicking 'Sign Up' to submit and redirect to landing page](https://github.com/baspin94/accessible-parks/blob/main/assets/11_Signup%20Successful.gif)
+
 When entering/confirming their password, users can toggle the 'Show Password' button on and off, which will update both fields for easy comparison.
+
+![User clicking the 'Show Password' button to toggle between showing and hiding password in both the 'Password' and 'Confirm Password' fields](https://github.com/baspin94/accessible-parks/blob/main/assets/12_Signup%20Password%20Reveal.gif)
 
 An error will render at the top of the form upon submission if the user attempts to log in with a duplicate email address, indicating they already have an account.
 
 If the user attempts to sign up with an invalid email address, or the 'Password' and 'Confirm Password' fields do not match, the form field will be highlighted and an error message displayed below it.
 
+![Error messages underneath 'Email Address' and 'Confirm Password' fields](https://github.com/baspin94/accessible-parks/blob/main/assets/15-16%20Signup%20Invalid%20Email%20or%20Password.png)
+
 If the user attempts to submit the form with any required fields left blank, a prompt to 'Please Fill Out This Field' will appear below the field.
+
+![Empty field with 'Please Fill Out This Field' message below](https://github.com/baspin94/accessible-parks/blob/main/assets/13_Signup%20Blank%20Field.png)
 
 ### Logging in to an Account
 
 Users can log in to an existing account by entering the email address and password they submitted when signing up and clicking the 'Log In' button.
 
+![User entering information into 'Log In' form and clicking 'Log In' to submit and redirect to landing page](https://github.com/baspin94/accessible-parks/blob/main/assets/05_Successful%20Login.gif)
+
 When entering a password, users can toggle the 'Show Password' button on and off.
+
+![User clicking the 'Show Password' button to toggle between showing and hiding password in the 'Password' field](https://github.com/baspin94/accessible-parks/blob/main/assets/06_Login%20Password%20Reveal.gif)
 
 Errors will render at the top of the form upon submission if the user attempts to log in with an email address that does not exist in the system or an invalid password.
 
+![Error messages at the top of the form for invalid email address and password](https://github.com/baspin94/accessible-parks/blob/main/assets/07-08%20Login%20Invalid%20Username%20Password.png)
+
 If the user attempts to log in with an invalid email address, the form field will be highlighted and an error message displayed below it.
 
+![Error message underneath 'Email Address' field](https://github.com/baspin94/accessible-parks/blob/main/assets/09_Login%20Invalid%20Email%20Address.png)
+
 If the user attempts to submit the form with any required fields left blank, a prompt to 'Please Fill Out This Field' will appear below the field.
+
+![Empty field with 'Please Fill Out This Field' message below](https://github.com/baspin94/accessible-parks/blob/main/assets/10_Login%20Blank%20Field.png)
 
 ## Roadmap
 Future additions will include:
