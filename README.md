@@ -13,7 +13,74 @@ Registered users can:
 - Leave a review about their experience at a park.
 
 ## Installation
-*Coming soon* 
+
+Fork and clone this repository into your local environment and open within your IDE of choice.
+
+### Frontend Initial Setup
+
+Navigate to the `/client` directory in your terminal and run the following command:
+```
+$ npm install
+```
+Navigate back to the root directory and run the following command:
+```
+$ npm start --prefix client
+```
+If the app doesn't automatically launch in your browser, navigate to `localhost:4000`.
+
+### Backend Initial Setup
+
+Open a new terminal, as the frontend server will continue to run in the current terminal.
+
+Create a `.env` file in the root directory of the repository:
+
+```
+$ touch .env
+```
+Within that `.env` file, you'll need to add three pieces of information:
+- NPS_API_KEY: In order to populate your own local copy of the database, you will need to obtain an API key from the National Park Service by registering on their website. An API key will be emailed to you shortly after registering.
+- APP_SECRET_KEY: For user sessions to work correctly, you will need to configure a secret key for your app. You can generate one in your terminal by entering the following command: `python -c 'import os; print(os.urandom(16))'`
+- DATABASE_URI: This is where your local database can be accessed.
+
+Now, the file should look something like this:
+```
+NPS_API_KEY = <YOUR API KEY HERE (no quotation marks needed)>
+APP_SECRET_KEY = <YOUR SECRET KEY HERE (no quotation marks needed)>
+DATABASE_URI = 'sqlite:///app.db'
+```
+Next, in your terminal, run the following command to install dependencies:
+```
+$ pipenv install -r requirements.txt
+```
+Run the following command to launch your virtual environment and load the `.env` environment variables:
+```
+$ pipenv shell
+```
+Within that subshell, navigate to the `/server` directory. From there, delete any existing `instance` and `migrations` directories and run the following command to initialize your database with Flask and SQLAlchemy:
+```
+$ flask db init
+$ flask db revision --autogenerate -m "Create tables."
+$ flask db upgrade
+```
+### Populating Your Database
+
+First, populate the 'Amenities' table by running the following command from the `/server` directory:
+```
+$ python amenity-seed.py
+```
+Next, populate the 'Parks' table by running the following command from the `/server` directory:
+```
+$ python park-seed.py
+```
+Lastly, populate the 'Park Amenities' table by running the following command from the `/server` directory:
+```
+$ python park-amenity-seed.py
+```
+Now that you have data seeded, you can go ahead and run the following command to start the server:
+```
+$ python app.py
+```
+After starting/restarting the server, you'll need to refresh the app in your browser to fetch data from the backend.
 
 ## Usage
 ### Search
