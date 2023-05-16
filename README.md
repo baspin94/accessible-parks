@@ -65,6 +65,30 @@ Users can also remove any review they have previously submitted by clicking the 
 
 ![User clicking 'Delete' button on their review, which immediately removes it from the page](https://github.com/baspin94/accessible-parks/blob/main/assets/22_Delete%20Review.gif)
 
+### Signing Up for an Account
+
+Users can sign up for a new account by entering their first name, last name, and email address, as well as a password (which they'll need to confirm in a separate field) for their account, and then clicking the 'Sign Up' button.
+
+When entering/confirming their password, users can toggle the 'Show Password' button on and off, which will update both fields for easy comparison.
+
+An error will render at the top of the form upon submission if the user attempts to log in with a duplicate email address, indicating they already have an account.
+
+If the user attempts to sign up with an invalid email address, or the 'Password' and 'Confirm Password' fields do not match, the form field will be highlighted and an error message displayed below it.
+
+If the user attempts to submit the form with any required fields left blank, a prompt to 'Please Fill Out This Field' will appear below the field.
+
+### Logging in to an Account
+
+Users can log in to an existing account by entering the email address and password they submitted when signing up and clicking the 'Log In' button.
+
+When entering a password, users can toggle the 'Show Password' button on and off.
+
+Errors will render at the top of the form upon submission if the user attempts to log in with an email address that does not exist in the system or an invalid password.
+
+If the user attempts to log in with an invalid email address, the form field will be highlighted and an error message displayed below it.
+
+If the user attempts to submit the form with any required fields left blank, a prompt to 'Please Fill Out This Field' will appear below the field.
+
 ## Roadmap
 Future additions will include:
 - Faster loading times for search results.
