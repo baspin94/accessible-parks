@@ -93,7 +93,7 @@ class ParkAmenity(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
-    amenity_id = db.Column(db.Integer, db.ForeignKey('amenities.id'))
+    amenity_id = db.Column(db.Integer, db.ForeignKey('amenities.id'), index=True)
     created_at = db.Column(db.DateTime, server_default = db.func.now())
 
     def __repr__(self):

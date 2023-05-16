@@ -8,7 +8,8 @@ import {
     Alert,
     AlertIcon,
     AlertTitle,
-    AlertDescription
+    AlertDescription, 
+    FormControl
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
@@ -30,7 +31,7 @@ function Main({ user, setParks }) {
         initialValues: {
             checked: []
         },
-        onSubmit: (values) => {
+        onSubmit: (values, {resetForm}) => {
             const value_array = values['checked']
             const value_string = value_array.join()
             fetch(`/parkamenities/${value_string}`)
@@ -41,7 +42,10 @@ function Main({ user, setParks }) {
                     .then(() => history.push('/results'))
                 } else {
                     response.json()
-                    .then(error => setSearchError(true))
+                    .then(error => 
+                        setSearchError(true),
+                        resetForm({values: values})
+                        )
                 }
             })
             
@@ -115,12 +119,14 @@ function Main({ user, setParks }) {
                     : null
                 }
             <form onSubmit={formik.handleSubmit}>
+                <FormControl isDisabled={formik.isSubmitting}>
                 <Grid margin="auto" templateColumns='repeat(3, 1fr)' gap={2} justifyContent="center">
                     {checkboxes}
                 </Grid>
                 <Box w="20%" margin="auto">
-                    <Button colorScheme="orange" mt='10px' border='1px' background="green" color="white" type="submit" width="full">Search</Button>
+                    <Button isDisabled={formik.isSubmitting} colorScheme="orange" mt='10px' border='1px' background="green" color="white" type="submit" width="full">{formik.isSubmitting ? "Loading Results..." : "Search"}</Button>
                 </Box>
+                </FormControl>
             </form>
             </Stack>
         </>
