@@ -77,6 +77,8 @@ When entering/confirming their password, users can toggle the 'Show Password' bu
 
 An error will render at the top of the form upon submission if the user attempts to log in with a duplicate email address, indicating they already have an account.
 
+![Error message at top of the form for email address already in system](https://github.com/baspin94/accessible-parks/blob/main/assets/14_Signup%20Duplicate%20User.png)
+
 If the user attempts to sign up with an invalid email address, or the 'Password' and 'Confirm Password' fields do not match, the form field will be highlighted and an error message displayed below it.
 
 ![Error messages underneath 'Email Address' and 'Confirm Password' fields](https://github.com/baspin94/accessible-parks/blob/main/assets/15-16%20Signup%20Invalid%20Email%20or%20Password.png)
