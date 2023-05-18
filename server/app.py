@@ -145,16 +145,18 @@ class AmenityById(Resource):
         
 class ParksByAmenityIds(Resource):
     def get(self, id_string):
-        id_array = id_string.split(',')
-        int_ids = [int(id) for id in id_array]
+        int_ids = [int(id) for id in id_string.split(',')]
 
-        all_matching_amenities = [amenity.to_dict() for amenity in ParkAmenity.query.filter(ParkAmenity.amenity_id.in_(int_ids)).all()]
-        all_park_ids = [element['park']['id'] for element in all_matching_amenities]
+        # all_matching_amenities = [amenity.to_dict() for amenity in ParkAmenity.query.filter(ParkAmenity.amenity_id.in_(int_ids)).all()]
+        # all_park_ids = [element['park']['id'] for element in all_matching_amenities]
 
-        multiple_matches = [id for id in all_park_ids if all_park_ids.count(id) == len(int_ids)]
-        unique_matches = set(multiple_matches)
+        # multiple_matches = [id for id in all_park_ids if all_park_ids.count(id) == len(int_ids)]
+        # unique_matches = set(multiple_matches)
 
-        parks = [park.to_dict(only=('id', 'name', 'designation', 'states', 'image_url', 'image_alt')) for park in Park.query.filter(Park.id.in_(unique_matches)).all()]
+        # parks = [park.to_dict(only=('id', 'name', 'designation', 'states', 'image_url', 'image_alt')) for park in Park.query.filter(Park.id.in_(unique_matches)).all()]
+
+        matching_parks = Park.query.join(ParkAmenity).filter(ParkAmenity.amenity_id.in_(int_ids)).group_by(Park.id).having(db.func.count(ParkAmenity.amenity_id.distinct()) == len(int_ids))
+        parks = [park.to_dict(only=('id', 'name', 'designation', 'states', 'image_url', 'image_alt')) for park in matching_parks]
 
         if len(parks) == 0:
             response = make_response(
