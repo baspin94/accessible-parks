@@ -155,7 +155,7 @@ function Results({ parks }) {
                 <SimpleGrid margin="auto" w="100%" spacing={2} minChildWidth="300px">
                     {cards}
                 </SimpleGrid>
-                <Link exact to='/'>
+                <Link exact='true' to='/'>
                     <Button mt='10px' colorScheme="orange" border='1px' background="green" color="white">Search Again</Button>
                 </Link>
         </Box>

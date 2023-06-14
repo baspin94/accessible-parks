@@ -20,9 +20,9 @@ function ParkCard( { park, id }) {
             const states = park.states.split(',')
             const stateList = states.map(state => {
                 if (states.indexOf(state) === 0) {
-                    return <ListItem display='inline' p='1'>{state}</ListItem>
+                    return <ListItem key={state} display='inline' p='1'>{state}</ListItem>
                 } else {
-                    return <ListItem display='inline' p='1'>· {state}</ListItem>
+                    return <ListItem key={state} display='inline' p='1'>· {state}</ListItem>
                 }
             })
             return stateList
