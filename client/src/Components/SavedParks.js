@@ -7,17 +7,17 @@ import {
     Heading
 } from '@chakra-ui/react';
 
-function SavedParks({ savedParks }){
+function SavedParks(){
 
     const user = useContext(UserContext)
-    
-    const cards = savedParks.map(element => {
-        return <ParkCard key={element.park_id} id={element.park_id} park={element.park} />
-    })
 
     if (user.id === undefined) {
         return <h1>Loading...</h1>
     }
+    
+    const cards = user.parks.map(element => {
+        return <ParkCard key={element.park_id} id={element.park_id} park={element.park} />
+    })
 
     return (
         <Box p="5px" margin="auto" w="90%" textAlign="center">
