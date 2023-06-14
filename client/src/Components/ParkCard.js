@@ -35,7 +35,7 @@ function ParkCard( { park, id }) {
 
     return(
         <Link to={`/park/${id}`}>
-            <Card w="100%" h="100%" maxHeight="425px" border="1px" align="center">
+            <Card key={id} w="100%" h="100%" maxHeight="425px" border="1px" align="center">
                 <CardBody maxHeight="66.666%">
                     <Image w="100%" h="100%" src={park.image_url} alt={park.image_alt}/>
                 </CardBody>
