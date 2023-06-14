@@ -20,9 +20,9 @@ function ParkCard( { park, id }) {
             const states = park.states.split(',')
             const stateList = states.map(state => {
                 if (states.indexOf(state) === 0) {
-                    return <ListItem display='inline' p='1'>{state}</ListItem>
+                    return <ListItem key={state} display='inline' p='1'>{state}</ListItem>
                 } else {
-                    return <ListItem display='inline' p='1'>· {state}</ListItem>
+                    return <ListItem key={state} display='inline' p='1'>· {state}</ListItem>
                 }
             })
             return stateList
@@ -35,7 +35,7 @@ function ParkCard( { park, id }) {
 
     return(
         <Link to={`/park/${id}`}>
-            <Card key={id} w="100%" h="100%" maxHeight="425px" border="1px" align="center">
+            <Card w="100%" h="100%" maxHeight="425px" border="1px" align="center">
                 <CardBody maxHeight="66.666%">
                     <Image w="100%" h="100%" src={park.image_url} alt={park.image_alt}/>
                 </CardBody>
