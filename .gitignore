@@ -1,5 +1,6 @@
 node_modules
 /server/gunicorn.conf.py
+deploy.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
