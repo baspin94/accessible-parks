@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-function ParkCard( { park, id }) {
+function ParkCard( { park }) {
 
     function formatStates() {
         if (park.states.length === 2) {

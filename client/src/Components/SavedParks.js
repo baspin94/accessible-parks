@@ -16,7 +16,7 @@ function SavedParks(){
     }
     
     const cards = user.parks.map(element => {
-        return <ParkCard key={element.park_id} id={element.park_id} park={element.park} />
+        return <ParkCard key={element.park_id} id={element.park_id} park={element.park}/>
     })
 
     return (

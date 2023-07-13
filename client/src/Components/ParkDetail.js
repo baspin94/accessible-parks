@@ -35,17 +35,15 @@ function ParkDetail({ savedParks, setSavedParks }) {
             setPark(parkData)
             setReviews(parkData.reviews)
             })
-        // .then(() => {
-        //     if (user.id !== undefined) {
-        //         const savedIds = user.parks.map(park => park.park_id)
-        //         const intParkId = parseInt(parkId)
-        //         if (savedIds.includes(intParkId)) {
-        //             const match = user.parks.find(park => park.park_id === intParkId)
-        //             setSavedId(match.id)
-        //         }}
-        // })
-    // }, [parkId, user])
-    }, [parkCode])
+        .then(() => {
+            if (user.id !== undefined) {
+                const savedIds = user.parks.map(park => park.code)
+                if (savedIds.includes(parkCode)) {
+                    const match = user.parks.find(park => park.park_id === parkCode)
+                    setSavedId(match.id)
+                }}
+        })
+    }, [user, parkCode])
 
     function handleSaveUnsave(event) {
         if (event.target.id === 'save'){
