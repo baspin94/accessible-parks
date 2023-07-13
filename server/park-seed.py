@@ -24,12 +24,20 @@ with app.app_context():
     print("Generating new database objects based on response...")
     for park in parks_data['data']:
 
-        accessibility_url = f"https://www.nps.gov/{park['parkCode']}/planyourvisit/accessibility.htm"
-
         try:
             phone_number = park['contacts']['phoneNumbers'][0]['phoneNumber']
         except IndexError:
             phone_number = "Unavailable"
+
+        try:
+            img_url = park['images'][0]['url']
+            img_alt = park['images'][0]['altText']
+            img_credit = park['images'][0]['credit']
+
+        except IndexError:
+            img_url = ""
+            img_alt = ""
+            img_credit = ""
 
         lat_data = park['latitude']
 
@@ -56,9 +64,9 @@ with app.app_context():
             description = park['description'],
             phone = phone_number,
             email = park['contacts']['emailAddresses'][0]['emailAddress'],
-            image_url = park['images'][0]['url'],
-            image_alt = park['images'][0]['altText'],
-            image_credit = park['images'][0]['credit'],
+            image_url = img_url,
+            image_alt = img_alt,
+            image_credit = img_credit,
             weather = park['weatherInfo']
         )
 

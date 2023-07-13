@@ -93,6 +93,7 @@ class ParkAmenity(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
+    park_code = db.Column(db.String)
     amenity_id = db.Column(db.Integer, db.ForeignKey('amenities.id'), index=True)
     created_at = db.Column(db.DateTime, server_default = db.func.now())
 
@@ -116,6 +117,7 @@ class UserPark(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
+    park_code = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, server_default = db.func.now())
 
@@ -129,6 +131,7 @@ class Review(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
+    park_code = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     review = db.Column(db.String)
     rating = db.Column(db.Integer)
