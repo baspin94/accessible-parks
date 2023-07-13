@@ -111,6 +111,7 @@ class UserPark(db.Model, SerializerMixin):
         'user_id', 
         'created_at',
         'park.name',
+        'park.code',
         'park.states',
         'park.image_url',
         'park.image_alt',
