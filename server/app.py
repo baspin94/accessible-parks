@@ -133,6 +133,7 @@ class AmenityById(Resource):
                             # 'name',
                             # 'id',
                             'park_amenities.park.id',
+                            'park_amenities.park.code',
                             'park_amenities.park.name',
                             'park_amenities.park.image_url',
                             'park_amenities.park.image_alt',
@@ -156,7 +157,7 @@ class ParksByAmenityIds(Resource):
         # parks = [park.to_dict(only=('id', 'name', 'designation', 'states', 'image_url', 'image_alt')) for park in Park.query.filter(Park.id.in_(unique_matches)).all()]
 
         matching_parks = Park.query.join(ParkAmenity).filter(ParkAmenity.amenity_id.in_(int_ids)).group_by(Park.id).having(db.func.count(ParkAmenity.amenity_id.distinct()) == len(int_ids))
-        parks = [park.to_dict(only=('id', 'name', 'designation', 'states', 'image_url', 'image_alt')) for park in matching_parks]
+        parks = [park.to_dict(only=('id', 'name', 'code', 'designation', 'states', 'image_url', 'image_alt')) for park in matching_parks]
 
         if len(parks) == 0:
             response = make_response(
