@@ -50,7 +50,8 @@ function ParkDetail({ savedParks, setSavedParks }) {
         if (event.target.id === 'save'){
             const submission = {
                 user_id: user.id,
-                park_id: parseInt(parkId)
+                park_id: park.id,
+                park_code: park.code
             }
             fetch(`/user_parks`, {
                 method: "POST", 

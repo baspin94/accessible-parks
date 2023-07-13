@@ -196,10 +196,12 @@ class UserParks(Resource):
     def post(self):
         user_id = request.get_json()['user_id']
         park_id = request.get_json()['park_id']
+        park_code = request.get_json()['park_code']
 
         new_user_park = UserPark(
             user_id = user_id,
-            park_id = park_id
+            park_id = park_id,
+            park_code = park_code
         )
 
         db.session.add(new_user_park)
