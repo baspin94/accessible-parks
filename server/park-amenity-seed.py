@@ -80,10 +80,12 @@ with app.app_context():
 
             park_rec = Park.query.filter(Park.code == park['parkCode']).first()
             park_id = park_rec.id
+            park_code = park_rec.code
 
             new_pa = ParkAmenity(
                 park_id = park_id,
-                amenity_id = amenity_id
+                amenity_id = amenity_id,
+                park_code = park_code
             )
             db.session.add(new_pa)
         
