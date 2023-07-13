@@ -129,7 +129,7 @@ function ParkDetail({ savedParks, setSavedParks }) {
                         <OverviewPanel park={park}/>
                     </GridItem>
                     <GridItem border='1px' colSpan={2}><AmenitiesPanel park={park}/></GridItem>
-                    <GridItem border='1px' colSpan={2}><ReviewPanel reviews={reviews} setReviews={setReviews}/></GridItem>
+                    <GridItem border='1px' colSpan={2}><ReviewPanel park={park} reviews={reviews} setReviews={setReviews}/></GridItem>
                 </Grid>
             </>
         )

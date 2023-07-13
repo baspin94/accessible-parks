@@ -238,6 +238,7 @@ class Reviews(Resource):
 
         new_review = Review(
             park_id = data['park_id'],
+            park_code = data['park_code'],
             user_id = data['user_id'],
             review = data['review'],
             rating = data['rating']
