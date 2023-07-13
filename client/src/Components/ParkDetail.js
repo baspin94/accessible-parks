@@ -22,29 +22,30 @@ function ParkDetail({ savedParks, setSavedParks }) {
     const user = useContext(UserContext)
 
     const params = useParams();
-    const parkId = params['id'];
+    const parkCode = params['code'];
 
     const [park, setPark] = useState(null)
     const [savedId, setSavedId] = useState(null)
     const [reviews, setReviews] = useState([])
 
     useEffect( () => {
-        fetch(`/parks/${parkId}`)
+        fetch(`/parks/${parkCode}`)
         .then(response => response.json())
         .then(parkData => {
             setPark(parkData)
             setReviews(parkData.reviews)
             })
-        .then(() => {
-            if (user.id !== undefined) {
-                const savedIds = user.parks.map(park => park.park_id)
-                const intParkId = parseInt(parkId)
-                if (savedIds.includes(intParkId)) {
-                    const match = user.parks.find(park => park.park_id === intParkId)
-                    setSavedId(match.id)
-                }}
-        })
-    }, [parkId, user])
+        // .then(() => {
+        //     if (user.id !== undefined) {
+        //         const savedIds = user.parks.map(park => park.park_id)
+        //         const intParkId = parseInt(parkId)
+        //         if (savedIds.includes(intParkId)) {
+        //             const match = user.parks.find(park => park.park_id === intParkId)
+        //             setSavedId(match.id)
+        //         }}
+        // })
+    // }, [parkId, user])
+    }, [parkCode])
 
     function handleSaveUnsave(event) {
         if (event.target.id === 'save'){
