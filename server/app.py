@@ -191,6 +191,25 @@ class ParkById(Resource):
             )
 
             return response
+        
+class ParkByCode(Resource):
+    def get(self, code):
+        park = Park.query.filter(Park.code == code).first()
+
+        if not park:
+            response = make_response(
+                {"error": "Park not found."}, 
+                404
+            )
+            return response
+        
+        else:
+            response = make_response(
+                park.to_dict(rules=('park_amenities.amenity', 'reviews', 'reviews.user.first_name', 'reviews.user.last_name')),
+                200
+            )
+
+            return response
 
 class UserParks(Resource):
     def post(self):
@@ -290,6 +309,7 @@ api.add_resource(Amenities, '/amenities')
 api.add_resource(AmenityById, '/amenities/<int:id>')
 api.add_resource(ParksByAmenityIds, '/parkamenities/<string:id_string>')
 api.add_resource(ParkById, '/parks/<int:id>')
+api.add_resource(ParkByCode, '/parks/<string:code>')
 api.add_resource(UserParks, '/user_parks')
 api.add_resource(UserParkById, '/user_parks/<int:id>')
 api.add_resource(Reviews, '/reviews')
