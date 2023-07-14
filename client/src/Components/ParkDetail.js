@@ -37,10 +37,10 @@ function ParkDetail({ savedParks, setSavedParks }) {
             })
         .then(() => {
             if (user.id !== undefined) {
-                const savedIds = user.parks.map(park => park.code)
+                const savedIds = user.parks.map(park => park.park.code)
                 if (savedIds.includes(parkCode)) {
-                    const match = user.parks.find(park => park.park_id === parkCode)
-                    setSavedId(match.id)
+                    // const match = user.parks.find(park => park.park_id === parkCode)
+                    setSavedId(parkCode)
                 }}
         })
     }, [user, parkCode])
