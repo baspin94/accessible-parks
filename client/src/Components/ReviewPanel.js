@@ -14,18 +14,18 @@ import ReviewCard from './ReviewCard';
 import { UserContext } from '../App';
 import { useFormik } from 'formik';
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
 
-function ReviewPanel({ reviews, setReviews }) {
+function ReviewPanel({ park, reviews, setReviews }) {
 
     const review_cards = reviews.map(element => {
         return <ReviewCard key={element.id} review={element} reviewArray={reviews} setReviews={setReviews}/>
     })
 
     const user = useContext(UserContext)
-    const params = useParams();
-    const parkId = params['id'];
+    // const params = useParams();
+    // const parkId = params['id'];
 
     const formSchema = yup.object().shape({
         review: yup.string().required("Review cannot be empty."),
@@ -43,7 +43,8 @@ function ReviewPanel({ reviews, setReviews }) {
         onSubmit: (values, { resetForm }) => {
             const submission = {
                 user_id: user.id,
-                park_id: parseInt(parkId),
+                park_id: park.id,
+                park_code: park.code,
                 review: values.review,
                 rating: parseInt(values.rating)
             }

@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-function ParkCard( { park, id }) {
+function ParkCard( { park }) {
 
     function formatStates() {
         if (park.states.length === 2) {
@@ -34,7 +34,7 @@ function ParkCard( { park, id }) {
     const designation = (park.designation === "") ? "Destination" : park.designation
 
     return(
-        <Link to={`/park/${id}`}>
+        <Link to={`/park/${park.code}`}>
             <Card w="100%" h="100%" maxHeight="425px" border="1px" align="center">
                 <CardBody maxHeight="66.666%">
                     <Image w="100%" h="100%" src={park.image_url} alt={park.image_alt}/>

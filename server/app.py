@@ -133,6 +133,7 @@ class AmenityById(Resource):
                             # 'name',
                             # 'id',
                             'park_amenities.park.id',
+                            'park_amenities.park.code',
                             'park_amenities.park.name',
                             'park_amenities.park.image_url',
                             'park_amenities.park.image_alt',
@@ -156,7 +157,7 @@ class ParksByAmenityIds(Resource):
         # parks = [park.to_dict(only=('id', 'name', 'designation', 'states', 'image_url', 'image_alt')) for park in Park.query.filter(Park.id.in_(unique_matches)).all()]
 
         matching_parks = Park.query.join(ParkAmenity).filter(ParkAmenity.amenity_id.in_(int_ids)).group_by(Park.id).having(db.func.count(ParkAmenity.amenity_id.distinct()) == len(int_ids))
-        parks = [park.to_dict(only=('id', 'name', 'designation', 'states', 'image_url', 'image_alt')) for park in matching_parks]
+        parks = [park.to_dict(only=('id', 'name', 'code', 'designation', 'states', 'image_url', 'image_alt')) for park in matching_parks]
 
         if len(parks) == 0:
             response = make_response(
@@ -190,15 +191,36 @@ class ParkById(Resource):
             )
 
             return response
+        
+class ParkByCode(Resource):
+    def get(self, code):
+        park = Park.query.filter(Park.code == code).first()
+
+        if not park:
+            response = make_response(
+                {"error": "Park not found."}, 
+                404
+            )
+            return response
+        
+        else:
+            response = make_response(
+                park.to_dict(rules=('park_amenities.amenity', 'reviews', 'reviews.user.first_name', 'reviews.user.last_name')),
+                200
+            )
+
+            return response
 
 class UserParks(Resource):
     def post(self):
         user_id = request.get_json()['user_id']
         park_id = request.get_json()['park_id']
+        park_code = request.get_json()['park_code']
 
         new_user_park = UserPark(
             user_id = user_id,
-            park_id = park_id
+            park_id = park_id,
+            park_code = park_code
         )
 
         db.session.add(new_user_park)
@@ -235,6 +257,7 @@ class Reviews(Resource):
 
         new_review = Review(
             park_id = data['park_id'],
+            park_code = data['park_code'],
             user_id = data['user_id'],
             review = data['review'],
             rating = data['rating']
@@ -286,6 +309,7 @@ api.add_resource(Amenities, '/amenities')
 api.add_resource(AmenityById, '/amenities/<int:id>')
 api.add_resource(ParksByAmenityIds, '/parkamenities/<string:id_string>')
 api.add_resource(ParkById, '/parks/<int:id>')
+api.add_resource(ParkByCode, '/parks/<string:code>')
 api.add_resource(UserParks, '/user_parks')
 api.add_resource(UserParkById, '/user_parks/<int:id>')
 api.add_resource(Reviews, '/reviews')

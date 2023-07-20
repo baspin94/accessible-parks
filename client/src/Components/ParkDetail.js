@@ -22,14 +22,14 @@ function ParkDetail({ savedParks, setSavedParks }) {
     const user = useContext(UserContext)
 
     const params = useParams();
-    const parkId = params['id'];
+    const parkCode = params['code'];
 
     const [park, setPark] = useState(null)
     const [savedId, setSavedId] = useState(null)
     const [reviews, setReviews] = useState([])
 
     useEffect( () => {
-        fetch(`/parks/${parkId}`)
+        fetch(`/parks/${parkCode}`)
         .then(response => response.json())
         .then(parkData => {
             setPark(parkData)
@@ -37,20 +37,20 @@ function ParkDetail({ savedParks, setSavedParks }) {
             })
         .then(() => {
             if (user.id !== undefined) {
-                const savedIds = user.parks.map(park => park.park_id)
-                const intParkId = parseInt(parkId)
-                if (savedIds.includes(intParkId)) {
-                    const match = user.parks.find(park => park.park_id === intParkId)
+                const savedIds = user.parks.map(park => park.park.code)
+                if (savedIds.includes(parkCode)) {
+                    const match = user.parks.find(park => park.park.code === parkCode)
                     setSavedId(match.id)
                 }}
         })
-    }, [parkId, user])
+    }, [user, parkCode])
 
     function handleSaveUnsave(event) {
         if (event.target.id === 'save'){
             const submission = {
                 user_id: user.id,
-                park_id: parseInt(parkId)
+                park_id: park.id,
+                park_code: park.code
             }
             fetch(`/user_parks`, {
                 method: "POST", 
@@ -128,7 +128,7 @@ function ParkDetail({ savedParks, setSavedParks }) {
                         <OverviewPanel park={park}/>
                     </GridItem>
                     <GridItem border='1px' colSpan={2}><AmenitiesPanel park={park}/></GridItem>
-                    <GridItem border='1px' colSpan={2}><ReviewPanel reviews={reviews} setReviews={setReviews}/></GridItem>
+                    <GridItem border='1px' colSpan={2}><ReviewPanel park={park} reviews={reviews} setReviews={setReviews}/></GridItem>
                 </Grid>
             </>
         )

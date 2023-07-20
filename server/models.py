@@ -59,10 +59,11 @@ class Park(db.Model, SerializerMixin):
 
     serialize_rules = ('-created_at', '-updated_at', '-park_amenities', '-users', '-reviews')
 
-    id = db.Column(db.Integer, primary_key = True)
+    # id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer)
     nps_api_id = db.Column(db.String)
     name = db.Column(db.String)
-    code = db.Column(db.String)
+    code = db.Column(db.String, primary_key = True)
     states = db.Column(db.String)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
@@ -98,7 +99,7 @@ class ParkAmenity(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default = db.func.now())
 
     def __repr__(self):
-        return f'<Park ID: {self.park_id} Amenity ID: {self.amenity_id}>'
+        return f'<Park Code: {self.park_code} Amenity ID: {self.amenity_id}>'
     
 class UserPark(db.Model, SerializerMixin):
     __tablename__ = "user_parks"
@@ -109,6 +110,7 @@ class UserPark(db.Model, SerializerMixin):
         'user_id', 
         'created_at',
         'park.name',
+        'park.code',
         'park.states',
         'park.image_url',
         'park.image_alt',
@@ -122,7 +124,7 @@ class UserPark(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default = db.func.now())
 
     def __repr__(self):
-        return f'<Park ID: {self.park_id} User ID: {self.user_id}>'
+        return f'<Park Code: {self.park_code} User ID: {self.user_id}>'
     
 class Review(db.Model, SerializerMixin):
     __tablename__ = "reviews"
@@ -139,5 +141,5 @@ class Review(db.Model, SerializerMixin):
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
     def __repr__(self):
-        return f'<User ID: {self.user_id} Park ID: {self.park_id} Rating: {self.rating}>'
+        return f'<User ID: {self.user_id} Park Code: {self.park_code} Rating: {self.rating}>'
 
