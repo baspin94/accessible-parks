@@ -7,7 +7,6 @@ with app.app_context():
 
     print("Setting the 'park_code' column to the affiliated park's code.")
     for entry in park_amenities:
-        print(entry.park)
         setattr(entry, 'park_code', entry.park.code)
         db.session.add(entry)
     
