@@ -49,7 +49,7 @@ function App() {
           <Results parks={parkMatches}/>
        </Route>
        <UserContext.Provider value={user}>
-       <Route path='/park/:id'>
+       <Route path='/park/:code'>
             <ParkDetail savedParks={savedParks} setSavedParks={setSavedParks}/>
        </Route>
        <Route path='/myparks'>
