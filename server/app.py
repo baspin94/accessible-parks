@@ -9,9 +9,11 @@ from models import User, Amenity, Park, ParkAmenity, UserPark, Review
 @app.route('/login')
 @app.route('/signup')
 @app.route('/results')
-@app.route('/park/<int:id>')
+# @app.route('/park/<int:id>')
 @app.route('/myparks')
 @app.route('/<int:id>')
+@app.route('/park/<string:code>')
+
 def index(id=0):
     return render_template("index.html")
 
