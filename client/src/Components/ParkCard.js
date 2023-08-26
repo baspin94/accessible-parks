@@ -33,16 +33,16 @@ function ParkCard( { park }) {
 
     const designation = (park.designation === "") ? "Destination" : park.designation
 
+    function onImageError(e){
+        e.target.src = "https://placehold.co/600x400?text=Image+Not+Available"
+        e.target.alt = "Image Not Available"
+    }
+
     return(
         <Link to={`/park/${park.code}`}>
             <Card w="100%" h="100%" maxHeight="425px" border="1px" align="center">
                 <CardBody maxHeight="66.666%">
-                    {
-                        park.image_url
-                        ? <Image w="100%" h="100%" src={park.image_url} alt={park.image_alt}/>
-                        : <Image w="100%" h="100%" src="https://placehold.co/600x400?text=Image+Not+Available" alt="Image Not Available"/>
-                    }
-                    
+                    <Image w="100%" h="100%" src={park.image_url} alt={park.image_alt} onError={onImageError}/>
                 </CardBody>
                 <CardHeader align="center">
                     <VStack>
