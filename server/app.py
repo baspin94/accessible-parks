@@ -14,7 +14,7 @@ from models import User, Amenity, Park, ParkAmenity, UserPark, Review
 @app.route('/<int:id>')
 @app.route('/park/<string:code>')
 
-def index(id=0):
+def index(id=0, code=None):
     return render_template("index.html")
 
 class Signup(Resource):
