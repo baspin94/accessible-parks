@@ -14,7 +14,6 @@ import ReviewCard from './ReviewCard';
 import { UserContext } from '../App';
 import { useFormik } from 'formik';
 import { useContext } from 'react';
-// import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
 
 function ReviewPanel({ park, reviews, setReviews }) {
@@ -24,8 +23,6 @@ function ReviewPanel({ park, reviews, setReviews }) {
     })
 
     const user = useContext(UserContext)
-    // const params = useParams();
-    // const parkId = params['id'];
 
     const formSchema = yup.object().shape({
         review: yup.string().required("Review cannot be empty."),
