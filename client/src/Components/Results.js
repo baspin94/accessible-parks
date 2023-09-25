@@ -20,19 +20,22 @@ function Results({ parks }) {
     const [displayParks, setDisplayParks] = useState(parks)
     const [states, setStates] = useState([])
     const [designations, setDesignations] = useState([])
-
     const history = useHistory()
+    const stateConvert = require('us-state-converter')
 
     useEffect(() => {
         function getStates() {
             let statesArray = []
+            let fullState
             displayParks.forEach(park => {
                 if (park.states.length === 2) {
-                    statesArray.push(park.states)
+                    fullState = stateConvert.fullName(park.states) + ` (${park.states})`
+                    statesArray.push(fullState)
                 } else {
                     const states = park.states.split(',')
                     states.forEach(state => {
-                        statesArray.push(state)
+                        fullState = stateConvert.fullName(state) + ` (${state})`
+                        statesArray.push(fullState)
                     })
                 }
             })
@@ -62,14 +65,14 @@ function Results({ parks }) {
             setStates(states)
             setDesignations(designations)
         }
-    }, [displayParks, parks, history])
+    }, [displayParks, parks, history, stateConvert])
 
     const stateFormik = useFormik({
         initialValues: {
             state: ""
         },
         onSubmit: (values) => {
-            const filterState = values['state']
+            const filterState = values['state'].slice(-3, -1)
             const filteredByState = displayParks.filter(park => {
                 if (park.states.includes(filterState)){
                     return park
