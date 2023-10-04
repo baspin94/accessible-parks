@@ -25,7 +25,7 @@ function Header({ user, setUser }) {
             <Stack
                 alignItems="center"
                 p="5px"
-                direction={['column', 'row']}
+                direction={{base: "column", md: "row"}}
             >
                 <Heading 
                     as="h1" 
