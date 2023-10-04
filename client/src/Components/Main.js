@@ -1,15 +1,15 @@
 import {
     Checkbox,
     Heading,
-    Grid,
+    SimpleGrid,
     Button,
     Stack,
-    Box,
     Alert,
     AlertIcon,
     AlertTitle,
     AlertDescription, 
-    FormControl
+    FormControl, 
+    Flex
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
@@ -54,15 +54,17 @@ function Main({ user, setParks }) {
     const checkboxes = amenities.map( (amenity) => {
         return (
             <Checkbox
-                p='2px'
-                size='lg' 
-                border='1px'
-                colorScheme='green'
-                _hover={{borderColor: 'green.500'}}
                 key={amenity.id}
                 name="checked"
                 onChange={formik.handleChange}
                 value={amenity.id}
+                p="5px"
+                size='lg'
+                colorScheme='green'
+                border='1px'
+                borderRadius='10px'
+                // _hover={{borderColor: 'green.500'}}
+                
             >
                 {amenity.name}
             </Checkbox>
@@ -71,15 +73,24 @@ function Main({ user, setParks }) {
 
     return (
         <>
-            <Heading p="20px">
+            <Heading 
+                as="h2"
+                p="10px"
+            >
                 {
                 (user.first_name !== undefined)
                     ? `Welcome, ${user.first_name}!`
                     : 'Welcome!'
                 }
             </Heading>
-            <Stack margin="auto" w="80%">
-                <Heading margin="auto">Search By Amenities</Heading>
+            <Stack
+                p="10px"
+                margin="auto"
+            >
+                <Heading
+                    as="h2"
+                    textAlign="center"
+                >Search By Amenities</Heading>
                 {searchError 
                     ?   <Alert status='error' flexDirection='column'>
                             <AlertIcon/>
@@ -88,14 +99,33 @@ function Main({ user, setParks }) {
                         </Alert>
                     : null
                 }
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} alignItems='center'>
                 <FormControl isDisabled={formik.isSubmitting}>
-                <Grid margin="auto" templateColumns='repeat(3, 1fr)' gap={2} justifyContent="center">
+                <SimpleGrid 
+                    minChildWidth='300px'
+                    maxWidth='1024px' 
+                    spacing='5px'
+                    margin="auto"
+                >
                     {checkboxes}
-                </Grid>
-                <Box w="20%" margin="auto">
-                    <Button isDisabled={formik.isSubmitting} colorScheme="orange" mt='10px' border='1px' background="green" color="white" type="submit" width="full">{formik.isSubmitting ? "Loading Results..." : "Search"}</Button>
-                </Box>
+                </SimpleGrid>
+                <Flex 
+                    p='5px'
+                    justifyContent='center'
+                >
+                    <Button
+                        type="submit" 
+                        isDisabled={formik.isSubmitting}
+                        colorScheme="orange" 
+                        mt='5px' 
+                        border='1px' 
+                        background="green" 
+                        color="white"
+                        width='300px'
+                    >
+                        {formik.isSubmitting ? "Loading Results..." : "Search"}
+                    </Button>
+                </Flex>
                 </FormControl>
             </form>
             </Stack>
