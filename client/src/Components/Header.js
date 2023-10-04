@@ -1,5 +1,5 @@
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
-import { Heading, Flex, Spacer, HStack, Button, Text, Box, Stack } from '@chakra-ui/react';
+import { Heading, Spacer, HStack, Button, Text, Box, Stack } from '@chakra-ui/react';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 
 function Header({ user, setUser }) {
