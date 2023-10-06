@@ -77,14 +77,26 @@ function Login({ setUser }) {
     
     return (
         
-        <Box w="500px" p='20px' margin="auto" textAlign='center'>
+        <Box 
+            p='20px'
+            margin="auto"
+            textAlign='center'
+            maxWidth="500px"
+        >
 
             <Stack>
 
-                <Heading p='5px'>Log In to Your Account</Heading>
+                <Heading 
+                    p='5px'
+                >
+                    Log In to Your Account
+                </Heading>
 
                 {error 
-                    ? <Alert status='error' flexDirection='column'>
+                    ? <Alert 
+                        status='error'
+                        flexDirection='column'
+                    >
                         <AlertIcon/>
                         <AlertTitle>Login Unsuccessful.</AlertTitle>
                         <AlertDescription>{error}<br/>Please log in or try again.</AlertDescription>
@@ -95,15 +107,39 @@ function Login({ setUser }) {
                 <form onSubmit={formik.handleSubmit}>
 
                     <FormControl isRequired='true' isInvalid={formik.errors['email']}>
-                        <FormLabel mt='10px'>Email Address</FormLabel>
-                        <Input _hover={{border: '2px', borderColor: 'blue.500'}} border='1px' type="text" name="email" value={formik.values.email} onChange={formik.handleChange}/>
+                        <FormLabel 
+                            mt='10px'
+                        >
+                            Email Address
+                        </FormLabel>
+                        <Input
+                            type="text"
+                            name="email"
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            border='1px'
+                            // _hover={{border: '2px', borderColor: 'blue.500'}}
+                            
+                        />
                         <FormErrorMessage>{formik.errors['email']}</FormErrorMessage>
                     </FormControl>
 
                     <FormControl isRequired='true' isInvalid={formik.errors['password']}>
-                        <FormLabel mt='10px'>Password</FormLabel>
+                        <FormLabel 
+                            mt='10px'
+                        >
+                            Password
+                        </FormLabel>
                         <InputGroup>
-                            <Input _hover={{border: '2px', borderColor: 'blue.500'}} border='1px' type={showPassword ? "text" : "password"} name="password" value={formik.values.password} onChange={formik.handleChange}/>
+                            <Input 
+                                type={showPassword ? "text" : "password"}
+                                name="password"
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                border='1px'
+                                // _hover={{border: '2px', borderColor: 'blue.500'}}
+                                
+                            />
                             <InputRightElement>
                             <IconButton aria-label={showPassword ? "Hide Password" : "Show Password"} colorScheme="orange" background="green" color="white" onClick={handlePasswordToggle} icon={showPassword ? <ViewOffIcon /> : <ViewIcon />} />
                             </InputRightElement>
@@ -111,8 +147,16 @@ function Login({ setUser }) {
                         <FormErrorMessage>{formik.errors['password']}</FormErrorMessage>
                     </FormControl>
 
-                    <Button colorScheme="orange" mt='10px' border='1px' background="green" color="white" type="submit">Log In</Button>
-
+                    <Button
+                        type="submit"
+                        background="green"
+                        color="white"
+                        colorScheme="orange"
+                        mt='10px'
+                        border='1px'
+                    >
+                        Log In
+                    </Button>
                 </form>
 
                 <Link as={ReachLink} to='/signup'>
