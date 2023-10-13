@@ -12,7 +12,9 @@ import {
     GridItem,
     Button,
     Flex,
-    Spacer
+    Spacer, 
+    Box, 
+    Stack
 } from '@chakra-ui/react';
 
 function ParkDetail({ savedParks, setSavedParks }) {
@@ -82,26 +84,99 @@ function ParkDetail({ savedParks, setSavedParks }) {
         if (user.id !== undefined) {
             if (savedId !== null) {
                 return (
-                    <Flex>
-                        <Button mt='10px' mb='10px' ml='10px' colorScheme="orange" border='1px' background="green" color="white" onClick={history.goBack}>Back to Previous Page</Button>
+                    <Flex 
+                        border='1px'
+                        direction={{base: "column", md: "row"}}
+                        alignItems="center"
+                        p="10px"
+                    >
+                        <Button 
+                            // mt='10px'
+                            // mb='10px'
+                            // ml='10px'
+                            colorScheme="orange"
+                            border='1px'
+                            background="green"
+                            color="white"
+                            onClick={history.goBack}
+                        >
+                            Back to Previous Page
+                        </Button>
                         <Spacer />
-                        <Button mt='10px' mb='10px' mr='10px' colorScheme="orange" border='1px' background="green" color="white" id="unsave" onClick={handleSaveUnsave}>Unsave</Button>
+                        <Button
+                            // mt='10px'
+                            // mb='10px'
+                            // mr='10px'
+                            colorScheme="orange"
+                            border='1px'
+                            background="green"
+                            color="white"
+                            id="unsave"
+                            onClick={handleSaveUnsave}
+                        >
+                            Unsave
+                        </Button>
                     </Flex>
             )} else {
                 return (
-                    <Flex>
-                    <Link to='/results'>
-                        <Button mt='10px' mb='10px' ml='10px' colorScheme="orange" border='1px' background="green" color="white" onClick={history.goBack}>Back to Previous Page</Button>
-                    </Link>
-                    <Spacer />
-                    <Button mt='10px' mb='10px' mr='10px' colorScheme="orange" border='1px' background="green" color="white" id="save" onClick={handleSaveUnsave}>Save</Button>
+                    <Flex 
+                        border='1px'
+                        direction={{base: "column", md: "row"}}
+                        alignItems="center"
+                        p="10px"
+                    >
+                        <Link to='/results'>
+                            <Button 
+                                // mt='10px'
+                                // mb='10px'
+                                // ml='10px'
+                                colorScheme="orange"
+                                border='1px'
+                                background="green"
+                                color="white" onClick={history.goBack}
+                            >
+                                Back to Previous Page
+                            </Button>
+                        </Link>
+                        <Spacer />
+                        <Button
+                            // mt='10px'
+                            // mb='10px'
+                            // mr='10px'
+                            colorScheme="orange" 
+                            border='1px'
+                            background="green"
+                            color="white"
+                            id="save"
+                            onClick={handleSaveUnsave}
+                        >
+                            Save
+                        </Button>
                     </Flex>
             )}
         } else {
             return(
-                <Link to='/results'>
-                    <Button mt='10px' mb='10px' ml='10px' colorScheme="orange" border='1px' background="green" color="white" onClick={history.goBack}>Back to Previous Page</Button>
-                </Link>
+                <Flex 
+                        border='1px'
+                        direction={{base: "column", md: "row"}}
+                        alignItems="center"
+                        p="10px"
+                >
+                    <Link to='/results'>
+                        <Button
+                            // mt='10px'
+                            // mb='10px'
+                            // ml='10px'
+                            colorScheme="orange"
+                            border='1px'
+                            background="green"
+                            color="white"
+                            onClick={history.goBack}
+                        >
+                            Back to Previous Page
+                        </Button>
+                    </Link>
+                </Flex>
             )
         }
     }
@@ -116,19 +191,38 @@ function ParkDetail({ savedParks, setSavedParks }) {
             <>
                 {subheader}
                 <Grid
-                    templateRows='repeat(2, 1fr)'
-                    templateColumns='repeat(4, 1fr)'
-                    gap={4}
-                    p='10px'
+                    minChildWidth='300px'
+                    maxWidth='1024px'
+                    // templateRows='repeat(2, 1fr)'
+                    // templateColumns='repeat(4, 1fr)'
+                    // gap={4}
+                    // p='10px'
                 >
-                    <GridItem border='1px'rowSpan={1} colSpan={1}>
+                    <GridItem
+                        border='1px'
+                        // rowSpan={1}
+                        // colSpan={1}
+                    >
                         <DetailsPanel park={park}/>
                     </GridItem>
-                    <GridItem border='1px' colSpan={3}>
+                    <GridItem
+                        // border='1px'
+                        // colSpan={3}
+                    >
                         <OverviewPanel park={park}/>
                     </GridItem>
-                    <GridItem border='1px' colSpan={2}><AmenitiesPanel park={park}/></GridItem>
-                    <GridItem border='1px' colSpan={2}><ReviewPanel park={park} reviews={reviews} setReviews={setReviews}/></GridItem>
+                    <GridItem
+                        // border='1px'
+                        // colSpan={2}
+                    >
+                        <AmenitiesPanel park={park}/>
+                    </GridItem>
+                    <GridItem 
+                        // border='1px' 
+                        // colSpan={2}
+                    >
+                        <ReviewPanel park={park} reviews={reviews} setReviews={setReviews}/>
+                    </GridItem>
                 </Grid>
             </>
         )
