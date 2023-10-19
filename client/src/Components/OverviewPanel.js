@@ -39,31 +39,9 @@ function OverviewPanel( { park }) {
 
     const stateText = getFullStates()
 
-    // function getImage(){
-    //     if (park.image_url){
-    //         return (
-    //             <Box>
-    //                 <Image margin="auto" w="40%" h="40%" src={park.image_url} alt={park.image_alt} onError={onImageError}/>
-    //                 <Text align="center" fontSize="2xs">{park.image_credit}</Text>
-    //             </Box>
-    //         )
-    //     } else {
-    //         return (
-    //             <Box>
-    //                 <Image margin="auto" src="https://placehold.co/600x400?text=Image+Not+Available" alt="Image Not Available"/>
-    //             </Box>
-    //         )
-    //     }
-    // }
-
-    // const image = getImage()
-
-
     return (
-        <>
-        <Box margin="auto" p="5px">
-        <VStack p="10px" spacing={5}>
-            <Heading>{park.name}</Heading>
+        <VStack border='1px' p="10px" spacing={5} w={{lg: '75%'}} margin='10px'>
+            <Heading textAlign='center'>{park.name}</Heading>
             <Text fontSize='xl' as='i'>{designation}</Text>
             {park.states.length === 2 
             ? stateText
@@ -72,16 +50,17 @@ function OverviewPanel( { park }) {
                 {stateText}
                 </UnorderedList>
             }
-            <Box>
-                <Image margin="auto" w="40%" h="40%" src={park.image_url} alt={park.image_alt} onError={onImageError}/>
+            <Box maxWidth="600px">
+                <Image
+                    src={park.image_url}
+                    alt={park.image_alt}
+                    onError={onImageError}
+                />
                 <Text align="center" fontSize="2xs">{park.image_credit}</Text>
             </Box>
             <Text>{park.description}</Text>
         </VStack>
-        </Box> 
-        </>
     )
-    
 }
 
 export default OverviewPanel;

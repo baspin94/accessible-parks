@@ -24,9 +24,24 @@ function DetailsPanel({ park }) {
     const phoneURI = phoneNumber.getURI()
       
     return (
-        <Stack p="10px">
-            <Heading as="h3" size="lg">General Information</Heading>
-            <Heading as="h4" size="md">National Park Service Pages</Heading>
+        <Stack
+            p="10px"
+            border='1px'
+            w={{lg: "33%"}}
+            margin='10px'
+        >
+            <Heading
+                as="h3"
+                size="lg"
+            >
+                General Information
+            </Heading>
+            <Heading
+                as="h4" 
+                size="md"
+            >
+                National Park Service Pages
+            </Heading>
                 <UnorderedList styleType="none">
                     <ListItem>
                         <ListIcon as={InfoOutlineIcon}/>
@@ -38,7 +53,12 @@ function DetailsPanel({ park }) {
                     </ListItem>
 
                 </UnorderedList>
-            <Heading as="h4" size="md">Contact Information</Heading>
+            <Heading 
+                as="h4"
+                size="md"
+            >
+                Contact Information
+            </Heading>
                 <UnorderedList styleType="none">
                     <ListItem>
                         <ListIcon as={PhoneIcon}/>
@@ -49,7 +69,12 @@ function DetailsPanel({ park }) {
                         Email: <a href={`mailto:${park.email}`} target="_blank" rel="noopener noreferrer">{park.email}</a>
                     </ListItem>
                 </UnorderedList>
-            <Heading as="h4" size="md">Weather</Heading>
+            <Heading
+                as="h4"
+                size="md"
+            >
+                Weather
+            </Heading>
                 <Text>{park.weather}</Text>
         </Stack>
     )
