@@ -100,7 +100,7 @@ function ReviewPanel({ park, reviews, setReviews }) {
 
 
     return (
-        <Stack p='15px'>
+        <Stack p='10px' border='1px' w={{lg: "50%"}} margin='10px'>
             <Heading as="h3" size="lg">Reviews</Heading>
                 {review_form}
             <Stack>

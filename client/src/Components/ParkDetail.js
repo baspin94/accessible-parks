@@ -8,13 +8,10 @@ import { useParams, Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../App'
 
 import {
-    Grid,
-    GridItem,
     Button,
     Flex,
     Spacer, 
     Box, 
-    Stack
 } from '@chakra-ui/react';
 
 function ParkDetail({ savedParks, setSavedParks }) {
@@ -85,7 +82,6 @@ function ParkDetail({ savedParks, setSavedParks }) {
             if (savedId !== null) {
                 return (
                     <Flex 
-                        border='1px'
                         direction={{base: "column", md: "row"}}
                         alignItems="center"
                         p="10px"
@@ -120,7 +116,6 @@ function ParkDetail({ savedParks, setSavedParks }) {
             )} else {
                 return (
                     <Flex 
-                        border='1px'
                         direction={{base: "column", md: "row"}}
                         alignItems="center"
                         p="10px"
@@ -157,7 +152,6 @@ function ParkDetail({ savedParks, setSavedParks }) {
         } else {
             return(
                 <Flex 
-                        border='1px'
                         direction={{base: "column", md: "row"}}
                         alignItems="center"
                         p="10px"
@@ -188,43 +182,17 @@ function ParkDetail({ savedParks, setSavedParks }) {
     }
     else {
         return (
-            <>
+            <Box p="10px">
                 {subheader}
-                <Grid
-                    minChildWidth='300px'
-                    maxWidth='1024px'
-                    // templateRows='repeat(2, 1fr)'
-                    // templateColumns='repeat(4, 1fr)'
-                    // gap={4}
-                    // p='10px'
-                >
-                    <GridItem
-                        border='1px'
-                        // rowSpan={1}
-                        // colSpan={1}
-                    >
-                        <DetailsPanel park={park}/>
-                    </GridItem>
-                    <GridItem
-                        // border='1px'
-                        // colSpan={3}
-                    >
-                        <OverviewPanel park={park}/>
-                    </GridItem>
-                    <GridItem
-                        // border='1px'
-                        // colSpan={2}
-                    >
-                        <AmenitiesPanel park={park}/>
-                    </GridItem>
-                    <GridItem 
-                        // border='1px' 
-                        // colSpan={2}
-                    >
-                        <ReviewPanel park={park} reviews={reviews} setReviews={setReviews}/>
-                    </GridItem>
-                </Grid>
-            </>
+                <Box display={{lg: "flex"}} flexDirection="row-reverse" maxW='2000px'>
+                    <OverviewPanel park={park}/>
+                    <DetailsPanel park={park}/>
+                </Box>
+                <Box display={{lg: "flex"}} maxW='2000px'>
+                    <AmenitiesPanel park={park}/>
+                    <ReviewPanel park={park} reviews={reviews} setReviews={setReviews}/>
+                </Box>
+            </Box>
         )
     }
 }
