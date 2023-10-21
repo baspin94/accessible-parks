@@ -53,19 +53,7 @@ function Main({ user, setParks }) {
 
     const checkboxes = amenities.map( (amenity) => {
         return (
-            <Checkbox
-                key={amenity.id}
-                name="checked"
-                onChange={formik.handleChange}
-                value={amenity.id}
-                p="5px"
-                size='lg'
-                colorScheme='green'
-                border='1px'
-                borderRadius='10px'
-                // _hover={{borderColor: 'green.500'}}
-                
-            >
+            <Checkbox key={amenity.id} name="checked" onChange={formik.handleChange} value={amenity.id} p="5px" size='lg' colorScheme='green' border='1px' borderRadius='10px'>
                 {amenity.name}
             </Checkbox>
         )
@@ -73,61 +61,37 @@ function Main({ user, setParks }) {
 
     return (
         <>
-            <Heading 
-                as="h2"
-                p="10px"
-            >
+            <Heading as="h2" p="10px">
                 {
                 (user.first_name !== undefined)
                     ? `Welcome, ${user.first_name}!`
                     : 'Welcome!'
                 }
             </Heading>
-            <Stack
-                p="10px"
-                margin="auto"
-            >
-                <Heading
-                    as="h2"
-                    textAlign="center"
-                >Search By Amenities</Heading>
-                {searchError 
-                    ?   <Alert status='error' flexDirection='column'>
-                            <AlertIcon/>
-                            <AlertTitle>Search Unsuccessful.</AlertTitle>
-                            <AlertDescription textAlign='center'>No parks with all specified amenities were found.<br/>Please try removing some criteria and search again.</AlertDescription>
-                        </Alert>
-                    : null
-                }
-            <form onSubmit={formik.handleSubmit} alignItems='center'>
-                <FormControl isDisabled={formik.isSubmitting}>
-                <SimpleGrid 
-                    minChildWidth='300px'
-                    maxWidth='1024px' 
-                    spacing='5px'
-                    margin="auto"
-                >
-                    {checkboxes}
-                </SimpleGrid>
-                <Flex 
-                    p='5px'
-                    justifyContent='center'
-                >
-                    <Button
-                        type="submit" 
-                        isDisabled={formik.isSubmitting}
-                        colorScheme="orange" 
-                        mt='5px' 
-                        border='1px' 
-                        background="green" 
-                        color="white"
-                        width='300px'
-                    >
-                        {formik.isSubmitting ? "Loading Results..." : "Search"}
-                    </Button>
-                </Flex>
-                </FormControl>
-            </form>
+            <Stack p="10px" margin="auto">
+                <Heading as="h2" textAlign="center">
+                    Search By Amenities
+                </Heading>
+                    {searchError 
+                        ?   <Alert status='error' flexDirection='column'>
+                                <AlertIcon/>
+                                <AlertTitle>Search Unsuccessful.</AlertTitle>
+                                <AlertDescription textAlign='center'>No parks with all specified amenities were found.<br/>Please try removing some criteria and search again.</AlertDescription>
+                            </Alert>
+                        : null
+                    }
+                <form onSubmit={formik.handleSubmit} alignItems='center'>
+                    <FormControl isDisabled={formik.isSubmitting}>
+                    <SimpleGrid minChildWidth='300px' maxWidth='1024px' spacing='5px' margin="auto">
+                        {checkboxes}
+                    </SimpleGrid>
+                    <Flex p='5px' justifyContent='center'>
+                        <Button type="submit" isDisabled={formik.isSubmitting} colorScheme="orange" mt='5px' border='1px' background="green"                        color="white" width='300px'>
+                            {formik.isSubmitting ? "Loading Results..." : "Search"}
+                        </Button>
+                    </Flex>
+                    </FormControl>
+                </form>
             </Stack>
         </>
     )

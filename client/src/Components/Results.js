@@ -125,31 +125,16 @@ function Results({ parks }) {
     }
 
     return (
-        <Box 
-            maxWidth="1024px"
-            p="5px" 
-            margin="auto"
-            textAlign="center"
-        >
+        <Box maxWidth="1024px" p="5px" margin="auto" textAlign="center">
                 <Heading as="h2" margin="auto">Search Results</Heading>
                 <Text><strong>{displayParks.length}</strong> parks matching your search criteria</Text>
-                <Box 
-                    margin='auto' 
-                    maxW="500px"
-                    p='10px' 
-                    alignItems='center'
-                >
+                <Box margin='auto' maxW="500px" p='10px' alignItems='center'>
                     <Heading as="h3" fontSize="xl">Filters</Heading>
                     <form onSubmit={stateFormik.handleSubmit}>
                         <FormControl isDisabled={stateFormik.isSubmitting}>
                         <FormLabel p="5px">State:</FormLabel>
                         <InputGroup>
-                        <Select 
-                            name="state"
-                            placeholder="Select:"
-                            value={stateFormik.values.state}
-                            onChange={stateFormik.handleChange}
-                        >
+                        <Select name="state" placeholder="Select:" value={stateFormik.values.state} onChange={stateFormik.handleChange}>
                             {stateOptions}
                         </Select>
                         <InputRightAddon><Button colorScheme="orange" border='1px' background="green" color="white" isDisabled={stateFormik.isSubmitting} type="submit">Filter</Button></InputRightAddon>
@@ -158,18 +143,17 @@ function Results({ parks }) {
                     </form>
                     <form onSubmit={designFormik.handleSubmit}>
                         <FormControl isDisabled={designFormik.isSubmitting}>
-                        <FormLabel p="5px">Park Designation:</FormLabel>   
-                        <InputGroup>
-                        <Select  
-                            name="designation"
-                            placeholder="Select:"
-                            value={designFormik.values.designation}
-                            onChange={designFormik.handleChange}
-                        >
-                            {designationOptions}
-                        </Select>
-                        <InputRightAddon><Button colorScheme="orange" border='1px' background="green" color="white" isDisabled={designFormik.isSubmitting} type="submit">Filter</Button></InputRightAddon>
-                        </InputGroup>
+                            <FormLabel p="5px">Park Designation:</FormLabel>   
+                            <InputGroup>
+                                <Select name="designation" placeholder="Select:" value={designFormik.values.designation} onChange={designFormik.handleChange}>
+                                    {designationOptions}
+                                </Select>
+                                <InputRightAddon>
+                                    <Button colorScheme="orange" border='1px' background="green" color="white" isDisabled={designFormik.isSubmitting} type="submit">
+                                        Filter
+                                    </Button>
+                                </InputRightAddon>
+                            </InputGroup>
                         </FormControl>
                         <Button colorScheme="orange" mt='10px' border='1px' background="green" color="white" onClick={handleFilterClear}>Reset Filters</Button>
                     </form>
@@ -178,7 +162,9 @@ function Results({ parks }) {
                     {cards}
                 </SimpleGrid>
                 <Link exact='true' to='/'>
-                    <Button mt='10px' colorScheme="orange" border='1px' background="green" color="white">Search Again</Button>
+                    <Button mt='10px' colorScheme="orange" border='1px' background="green" color="white">
+                        Search Again
+                    </Button>
                 </Link>
         </Box>
     )

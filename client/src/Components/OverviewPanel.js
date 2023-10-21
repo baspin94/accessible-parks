@@ -42,23 +42,17 @@ function OverviewPanel( { park }) {
     return (
         <VStack border='1px' p="10px" spacing={5} w={{lg: '75%'}} margin='10px'>
             <Heading textAlign='center'>{park.name}</Heading>
-            <Text fontSize='xl' as='i'>{designation}</Text>
-            {park.states.length === 2 
-            ? stateText
-            :
-                <UnorderedList styleType="None" textAlign='center'>
-                {stateText}
-                </UnorderedList>
-            }
-            <Box maxWidth="600px">
-                <Image
-                    src={park.image_url}
-                    alt={park.image_alt}
-                    onError={onImageError}
-                />
-                <Text align="center" fontSize="2xs">{park.image_credit}</Text>
-            </Box>
-            <Text>{park.description}</Text>
+                <Text fontSize='xl' as='i'>{designation}</Text>
+                {park.states.length === 2 
+                ? stateText
+                :
+                    <UnorderedList styleType="None" textAlign='center'>{stateText}</UnorderedList>
+                }
+                <Box maxWidth="600px">
+                    <Image src={park.image_url} alt={park.image_alt} onError={onImageError}/>
+                    <Text align="center" fontSize="2xs">{park.image_credit}</Text>
+                </Box>
+                <Text>{park.description}</Text>
         </VStack>
     )
 }

@@ -81,92 +81,34 @@ function ParkDetail({ savedParks, setSavedParks }) {
         if (user.id !== undefined) {
             if (savedId !== null) {
                 return (
-                    <Flex 
-                        direction={{base: "column", md: "row"}}
-                        alignItems="center"
-                        p="10px"
-                    >
-                        <Button 
-                            // mt='10px'
-                            // mb='10px'
-                            // ml='10px'
-                            colorScheme="orange"
-                            border='1px'
-                            background="green"
-                            color="white"
-                            onClick={history.goBack}
-                        >
+                    <Flex direction={{base: "column", md: "row"}} alignItems="center" p="10px">
+                        <Button colorScheme="orange" border='1px' background="green" color="white" onClick={history.goBack}>
                             Back to Previous Page
                         </Button>
                         <Spacer />
-                        <Button
-                            // mt='10px'
-                            // mb='10px'
-                            // mr='10px'
-                            colorScheme="orange"
-                            border='1px'
-                            background="green"
-                            color="white"
-                            id="unsave"
-                            onClick={handleSaveUnsave}
-                        >
+                        <Button colorScheme="orange" border='1px' background="green" color="white" id="unsave" onClick={handleSaveUnsave}>
                             Unsave
                         </Button>
                     </Flex>
             )} else {
                 return (
-                    <Flex 
-                        direction={{base: "column", md: "row"}}
-                        alignItems="center"
-                        p="10px"
-                    >
+                    <Flex direction={{base: "column", md: "row"}} alignItems="center" p="10px">
                         <Link to='/results'>
-                            <Button 
-                                // mt='10px'
-                                // mb='10px'
-                                // ml='10px'
-                                colorScheme="orange"
-                                border='1px'
-                                background="green"
-                                color="white" onClick={history.goBack}
-                            >
+                            <Button colorScheme="orange" border='1px' background="green" color="white" onClick={history.goBack}>
                                 Back to Previous Page
                             </Button>
                         </Link>
                         <Spacer />
-                        <Button
-                            // mt='10px'
-                            // mb='10px'
-                            // mr='10px'
-                            colorScheme="orange" 
-                            border='1px'
-                            background="green"
-                            color="white"
-                            id="save"
-                            onClick={handleSaveUnsave}
-                        >
+                        <Button colorScheme="orange" border='1px' background="green" color="white" id="save" onClick={handleSaveUnsave}>
                             Save
                         </Button>
                     </Flex>
             )}
         } else {
             return(
-                <Flex 
-                        direction={{base: "column", md: "row"}}
-                        alignItems="center"
-                        p="10px"
-                >
+                <Flex direction={{base: "column", md: "row"}} alignItems="center" p="10px">
                     <Link to='/results'>
-                        <Button
-                            // mt='10px'
-                            // mb='10px'
-                            // ml='10px'
-                            colorScheme="orange"
-                            border='1px'
-                            background="green"
-                            color="white"
-                            onClick={history.goBack}
-                        >
+                        <Button colorScheme="orange" border='1px' background="green" color="white" onClick={history.goBack}>
                             Back to Previous Page
                         </Button>
                     </Link>
@@ -184,14 +126,14 @@ function ParkDetail({ savedParks, setSavedParks }) {
         return (
             <Box p="10px">
                 {subheader}
-                <Box display={{lg: "flex"}} flexDirection="row-reverse" maxW='2000px'>
-                    <OverviewPanel park={park}/>
-                    <DetailsPanel park={park}/>
-                </Box>
-                <Box display={{lg: "flex"}} maxW='2000px'>
-                    <AmenitiesPanel park={park}/>
-                    <ReviewPanel park={park} reviews={reviews} setReviews={setReviews}/>
-                </Box>
+                    <Box display={{lg: "flex"}} flexDirection="row-reverse" maxW='2000px'>
+                        <OverviewPanel park={park}/>
+                        <DetailsPanel park={park}/>
+                    </Box>
+                    <Box display={{lg: "flex"}} maxW='2000px'>
+                        <AmenitiesPanel park={park}/>
+                        <ReviewPanel park={park} reviews={reviews} setReviews={setReviews}/>
+                    </Box>
             </Box>
         )
     }

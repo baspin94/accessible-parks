@@ -47,14 +47,11 @@ function ParkCard( { park }) {
                 <CardHeader align="center">
                     <VStack>
                         <Heading as="h3" size="md">{park.name}</Heading>
-                        <Text as="i">{designation}</Text>
-                        {park.states.length === 2 
-                        ? formattedStates
-                        :
-                            <UnorderedList styleType="None" textAlign='center'>
-                            {formattedStates}
-                            </UnorderedList>
-                        }
+                            <Text as="i">{designation}</Text>
+                            {park.states.length === 2 
+                            ? formattedStates
+                            : <UnorderedList styleType="None" textAlign='center'>{formattedStates}</UnorderedList>
+                            }
                     </VStack>
                 </CardHeader>
             </Card>
