@@ -1,5 +1,5 @@
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
-import { Heading, Flex, Spacer, HStack, Button, Text } from '@chakra-ui/react';
+import { Heading, Spacer, HStack, Button, Text, Box, Stack } from '@chakra-ui/react';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 
 function Header({ user, setUser }) {
@@ -17,27 +17,40 @@ function Header({ user, setUser }) {
     }
     
     return (
-        <Flex bg="green" p="20px">
-            <HStack>
-                <Heading as="h1" color="white">Accessible Parks</Heading>
-                <Spacer />
-                <NavLink exact to='/'>
-                    <Text as ="b" p='10px' color="white">New Search</Text>
-                </NavLink>
-                { user.id !== undefined
-                    ? <NavLink to='/myparks'><Text as="b" p='10px' color="white">Saved Parks</Text></NavLink>
-                    : null
-                }
-            </HStack>
+        <Box bg="green" display={{md: "flex"}} p="10px">
+            <Stack alignItems="center" p="5px" direction={{base: "column", md: "row"}}>
+                <Heading as="h1" color="white" margin="auto">
+                    Accessible Parks
+                </Heading>
+                    <NavLink exact to='/'>
+                        <Text as ="b" color="white" p='10px'>
+                            New Search
+                        </Text>
+                    </NavLink>
+                    { user.id !== undefined
+                        ? <NavLink to='/myparks'>
+                            <Text as="b" color="white" p='10px'>
+                                Saved Parks
+                            </Text>
+                        </NavLink>
+                        : null
+                    }
+            </Stack>
             <Spacer/>
-            <HStack>
+            <HStack justifyContent="center" p="5px">
                 <ColorModeSwitcher />
                 { user.id !== undefined
-                    ? <Button _hover={{bg: 'white'}} bg="white" color="black" onClick={handleLogout}>Log Out</Button>
-                    : <Link to='/login'><Button _hover={{bg: 'white'}} bg="white" color="black">Log In</Button></Link>
+                    ? <Button onClick={handleLogout} bg="white" color="black">
+                        Log Out
+                    </Button>
+                    : <Link to='/login'>
+                        <Button bg="white" color="black">
+                            Log In
+                        </Button>
+                    </Link>
                 }
             </HStack>
-        </Flex>
+        </Box>
     )
     
 }

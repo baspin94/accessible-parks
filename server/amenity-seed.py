@@ -9,11 +9,8 @@ with app.app_context():
 
     api_key = os.environ.get('NPS_API_KEY')
 
-    # Clear out existing database entries
     print("Deleting existing entries...")
     Amenity.query.delete()
-
-    # Accessibility-Specific Amenities Query
 
     accessibility_amenities = [
         "4E4D076A-6866-46C8-A28B-A129E2B8F3DB",
@@ -35,33 +32,7 @@ with app.app_context():
         "BF109EEC-1E9C-4015-B5D1-829FE122C64B",
         "3A8EC9F0-6CC6-48CE-9AA2-1B257B074383",
         "EAB59B1F-2FA1-4545-A322-2C19149AF7FC",
-        "1CF3D18E-C6A7-4462-9990-86B59383A9C3"
-    ]
-
-    acc_query_string = ','.join(accessibility_amenities)
-
-    acc_endpoint = f"https://developer.nps.gov/api/v1/amenities?id={acc_query_string}&api_key={api_key}"
-
-    print("Requesting data on accessibility-related amenities...")
-    acc_request = urllib.request.Request(acc_endpoint)
-
-    acc_response = urllib.request.urlopen(acc_request).read()
-
-    acc_amenity_data = json.loads(acc_response.decode('utf-8'))
-
-    print("Generating new database objects based on response...")
-    for amenity in acc_amenity_data['data']:
-        new_amenity = Amenity(nps_api_id = amenity['id'], name = amenity['name'])
-        db.session.add(new_amenity)
-    
-    print("Committing amenities to database...")
-    db.session.commit()
-
-    print("Accessibility amenities seeded!")
-
-    # Accessibility-Adjacent Amenities Query
-
-    additional_amenities = [
+        "1CF3D18E-C6A7-4462-9990-86B59383A9C3",
         "03A732CF-E5FD-473D-A78B-BDC4D20721BF",
         "20291812-E85C-4A84-B8A2-E31C8D149704",
         "48562BFB-834B-43F2-B865-E174C372032B",
@@ -86,25 +57,24 @@ with app.app_context():
         "9A652919-D548-4850-8053-798CDC2C762B"
     ]
 
-    add_query_string = ','.join(additional_amenities)
+    acc_query_string = ','.join(accessibility_amenities)
 
-    add_endpoint = f"https://developer.nps.gov/api/v1/amenities?id={add_query_string}&api_key={api_key}"
+    acc_endpoint = f"https://developer.nps.gov/api/v1/amenities?id={acc_query_string}&api_key={api_key}"
 
-    print("Requesting data on additional amenities...")
-    add_request = urllib.request.Request(add_endpoint)
+    print("Requesting data on accessibility-related amenities...")
+    acc_request = urllib.request.Request(acc_endpoint)
 
-    add_response = urllib.request.urlopen(add_request).read()
+    acc_response = urllib.request.urlopen(acc_request).read()
 
-    add_amenity_data = json.loads(add_response.decode('utf-8'))
+    acc_amenity_data = json.loads(acc_response.decode('utf-8'))
 
     print("Generating new database objects based on response...")
-    for amenity in add_amenity_data['data']:
+    for amenity in acc_amenity_data['data']:
         new_amenity = Amenity(nps_api_id = amenity['id'], name = amenity['name'])
         db.session.add(new_amenity)
-
+    
     print("Committing amenities to database...")
     db.session.commit()
 
-    print("Additional amenities seeded!")
-
+    print("Accessibility amenities seeded!")
 

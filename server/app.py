@@ -1,7 +1,6 @@
-from flask import Flask, request, session, make_response, jsonify, abort, render_template
+from flask import request, session, make_response, render_template
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
-from werkzeug.exceptions import NotFound, Unauthorized
 from config import app, db, api
 from models import User, Amenity, Park, ParkAmenity, UserPark, Review
 
@@ -9,7 +8,6 @@ from models import User, Amenity, Park, ParkAmenity, UserPark, Review
 @app.route('/login')
 @app.route('/signup')
 @app.route('/results')
-# @app.route('/park/<int:id>')
 @app.route('/myparks')
 @app.route('/<int:id>')
 @app.route('/park/<string:code>')
@@ -115,49 +113,10 @@ class Amenities(Resource):
             200
         )
         return response
-    
-class AmenityById(Resource):
-    def get(self, id):
-        amenity = Amenity.query.filter(Amenity.id == id).first()
-
-        if not amenity:
-            response = make_response(
-                {"error": "Amenity not found."},
-                404
-            )
-            return response
-        
-        else:
-            response = make_response(
-                amenity
-                    .to_dict(
-                        only=(
-                            # 'name',
-                            # 'id',
-                            'park_amenities.park.id',
-                            'park_amenities.park.code',
-                            'park_amenities.park.name',
-                            'park_amenities.park.image_url',
-                            'park_amenities.park.image_alt',
-                            'park_amenities.park.states'
-                        )
-                    ),
-                200
-            )
-            return response
         
 class ParksByAmenityIds(Resource):
     def get(self, id_string):
         int_ids = [int(id) for id in id_string.split(',')]
-
-        # all_matching_amenities = [amenity.to_dict() for amenity in ParkAmenity.query.filter(ParkAmenity.amenity_id.in_(int_ids)).all()]
-        # all_park_ids = [element['park']['id'] for element in all_matching_amenities]
-
-        # multiple_matches = [id for id in all_park_ids if all_park_ids.count(id) == len(int_ids)]
-        # unique_matches = set(multiple_matches)
-
-        # parks = [park.to_dict(only=('id', 'name', 'designation', 'states', 'image_url', 'image_alt')) for park in Park.query.filter(Park.id.in_(unique_matches)).all()]
-
         matching_parks = Park.query.join(ParkAmenity).filter(ParkAmenity.amenity_id.in_(int_ids)).group_by(Park.code).having(db.func.count(ParkAmenity.amenity_id.distinct()) == len(int_ids))
         parks = [park.to_dict(only=('id', 'name', 'code', 'designation', 'states', 'image_url', 'image_alt')) for park in matching_parks]
 
@@ -173,25 +132,6 @@ class ParksByAmenityIds(Resource):
                 parks, 
                 200
             )
-            return response
-
-class ParkById(Resource):
-    def get(self, id):
-        park = Park.query.filter(Park.id == id).first()
-
-        if not park:
-            response = make_response(
-                {"error": "Park not found."}, 
-                404
-            )
-            return response
-        
-        else:
-            response = make_response(
-                park.to_dict(rules=('park_amenities.amenity', 'reviews', 'reviews.user.first_name', 'reviews.user.last_name')),
-                200
-            )
-
             return response
         
 class ParkByCode(Resource):
@@ -308,9 +248,7 @@ api.add_resource(Login, '/login')
 api.add_resource(CheckSession, '/authorized')
 api.add_resource(Logout, '/logout')
 api.add_resource(Amenities, '/amenities')
-api.add_resource(AmenityById, '/amenities/<int:id>')
 api.add_resource(ParksByAmenityIds, '/parkamenities/<string:id_string>')
-api.add_resource(ParkById, '/parks/<int:id>')
 api.add_resource(ParkByCode, '/parks/<string:code>')
 api.add_resource(UserParks, '/user_parks')
 api.add_resource(UserParkById, '/user_parks/<int:id>')
