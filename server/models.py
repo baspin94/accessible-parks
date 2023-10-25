@@ -1,13 +1,17 @@
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.ext.associationproxy import association_proxy
 from config import db, bcrypt
 
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
-    serialize_rules = ('-_password_hash', '-created_at', '-updated_at', '-parks', '-reviews')
+    serialize_rules = (
+        '-_password_hash', 
+        '-created_at', 
+        '-updated_at', 
+        '-parks', 
+        '-reviews'
+    )
 
     id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.String, nullable = False)
@@ -42,7 +46,10 @@ class User(db.Model, SerializerMixin):
 class Amenity(db.Model, SerializerMixin):
     __tablename__ = "amenities"
 
-    serialize_rules = ('-created_at', '-park_amenities')
+    serialize_rules = (
+        '-created_at', 
+        '-park_amenities'
+    )
 
     id = db.Column(db.Integer, primary_key = True)
     nps_api_id = db.Column(db.String)
@@ -59,7 +66,6 @@ class Park(db.Model, SerializerMixin):
 
     serialize_rules = ('-created_at', '-updated_at', '-park_amenities', '-users', '-reviews')
 
-    # id = db.Column(db.Integer, primary_key = True)
     id = db.Column(db.Integer)
     nps_api_id = db.Column(db.String)
     name = db.Column(db.String)
@@ -75,8 +81,6 @@ class Park(db.Model, SerializerMixin):
     image_alt = db.Column(db.String)
     image_credit = db.Column(db.String)
     weather = db.Column(db.String)
-    nps_url = db.Column(db.String)
-    access_url = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
@@ -90,7 +94,9 @@ class Park(db.Model, SerializerMixin):
 class ParkAmenity(db.Model, SerializerMixin):
     __tablename__ = "park_amenities"
 
-    serialize_rules = ('-created_at',)
+    serialize_rules = (
+        '-created_at',
+    )
 
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
@@ -115,7 +121,7 @@ class UserPark(db.Model, SerializerMixin):
         'park.image_url',
         'park.image_alt',
         'park.designation'
-        )
+    )
 
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))
@@ -129,7 +135,10 @@ class UserPark(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = "reviews"
 
-    serialize_rules = ('-park', '-user')
+    serialize_rules = (
+        '-park', 
+        '-user'
+    )
 
     id = db.Column(db.Integer, primary_key = True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'))

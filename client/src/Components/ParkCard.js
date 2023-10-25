@@ -39,7 +39,7 @@ function ParkCard( { park }) {
     }
 
     return(
-        <Link to={`/park/${park.code}`}>
+        <Link to={`/park/${park.code}`} aria-label={park.name}>
             <Card w="100%" h="100%" maxHeight="425px" border="1px" align="center">
                 <CardBody maxHeight="66.666%">
                     <Image w="100%" h="100%" src={park.image_url} alt={park.image_alt} onError={onImageError}/>
@@ -47,14 +47,11 @@ function ParkCard( { park }) {
                 <CardHeader align="center">
                     <VStack>
                         <Heading as="h3" size="md">{park.name}</Heading>
-                        <Text as="i">{designation}</Text>
-                        {park.states.length === 2 
-                        ? formattedStates
-                        :
-                            <UnorderedList styleType="None" textAlign='center'>
-                            {formattedStates}
-                            </UnorderedList>
-                        }
+                            <Text as="i">{designation}</Text>
+                            {park.states.length === 2 
+                            ? formattedStates
+                            : <UnorderedList styleType="None" textAlign='center'>{formattedStates}</UnorderedList>
+                            }
                     </VStack>
                 </CardHeader>
             </Card>
