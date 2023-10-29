@@ -35,7 +35,7 @@ function ReviewCard({ review, reviewArray, setReviews }) {
                 review: values.review,
                 rating: parseInt(values.rating)
             }
-            fetch(`/reviews/${review.id}`, {
+            fetch(`/api/reviews/${review.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
@@ -62,7 +62,7 @@ function ReviewCard({ review, reviewArray, setReviews }) {
     }
 
     function handleDelete() {
-        fetch(`/reviews/${review.id}`, {
+        fetch(`/api/reviews/${review.id}`, {
             method: "DELETE"
         })
             .then(response => response.json())

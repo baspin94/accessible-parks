@@ -28,7 +28,7 @@ function ParkDetail({ savedParks, setSavedParks }) {
     const [reviews, setReviews] = useState([])
 
     useEffect( () => {
-        fetch(`/parks/${parkCode}`)
+        fetch(`/api/parks/${parkCode}`)
         .then(response => response.json())
         .then(parkData => {
             setPark(parkData)
@@ -51,7 +51,7 @@ function ParkDetail({ savedParks, setSavedParks }) {
                 park_id: park.id,
                 park_code: park.code
             }
-            fetch(`/user_parks`, {
+            fetch(`/api/user_parks`, {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json"
@@ -65,7 +65,7 @@ function ParkDetail({ savedParks, setSavedParks }) {
                 setSavedParks(updatedSavedParks)
             })
         } else {
-            fetch(`/user_parks/${savedId}`, {
+            fetch(`/api/user_parks/${savedId}`, {
                 method: "DELETE",
             })
             .then(response => response.json())

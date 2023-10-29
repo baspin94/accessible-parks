@@ -22,7 +22,7 @@ function Main({ user, setParks }) {
     const history = useHistory()
 
     useEffect( () => {
-        fetch('/amenities')
+        fetch('/api/amenities')
             .then(response => response.json())
             .then(amenityData => setAmenities(amenityData.sort((a1, a2) => (a1.name > a2.name) ? 1 : -1)))
     }, [])
@@ -34,7 +34,7 @@ function Main({ user, setParks }) {
         onSubmit: (values, {resetForm}) => {
             const value_array = values['checked']
             const value_string = value_array.join()
-            fetch(`/parkamenities/${value_string}`)
+            fetch(`/api/parkamenities/${value_string}`)
             .then(response => {
                 if (response.ok) {
                     response.json()

@@ -45,7 +45,7 @@ function ReviewPanel({ park, reviews, setReviews }) {
                 review: values.review,
                 rating: parseInt(values.rating)
             }
-            fetch('/reviews', {
+            fetch('/api/reviews', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

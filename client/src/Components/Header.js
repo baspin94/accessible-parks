@@ -7,7 +7,7 @@ function Header({ user, setUser }) {
     const history = useHistory()
 
     function handleLogout(){
-        fetch('/logout', {
+        fetch('/api/logout', {
             method: "DELETE",
         })
             .then(() => {
