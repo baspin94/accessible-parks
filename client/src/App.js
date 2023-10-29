@@ -17,7 +17,7 @@ function App() {
   const [savedParks, setSavedParks] = useState([])
 
   useEffect( () => {
-    fetch('/authorized')
+    fetch('/api/authorized')
     .then(response => {
       if (response.ok) {
         response.json()

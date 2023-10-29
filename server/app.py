@@ -243,17 +243,17 @@ class ReviewById(Resource):
         )
         return response
 
-api.add_resource(Signup, '/signup')
-api.add_resource(Login, '/login')
-api.add_resource(CheckSession, '/authorized')
-api.add_resource(Logout, '/logout')
-api.add_resource(Amenities, '/amenities')
-api.add_resource(ParksByAmenityIds, '/parkamenities/<string:id_string>')
-api.add_resource(ParkByCode, '/parks/<string:code>')
-api.add_resource(UserParks, '/user_parks')
-api.add_resource(UserParkById, '/user_parks/<int:id>')
-api.add_resource(Reviews, '/reviews')
-api.add_resource(ReviewById, '/reviews/<int:id>')
+api.add_resource(Signup, '/api/signup')
+api.add_resource(Login, '/api/login')
+api.add_resource(CheckSession, '/api/authorized')
+api.add_resource(Logout, '/api/logout')
+api.add_resource(Amenities, '/api/amenities')
+api.add_resource(ParksByAmenityIds, '/api/parkamenities/<string:id_string>')
+api.add_resource(ParkByCode, '/api/parks/<string:code>')
+api.add_resource(UserParks, '/api/user_parks')
+api.add_resource(UserParkById, '/api/user_parks/<int:id>')
+api.add_resource(Reviews, '/api/reviews')
+api.add_resource(ReviewById, '/api/reviews/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
