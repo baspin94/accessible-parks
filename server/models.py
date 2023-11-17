@@ -64,7 +64,7 @@ class Amenity(db.Model, SerializerMixin):
 class Park(db.Model, SerializerMixin):
     __tablename__ = "parks"
 
-    serialize_rules = ('-created_at', '-updated_at', '-park_amenities', '-users', '-reviews')
+    serialize_rules = ('-created_at', '-updated_at', '-park_amenities', '-users', '-reviews', 'parking_lots')
 
     id = db.Column(db.Integer)
     nps_api_id = db.Column(db.String)
@@ -87,6 +87,7 @@ class Park(db.Model, SerializerMixin):
     park_amenities = db.relationship('ParkAmenity', backref='park')
     users = db.relationship('UserPark', backref='park')
     reviews = db.relationship('Review', backref='park')
+    parking_lots = db.relationship('ParkingLot', backref='park')
 
     def __repr__(self):
         return f'<Park: {self.name} ({self.code})>'
@@ -106,6 +107,30 @@ class ParkAmenity(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Park Code: {self.park_code} Amenity ID: {self.amenity_id}>'
+    
+class ParkingLot(db.Model, SerializerMixin):
+    __tablename__ = "parking_lots"
+
+    serialize_rules = (
+        '-created_at',
+    )
+
+    id = db.Column(db.Integer, primary_key = True)
+    park_code = db.Column(db.String, db.ForeignKey('parks.code'))
+    name = db.Column(db.String)
+    gen_description = db.Column(db.String)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+    total_spaces = db.Column(db.Integer)
+    total_ada_spaces = db.Column(db.Integer)
+    van_accessible_spaces = db.Column(db.Integer)
+    step_free_spaces = db.Column(db.Integer)
+    oversize_vehicle_spaces = db.Column(db.Integer)
+    ada_description = db.Column(db.String)
+    created_at = db.Column(db.DateTime, server_default = db.func.now())
+
+    def __repr__(self):
+        return f'<Park Code: {self.park_code} Lot ID: {self.id} Lot Name: {self.name}>'
     
 class UserPark(db.Model, SerializerMixin):
     __tablename__ = "user_parks"
