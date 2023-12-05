@@ -64,7 +64,7 @@ class Amenity(db.Model, SerializerMixin):
 class Park(db.Model, SerializerMixin):
     __tablename__ = "parks"
 
-    serialize_rules = ('-created_at', '-updated_at', '-park_amenities', '-users', '-reviews', 'parking_lots')
+    serialize_rules = ('-created_at', '-updated_at', '-park_amenities', '-users', '-reviews', '-parking_lots')
 
     id = db.Column(db.Integer)
     nps_api_id = db.Column(db.String)
