@@ -1,86 +1,16 @@
 # Accessible Parks
 ## Description
-'Accessible Parks' is a full-stack application built using React and Flask. The app enables users to search for US national parks with particular accessibility-related amenities available.
+'Accessible Parks' is a web application enabling users to search for US national parks based on the accessibility-related amenities available.
 
-Any user can:
-- Create a profile.
-- Search for parks by accessibility-related amenities.
-- View additional details about each park and the overall accessibility features available.
-- View reviews for a park.
+Any user can search for parks by accessibility-related amenities, view additional details about each park and the accessibility features available, and see park reviews. Users who sign up for an account can save parks to explore later and leave reviews about their park experiences.
 
-Registered users can:
-- Save parks to explore later.
-- Leave a review about their experience at a park.
+## Why Is This Needed?
+Right now, the [National Parks Service website](https://www.nps.gov/findapark/index.htm) and mobile app lack search filters for accessibility features, making it challenging for users with disabilities to find parks with their needs in mind. While there is an [NPS Park Accessibility Map Tool](https://www.nps.gov/subjects/accessibility/plan-your-visit.htm), there is no hassle-free way to find parks with a specific accessibility feature (e.g. wheelchair accessible trails); users have to navigate to each park's accessibility page for a description of the amenities it has. 
 
-## Installation
+By providing these search filters and the option to search for multiple amenities at once, Accessible Parks streamlines users' experience so they can spend less time researching whether a park will be feasible for them to visit and more time planning a memorable trip.
 
-Fork and clone this repository into your local environment and open within your IDE of choice.
-
-### Frontend Initial Setup
-
-Navigate to the `/client` directory in your terminal and run the following command:
-```
-$ npm install
-```
-Navigate back to the root directory and run the following command:
-```
-$ npm start --prefix client
-```
-If the app doesn't automatically launch in your browser, navigate to `localhost:4000`.
-
-### Backend Initial Setup
-
-Open a new terminal, as the frontend server will continue to run in the current terminal.
-
-Create a `.env` file in the root directory of the repository:
-
-```
-$ touch .env
-```
-Within that `.env` file, you'll need to add three pieces of information:
-- NPS_API_KEY: In order to populate your own local copy of the database, you will need to obtain an API key from the National Park Service by registering on their website. An API key will be emailed to you shortly after registering.
-- APP_SECRET_KEY: For user sessions to work correctly, you will need to configure a secret key for your app. You can generate one in your terminal by entering the following command: `python -c 'import os; print(os.urandom(16))'`
-- DATABASE_URI: This is where your local database can be accessed.
-
-Now, the file should look something like this:
-```
-NPS_API_KEY = <YOUR API KEY HERE (no quotation marks needed)>
-APP_SECRET_KEY = <YOUR SECRET KEY HERE (no quotation marks needed)>
-DATABASE_URI = 'sqlite:///app.db'
-```
-Next, in your terminal, run the following command to install dependencies:
-```
-$ pipenv install -r requirements.txt
-```
-Run the following command to launch your virtual environment and load the `.env` environment variables:
-```
-$ pipenv shell
-```
-Within that subshell, navigate to the `/server` directory. From there, delete any existing `instance` and `migrations` directories and run the following command to initialize your database with Flask and SQLAlchemy:
-```
-$ flask db init
-$ flask db revision --autogenerate -m "Create tables."
-$ flask db upgrade
-```
-### Populating Your Database
-
-First, populate the 'Amenities' table by running the following command from the `/server` directory:
-```
-$ python amenity-seed.py
-```
-Next, populate the 'Parks' table by running the following command from the `/server` directory:
-```
-$ python park-seed.py
-```
-Lastly, populate the 'Park Amenities' table by running the following command from the `/server` directory:
-```
-$ python park-amenity-seed.py
-```
-Now that you have data seeded, you can go ahead and run the following command to start the server:
-```
-$ python app.py
-```
-After starting/restarting the server, you'll need to refresh the app in your browser to fetch data from the backend.
+## Quick Start
+Navigate to the [Accessible Parks website](https://parks.baspin.dev/) to start exploring.
 
 ## Usage
 ### Search
@@ -176,14 +106,83 @@ If the user attempts to submit the form with any required fields left blank, a p
 
 ![Empty field with 'Please Fill Out This Field' message below](https://github.com/baspin94/accessible-parks/blob/main/assets/10_Login%20Blank%20Field.png)
 
+## Developer Installation
+
+Fork and clone this repository into your local environment and open within your IDE of choice.
+
+### Frontend Initial Setup
+
+Navigate to the `/client` directory in your terminal and run the following command:
+```
+$ npm install
+```
+Navigate back to the root directory and run the following command:
+```
+$ npm start --prefix client
+```
+If the app doesn't automatically launch in your browser, navigate to `localhost:4000`.
+
+### Backend Initial Setup
+
+Open a new terminal, as the frontend server will continue to run in the current terminal.
+
+Create a `.env` file in the root directory of the repository:
+
+```
+$ touch .env
+```
+Within that `.env` file, you'll need to add three pieces of information:
+- NPS_API_KEY: In order to populate your own local copy of the database, you will need to obtain an API key from the National Park Service by registering on their website. An API key will be emailed to you shortly after registering.
+- APP_SECRET_KEY: For user sessions to work correctly, you will need to configure a secret key for your app. You can generate one in your terminal by entering the following command: `python -c 'import os; print(os.urandom(16))'`
+- DATABASE_URI: This is where your local database can be accessed.
+
+Now, the file should look something like this:
+```
+NPS_API_KEY = <YOUR API KEY HERE (no quotation marks needed)>
+APP_SECRET_KEY = <YOUR SECRET KEY HERE (no quotation marks needed)>
+DATABASE_URI = 'sqlite:///app.db'
+```
+Next, in your terminal, run the following command to install dependencies:
+```
+$ pipenv install -r requirements.txt
+```
+Run the following command to launch your virtual environment and load the `.env` environment variables:
+```
+$ pipenv shell
+```
+Within that subshell, navigate to the `/server` directory. From there, delete any existing `instance` and `migrations` directories and run the following command to initialize your database with Flask and SQLAlchemy:
+```
+$ flask db init
+$ flask db revision --autogenerate -m "Create tables."
+$ flask db upgrade
+```
+### Populating Your Database
+
+First, populate the 'Amenities' table by running the following command from the `/server` directory:
+```
+$ python amenity-seed.py
+```
+Next, populate the 'Parks' table by running the following command from the `/server` directory:
+```
+$ python park-seed.py
+```
+Lastly, populate the 'Park Amenities' table by running the following command from the `/server` directory:
+```
+$ python park-amenity-seed.py
+```
+Now that you have data seeded, you can go ahead and run the following command to start the server:
+```
+$ python app.py
+```
+After starting/restarting the server, you'll need to refresh the app in your browser to fetch data from the backend.
+
 ## Roadmap
 Future additions will include:
-- Faster loading times for search results.
-- Improved responsivity and 'look and feel' for mobile users.
+- Additional information on the 'park details' page related to accessible parking, visitor centers, and accessible places within each park.
 - Ability for users to upload photos with reviews.
 - Ability for users to view the location of each park on a map.
 - Enhanced user profiles with the option to view others' profiles and favorite parks.
-- Additional information on the 'park details' page related to accessible parking, visitor centers, and accessible places within each park.
+- A mobile application for iOS and Android.
 
 ## Author and Acknowledgements
  - This application was developed by [Bianca Aspin](https://github.com/baspin94) as my capstone project for [Flatiron School's Software Engineering Immersive Bootcamp](https://flatironschool.com/courses/coding-bootcamp/), which I graduated from in April 2023.
