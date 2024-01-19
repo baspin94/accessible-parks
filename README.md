@@ -1,4 +1,6 @@
 # Accessible Parks
+![User performing a basic search, reviewing and filtering results, and selecting a park to view more details.](https://github.com/baspin94/accessible-parks/blob/main/assets/00_App%20Overview.gif)
+
 ## Description
 'Accessible Parks' is a web application enabling users to search for US national parks based on the accessibility-related amenities available.
 
